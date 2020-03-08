@@ -25,6 +25,7 @@
     <ClCompile Include="D:\User Data\Documents\C++ Libraries\imgui-master\imgui_widgets.cpp" />
     <ClCompile Include="D:\User Data\Documents\C++ Libraries\imgui-sfml-master\imgui-SFML.cpp" />
     <ClCompile Include="main.cpp" />
+    <ClCompile Include="States.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="States.h" />

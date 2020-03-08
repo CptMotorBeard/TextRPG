@@ -1,9 +1,6 @@
 #include "States.h"
 
-State::State()
-{
-
-}
+StateManager* StateManager::mInstance = nullptr;
 
 State::StateType State::GetStateType()
 {

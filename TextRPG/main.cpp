@@ -1,8 +1,10 @@
+#include "imgui.h"
+#include "imgui-SFML.h"
+
 #include "SFML/Graphics.hpp"
 #include "SFML/System/Clock.hpp"
 
-#include "imgui.h"
-#include "imgui-SFML.h"
+#include "States.h"
 
 int main()
 {
@@ -10,6 +12,7 @@ int main()
 
 	sf::RenderWindow window(sf::VideoMode(640, 480), "SFML works!");
 	ImGui::SFML::Init(window);
+	StateManager* stateManager = StateManager::Init(new State());
 
 	sf::Color bgColor;
 	float color[3] = { 0.f, 0.f, 0.f };
@@ -44,6 +47,8 @@ int main()
 			}
 		}
 
+		stateManager->GetCurrentState()->Build();
+
 		// All widgets must be created between update and render
 		ImGui::SFML::Update(window, deltaClock.restart());
 
@@ -58,4 +63,5 @@ int main()
 	}
 
 	ImGui::SFML::Shutdown();
+	StateManager::Shutdown();
 }
