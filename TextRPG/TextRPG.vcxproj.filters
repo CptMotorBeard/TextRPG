@@ -12,6 +12,15 @@
     <Filter Include="imgui">
       <UniqueIdentifier>{f89edec5-2157-4f78-9f87-6d7d909de88c}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Header Files\People">
+      <UniqueIdentifier>{39b0c71f-0099-4186-8dce-7621055e52fc}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Base">
+      <UniqueIdentifier>{12bc72bc-d881-49d6-8fd6-6954d26c2507}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\People">
+      <UniqueIdentifier>{97cf2778-70b1-43c7-9906-acfa3787ac14}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
@@ -35,9 +44,18 @@
     <ClCompile Include="States.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="UnitStatus.cpp">
+      <Filter>Source Files\People</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="States.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="UnitStatus.h">
+      <Filter>Header Files\People</Filter>
+    </ClInclude>
+    <ClInclude Include="BaseIncludes.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

@@ -26,9 +26,12 @@
     <ClCompile Include="D:\User Data\Documents\C++ Libraries\imgui-sfml-master\imgui-SFML.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="States.cpp" />
+    <ClCompile Include="UnitStatus.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="BaseIncludes.h" />
     <ClInclude Include="States.h" />
+    <ClInclude Include="UnitStatus.h" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <VCProjectVersion>16.0</VCProjectVersion>
