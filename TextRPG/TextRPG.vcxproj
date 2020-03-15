@@ -33,6 +33,7 @@
     <ClInclude Include="BaseIncludes.h" />
     <ClInclude Include="States.h" />
     <ClInclude Include="Stats.h" />
+    <ClInclude Include="HealthStats.h" />
     <ClInclude Include="UnitStatus.h" />
   </ItemGroup>
   <PropertyGroup Label="Globals">

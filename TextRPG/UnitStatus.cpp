@@ -1,7 +1,9 @@
 #include "UnitStatus.h"
 
-UnitStatus::UnitStatus()
+UnitStatus::UnitStatus(uint16 startingAge)
 {
+	UnitHealth = HealthStats(startingAge);
+
 	for (auto att : Attribute::AllAttributes)
 	{
 		UnitStatus::UnitAttributes.insert(std::pair<AttributeType, Attribute> (att, Attribute(att)));

@@ -9,7 +9,7 @@
 class State
 {
 public:
-	enum StateType
+	enum class StateType
 	{
 
 	};

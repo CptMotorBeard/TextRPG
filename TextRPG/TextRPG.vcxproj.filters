@@ -58,10 +58,13 @@
     <ClInclude Include="UnitStatus.h">
       <Filter>Header Files\People</Filter>
     </ClInclude>
-    <ClInclude Include="BaseIncludes.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="Stats.h">
+      <Filter>Header Files\People</Filter>
+    </ClInclude>
+    <ClInclude Include="BaseIncludes.h">
+      <Filter>Header Files\Base</Filter>
+    </ClInclude>
+    <ClInclude Include="HealthStats.h">
       <Filter>Header Files\People</Filter>
     </ClInclude>
   </ItemGroup>
