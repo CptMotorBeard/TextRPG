@@ -67,5 +67,11 @@
     <ClInclude Include="HealthStats.h">
       <Filter>Header Files\People</Filter>
     </ClInclude>
+    <ClInclude Include="Unit.h">
+      <Filter>Header Files\People</Filter>
+    </ClInclude>
+    <ClInclude Include="UnitTraits.h">
+      <Filter>Header Files\People</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>

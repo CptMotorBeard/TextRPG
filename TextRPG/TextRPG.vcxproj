@@ -34,7 +34,9 @@
     <ClInclude Include="States.h" />
     <ClInclude Include="Stats.h" />
     <ClInclude Include="HealthStats.h" />
+    <ClInclude Include="Unit.h" />
     <ClInclude Include="UnitStatus.h" />
+    <ClInclude Include="UnitTraits.h" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <VCProjectVersion>16.0</VCProjectVersion>
