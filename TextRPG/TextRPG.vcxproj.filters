@@ -47,6 +47,9 @@
     <ClCompile Include="UnitStatus.cpp">
       <Filter>Source Files\People</Filter>
     </ClCompile>
+    <ClCompile Include="Stats.cpp">
+      <Filter>Source Files\People</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="States.h">
@@ -57,6 +60,9 @@
     </ClInclude>
     <ClInclude Include="BaseIncludes.h">
       <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Stats.h">
+      <Filter>Header Files\People</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

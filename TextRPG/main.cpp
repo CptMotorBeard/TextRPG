@@ -46,11 +46,10 @@ int main()
 				}
 			}
 		}
-
-		stateManager->GetCurrentState()->Build();
-
+		
 		// All widgets must be created between update and render
 		ImGui::SFML::Update(window, deltaClock.restart());
+		stateManager->GetCurrentState()->Build();
 
 		if (debugWindow)
 		{
