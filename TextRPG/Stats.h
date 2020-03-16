@@ -28,38 +28,15 @@ private:
 	std::vector<int8> mModifiers;
 
 public:
-	Stat(E statType, uint16 startingValue)
-	{		
-		mStatType = statType;
-		mBaseValue = startingValue;
-		mModifiers = std::vector<int8>();
-	};
+	Stat(E statType, uint16 startingValue);
 
-	int16 GetTotalModifier()
-	{
-		int16 total = 0;
-		for (auto attributeModifier : mModifiers)
-		{
-			total += attributeModifier;
-		}
-	}
+	int16 GetTotalModifier();
 
-	uint16 GetValue()
-	{
-		int16 modifier = GetTotalModifier();
-		if (modifier > mBaseValue)
-		{
-			return 0;
-		}
+	const uint16& GetBaseValue();
 
-		return mBaseValue - modifier;
-	}
+	uint16 GetValue();
 
-	uint16 AddModifier(int8 modifier)
-	{
-		mModifiers.push_back(modifier);
-		return GetValue();
-	}
+	uint16 AddModifier(int8 modifier);
 };
 
 class Attribute : public Stat<AttributeType>

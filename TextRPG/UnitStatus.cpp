@@ -6,7 +6,7 @@ UnitStatus::UnitStatus(uint16 startingAge)
 
 	for (auto att : Attribute::AllAttributes)
 	{
-		UnitStatus::UnitAttributes.insert(std::pair<AttributeType, Attribute> (att, Attribute(att)));
+		UnitStatus::UnitAttributes.insert(std::pair<AttributeType, Attribute> (att, Attribute(att)));		
 	}
 
 	for (auto skill : Skill::AllSkills)

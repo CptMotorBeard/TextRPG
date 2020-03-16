@@ -24,6 +24,7 @@
     <ClCompile Include="D:\User Data\Documents\C++ Libraries\imgui-master\imgui_draw.cpp" />
     <ClCompile Include="D:\User Data\Documents\C++ Libraries\imgui-master\imgui_widgets.cpp" />
     <ClCompile Include="D:\User Data\Documents\C++ Libraries\imgui-sfml-master\imgui-SFML.cpp" />
+    <ClCompile Include="HealthStats.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="States.cpp" />
     <ClCompile Include="Stats.cpp" />
@@ -31,6 +32,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="BaseIncludes.h" />
+    <ClInclude Include="Inventory.h" />
     <ClInclude Include="States.h" />
     <ClInclude Include="Stats.h" />
     <ClInclude Include="HealthStats.h" />

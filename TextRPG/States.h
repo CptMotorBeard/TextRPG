@@ -30,102 +30,32 @@ private:
 	static StateManager* mInstance;
 	std::vector<State *> mStates;
 
-	bool StateExists(State::StateType stateType)
-	{
-		for (std::vector<State *>::iterator iter = mStates.begin(); iter != mStates.end(); ++iter)
-		{
-			if ((*iter)->GetStateType() == stateType)
-			{
-				return true;
-			}
-		}
-
-		return false;
-	}
+	bool StateExists(State::StateType stateType);
 
 public:
-	StateManager(State* initialState)
-	{
-		mStates = std::vector<State *>();
-		mStates.push_back(initialState);
-	}
+	StateManager(State* initialState);
 
-	State* GetCurrentState()
-	{
-		return mStates[mStates.size() - 1];
-	}
+	State* GetCurrentState();
 
 	/// <summary>Push a new state onto the stack. If the state already exists on the stack, pop to it to avoid loops</summary>
-	void PushState(State *newState)
-	{
-		State* stateExists = PopToState(newState->GetStateType());
-		if (stateExists != nullptr)
-		{
-			PopState();
-		}
-
-		mStates.push_back(newState);
-	}
+	void PushState(State* newState);
 
 	/// <summary>Pop and return the current state. Cannot have an empty state so returns the bottom state without popping if only 1 state</summary>
-	State* PopState()
-	{
-		State* topState = GetCurrentState();
-		if (mStates.size() > 1)
-		{
-			mStates.pop_back();
-		}
-		return topState;
-	}
+	State* PopState();
 
 	/// <summary>If the state exists, pop to it, otherwise returns nullptr</summary>
-	State* PopToState(State::StateType stateType)
-	{
-		if (StateExists(stateType))
-		{
-			while (GetCurrentState()->GetStateType() != stateType)
-			{
-				PopState();
-			}
-
-			return GetCurrentState();
-		}
-
-		return nullptr;
-	}
+	State* PopToState(State::StateType stateType);
 
 	/// <summary>If the state exists, pop to it, otherwise returns nullptr</summary>
-	State* PopToState(State state)
-	{
-		return PopToState(state.GetStateType());
-	}
+	State* PopToState(State state);
 
 	/// <summary>Pops to the bottom state and returns it</summary>
-	State* PopToBottom()
-	{
-		while (mStates.size() > 1)
-		{
-			mStates.pop_back();
-		}			
-
-		return GetCurrentState();
-	}
+	State* PopToBottom();
 
 	// Singleton
-	static StateManager* Init(State* initialState)
-	{
-		delete mInstance;
-		mInstance = new StateManager(initialState);
-		return mInstance;
-	};
+	static StateManager* Init(State* initialState);
 
-	static StateManager *GetInstance()
-	{
-		return mInstance;
-	};
+	static StateManager* GetInstance();
 
-	static void Shutdown()
-	{
-		delete mInstance;
-	};
+	static void Shutdown();
 };
