@@ -61,6 +61,7 @@ int main()
 		}
 
 		window.clear(bgColor);
+
 		stateManager->GetCurrentState()->PreRender(window);
 		ImGui::SFML::Render(window);		
 		stateManager->GetCurrentState()->PostRender(window);
