@@ -1,28 +1,11 @@
 #pragma once
+#include "BaseIncludes.h"
+
 #include "imgui.h"
 #include "imgui-SFML.h"
 
 #include "SFML/Graphics.hpp"
-
-#include <vector>
-
-class State
-{
-public:
-	enum class StateType
-	{
-
-	};
-
-	State() {};
-	StateType GetStateType();
-
-	virtual ~State() {};
-	virtual void Build() {};
-
-private:
-	StateType mStateType;
-};
+#include "State.h"
 
 class StateManager
 {
@@ -30,7 +13,7 @@ private:
 	static StateManager* mInstance;
 	std::vector<State *> mStates;
 
-	bool StateExists(State::StateType stateType);
+	bool StateExists(StateType stateType);
 
 public:
 	StateManager(State* initialState);
@@ -44,7 +27,7 @@ public:
 	State* PopState();
 
 	/// <summary>If the state exists, pop to it, otherwise returns nullptr</summary>
-	State* PopToState(State::StateType stateType);
+	State* PopToState(StateType stateType);
 
 	/// <summary>If the state exists, pop to it, otherwise returns nullptr</summary>
 	State* PopToState(State state);

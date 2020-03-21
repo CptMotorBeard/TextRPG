@@ -1,10 +1,12 @@
+#include "BaseIncludes.h"
+
 #include "imgui.h"
 #include "imgui-SFML.h"
 
 #include "SFML/Graphics.hpp"
 #include "SFML/System/Clock.hpp"
 
-#include "States.h"
+#include "GameStates.h"
 
 int main()
 {
@@ -12,7 +14,8 @@ int main()
 
 	sf::RenderWindow window(sf::VideoMode(640, 480), "SFML works!");
 	ImGui::SFML::Init(window);
-	StateManager* stateManager = StateManager::Init(new State());
+
+	StateManager* stateManager = StateManager::Init(new StateMainMenu());
 
 	sf::Color bgColor;
 	float color[3] = { 0.f, 0.f, 0.f };

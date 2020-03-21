@@ -30,12 +30,15 @@
     <ClCompile Include="Faction.cpp" />
     <ClCompile Include="HealthStats.cpp" />
     <ClCompile Include="main.cpp" />
+    <ClCompile Include="State.cpp" />
+    <ClCompile Include="StateMainMenu.cpp" />
     <ClCompile Include="States.cpp" />
     <ClCompile Include="Stats.cpp" />
     <ClCompile Include="Unit.cpp" />
     <ClCompile Include="UnitStatus.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="GameStates.h" />
     <ClInclude Include="BaseIncludes.h" />
     <ClInclude Include="ColonyBuildings.h" />
     <ClInclude Include="Colony.h" />
@@ -43,7 +46,9 @@
     <ClInclude Include="ColonyZone.h" />
     <ClInclude Include="Faction.h" />
     <ClInclude Include="Inventory.h" />
-    <ClInclude Include="States.h" />
+    <ClInclude Include="State.h" />
+    <ClInclude Include="StateMainMenu.h" />
+    <ClInclude Include="StateManager.h" />
     <ClInclude Include="Stats.h" />
     <ClInclude Include="HealthStats.h" />
     <ClInclude Include="Unit.h" />

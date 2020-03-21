@@ -1,13 +1,8 @@
-#include "States.h"
+#include "StateManager.h"
 
 StateManager* StateManager::mInstance = nullptr;
 
-State::StateType State::GetStateType()
-{
-	return mStateType;
-}
-
-bool StateManager::StateExists(State::StateType stateType)
+bool StateManager::StateExists(StateType stateType)
 {
 	for (std::vector<State*>::iterator iter = mStates.begin(); iter != mStates.end(); ++iter)
 	{
@@ -52,7 +47,7 @@ State* StateManager::PopState()
 	return topState;
 }
 
-State* StateManager::PopToState(State::StateType stateType)
+State* StateManager::PopToState(StateType stateType)
 {
 	if (StateExists(stateType))
 	{

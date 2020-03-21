@@ -24,6 +24,12 @@
     <Filter Include="Source Files\Base">
       <UniqueIdentifier>{bb79479a-c088-4554-bebe-0c02624c0679}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Header Files\GameStates">
+      <UniqueIdentifier>{9fea2855-9023-41d8-b0a2-f9603f73116e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\GameStates">
+      <UniqueIdentifier>{13ae8382-7761-455c-a145-15a9a69af371}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
@@ -43,9 +49,6 @@
     </ClCompile>
     <ClCompile Include="D:\User Data\Documents\C++ Libraries\imgui-sfml-master\imgui-SFML.cpp">
       <Filter>imgui</Filter>
-    </ClCompile>
-    <ClCompile Include="States.cpp">
-      <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="UnitStatus.cpp">
       <Filter>Source Files\People</Filter>
@@ -71,11 +74,17 @@
     <ClCompile Include="Faction.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="State.cpp">
+      <Filter>Source Files\GameStates</Filter>
+    </ClCompile>
+    <ClCompile Include="States.cpp">
+      <Filter>Source Files\GameStates</Filter>
+    </ClCompile>
+    <ClCompile Include="StateMainMenu.cpp">
+      <Filter>Source Files\GameStates</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="States.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="UnitStatus.h">
       <Filter>Header Files\People</Filter>
     </ClInclude>
@@ -111,6 +120,18 @@
     </ClInclude>
     <ClInclude Include="Faction.h">
       <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="StateMainMenu.h">
+      <Filter>Header Files\GameStates</Filter>
+    </ClInclude>
+    <ClInclude Include="StateManager.h">
+      <Filter>Header Files\GameStates</Filter>
+    </ClInclude>
+    <ClInclude Include="State.h">
+      <Filter>Header Files\GameStates</Filter>
+    </ClInclude>
+    <ClInclude Include="GameStates.h">
+      <Filter>Header Files\GameStates</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>
