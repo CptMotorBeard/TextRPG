@@ -19,6 +19,7 @@
     </ProjectConfiguration>
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="Colony.cpp" />
     <ClCompile Include="D:\User Data\Documents\C++ Libraries\imgui-master\imgui.cpp" />
     <ClCompile Include="D:\User Data\Documents\C++ Libraries\imgui-master\imgui_demo.cpp" />
     <ClCompile Include="D:\User Data\Documents\C++ Libraries\imgui-master\imgui_draw.cpp" />
@@ -32,6 +33,10 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="BaseIncludes.h" />
+    <ClInclude Include="ColonyBuildings.h" />
+    <ClInclude Include="Colony.h" />
+    <ClInclude Include="ColonyUpgrades.h" />
+    <ClInclude Include="ColonyZone.h" />
     <ClInclude Include="Inventory.h" />
     <ClInclude Include="States.h" />
     <ClInclude Include="Stats.h" />

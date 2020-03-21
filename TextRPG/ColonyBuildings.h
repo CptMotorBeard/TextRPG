@@ -1,0 +1,20 @@
+#pragma once
+#include "BaseIncludes.h"
+#include "Unit.h"
+
+class ColonyBuilding
+{
+private:
+	std::vector<Unit> mUnits;
+
+public:
+	ColonyBuilding()
+	{
+		mUnits = std::vector<Unit>();
+	};
+};
+
+class ColonyHome : ColonyBuilding {};
+class ColonyBusiness : ColonyBuilding {};
+class ColonyPowerBuilding : ColonyBuilding {};
+class ColonyConstructionBuilding : ColonyBuilding {};

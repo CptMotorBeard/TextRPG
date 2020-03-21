@@ -21,6 +21,9 @@
     <Filter Include="Source Files\People">
       <UniqueIdentifier>{97cf2778-70b1-43c7-9906-acfa3787ac14}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Source Files\Base">
+      <UniqueIdentifier>{bb79479a-c088-4554-bebe-0c02624c0679}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
@@ -53,6 +56,9 @@
     <ClCompile Include="HealthStats.cpp">
       <Filter>Source Files\People</Filter>
     </ClCompile>
+    <ClCompile Include="Colony.cpp">
+      <Filter>Source Files\Base</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="States.h">
@@ -78,6 +84,18 @@
     </ClInclude>
     <ClInclude Include="Inventory.h">
       <Filter>Header Files\People</Filter>
+    </ClInclude>
+    <ClInclude Include="Colony.h">
+      <Filter>Header Files\Base</Filter>
+    </ClInclude>
+    <ClInclude Include="ColonyZone.h">
+      <Filter>Header Files\Base</Filter>
+    </ClInclude>
+    <ClInclude Include="ColonyBuildings.h">
+      <Filter>Header Files\Base</Filter>
+    </ClInclude>
+    <ClInclude Include="ColonyUpgrades.h">
+      <Filter>Header Files\Base</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>
