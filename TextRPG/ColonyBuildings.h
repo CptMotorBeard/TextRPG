@@ -8,10 +8,7 @@ private:
 	std::vector<Unit> mUnits;
 
 public:
-	ColonyBuilding()
-	{
-		mUnits = std::vector<Unit>();
-	};
+	ColonyBuilding();
 };
 
 class ColonyHome : ColonyBuilding {};

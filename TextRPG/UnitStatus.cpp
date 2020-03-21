@@ -2,7 +2,7 @@
 
 UnitStatus::UnitStatus(uint16 startingAge)
 {
-	UnitHealth = HealthStats(startingAge);
+	UnitStatus::UnitHealth = HealthStats(startingAge);
 
 	for (auto att : Attribute::AllAttributes)
 	{

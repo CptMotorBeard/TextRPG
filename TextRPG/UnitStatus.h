@@ -11,5 +11,6 @@ public:
 
 	HealthStats UnitHealth;
 
+	UnitStatus() : UnitStatus(0) {};
 	UnitStatus(uint16 startingAge);
 };

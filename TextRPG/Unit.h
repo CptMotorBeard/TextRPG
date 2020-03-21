@@ -5,6 +5,10 @@
 
 class Unit
 {
+private:
+	uint8 mHeight;
+	uint8 mWeight;
+
 public:
 	UnitStatus Status;
 	std::vector<UnitTraits> Traits;
@@ -12,6 +16,13 @@ public:
 
 	Inventory UnitInventory;
 
-	uint8 Height;
-	uint8 Weight;
+	Unit() : Unit(0, 0, 0) {};
+	Unit(uint16 startingAge, uint8 startingHeight, uint8 startingWeight);
+};
+
+class Leader : Unit
+{
+public:
+	Leader() {};
+	Leader(uint16 startingAge, uint8 startingHeight, uint8 startingWeight) : Unit(startingAge, startingHeight, startingWeight) {};
 };

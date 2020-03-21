@@ -2,18 +2,18 @@
 
 HealthStats::HealthStats(uint16 startingAge)
 {
-	mAge = startingAge;
+	HealthStats::mAge = startingAge;
 
-	mHealth = 10;
-	mSanity = 10;
-	mAlive = true;
+	HealthStats::mHealth = 10;
+	HealthStats::mSanity = 10;
+	HealthStats::mAlive = true;
 
-	mInjuries = std::vector<Injury>();
-	mIllnesses = std::vector<Illness>();
-	mDiseases = std::vector<Disease>();
+	HealthStats::mInjuries = std::vector<Injury>();
+	HealthStats::mIllnesses = std::vector<Illness>();
+	HealthStats::mDiseases = std::vector<Disease>();
 
 	std::random_device dev;
-	mUnitRandom = std::mt19937(dev());
+	HealthStats::mUnitRandom = std::mt19937(dev());
 
-	mCurrentWeeksAlive = Random::WeeklyDistribution(mUnitRandom);
+	HealthStats::mCurrentWeeksAlive = Random::WeeklyDistribution(mUnitRandom);
 }

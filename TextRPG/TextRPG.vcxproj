@@ -20,15 +20,19 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Colony.cpp" />
+    <ClCompile Include="ColonyBuildings.cpp" />
+    <ClCompile Include="ColonyZone.cpp" />
     <ClCompile Include="D:\User Data\Documents\C++ Libraries\imgui-master\imgui.cpp" />
     <ClCompile Include="D:\User Data\Documents\C++ Libraries\imgui-master\imgui_demo.cpp" />
     <ClCompile Include="D:\User Data\Documents\C++ Libraries\imgui-master\imgui_draw.cpp" />
     <ClCompile Include="D:\User Data\Documents\C++ Libraries\imgui-master\imgui_widgets.cpp" />
     <ClCompile Include="D:\User Data\Documents\C++ Libraries\imgui-sfml-master\imgui-SFML.cpp" />
+    <ClCompile Include="Faction.cpp" />
     <ClCompile Include="HealthStats.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="States.cpp" />
     <ClCompile Include="Stats.cpp" />
+    <ClCompile Include="Unit.cpp" />
     <ClCompile Include="UnitStatus.cpp" />
   </ItemGroup>
   <ItemGroup>
@@ -37,6 +41,7 @@
     <ClInclude Include="Colony.h" />
     <ClInclude Include="ColonyUpgrades.h" />
     <ClInclude Include="ColonyZone.h" />
+    <ClInclude Include="Faction.h" />
     <ClInclude Include="Inventory.h" />
     <ClInclude Include="States.h" />
     <ClInclude Include="Stats.h" />

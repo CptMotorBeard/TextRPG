@@ -10,7 +10,10 @@ enum class FactionAllegiance
 
 class Faction
 {
+public:
 	std::map<Faction, FactionAllegiance> mFactionRelationships;
-	Unit mLeader;
+	Leader mLeader;
 	Colony mColony;
+
+	Faction();	
 };

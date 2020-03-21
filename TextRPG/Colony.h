@@ -11,9 +11,5 @@ private:
 	std::vector<ColonyUpgrades> mUpgrades;
 
 public:
-	Colony()
-	{
-		mZones = std::vector<ColonyZone>();
-		mUpgrades = std::vector<ColonyUpgrades>();
-	};
+	Colony();
 };

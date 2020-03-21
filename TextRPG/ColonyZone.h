@@ -8,8 +8,5 @@ private:
 	std::vector<ColonyBuilding> mColonyBuildings;
 
 public:
-	ColonyZone()
-	{
-		mColonyBuildings = std::vector<ColonyBuilding>();
-	};
+	ColonyZone();
 };

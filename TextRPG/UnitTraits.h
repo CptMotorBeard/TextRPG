@@ -3,7 +3,7 @@
 
 enum class PersonalityTraits
 {
-	test
+	LENGTH
 };
 
 class UnitTraits
