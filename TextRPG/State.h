@@ -1,6 +1,7 @@
 #pragma once
 #include "imgui.h"
 #include "imgui-SFML.h"
+#include "SFML/Graphics.hpp"
 
 /*
 	All states must be declared as a StateType. All states must be declared as friend classes. We want the states to be able to initialize what state type they are
@@ -31,5 +32,14 @@ public:
 	const StateType& GetStateType();
 
 	virtual ~State() {};
+
+	/// <summary>Builds the imGui state. All widgets must be created between update and render</summary>
 	virtual void Build() {};
+	/// <summary>Process SFML events</summary>
+	virtual void ProcessEvents(const sf::Event &sfEvent) {};
+
+	/// <summary>Renders prior to imGui, all elements are designed to be BEHIND imGui elements</summary>
+	virtual void PreRender(sf::RenderTarget &target) {};
+	/// <summary>Renders after imGui, all elements are designed to be ABOVE imGui elements</summary>
+	virtual void PostRender(sf::RenderTarget &target) {};
 };

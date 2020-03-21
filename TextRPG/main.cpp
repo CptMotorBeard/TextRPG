@@ -27,23 +27,24 @@ int main()
 
 	while (window.isOpen())
 	{
-		sf::Event event;
-		while (window.pollEvent(event))
+		sf::Event sfEvent;
+		while (window.pollEvent(sfEvent))
 		{
-			ImGui::SFML::ProcessEvent(event);
+			ImGui::SFML::ProcessEvent(sfEvent);
+			stateManager->GetCurrentState()->ProcessEvents(sfEvent);
 
-			if (event.type == sf::Event::Closed)
+			if (sfEvent.type == sf::Event::Closed)
 			{
 				window.close();
 			}
-			else if (event.type == sf::Event::Resized)
+			else if (sfEvent.type == sf::Event::Resized)
 			{
-				sf::FloatRect visibleArea(0, 0, event.size.width, event.size.height);
+				sf::FloatRect visibleArea(0, 0, sfEvent.size.width, sfEvent.size.height);
 				window.setView(sf::View(visibleArea));
 			}
-			else if (event.type == sf::Event::KeyReleased)
+			else if (sfEvent.type == sf::Event::KeyReleased)
 			{
-				if (event.key.code == sf::Keyboard::Tilde)
+				if (sfEvent.key.code == sf::Keyboard::Tilde)
 				{
 					debugWindow = !debugWindow;
 				}
@@ -57,10 +58,12 @@ int main()
 		if (debugWindow)
 		{
 			ImGui::ShowMetricsWindow();
-		}		
+		}
 
 		window.clear(bgColor);
-		ImGui::SFML::Render(window);
+		stateManager->GetCurrentState()->PreRender(window);
+		ImGui::SFML::Render(window);		
+		stateManager->GetCurrentState()->PostRender(window);
 		window.display();
 	}
 
