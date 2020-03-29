@@ -29,6 +29,17 @@ private:
 	StateType mStateType;	
 	State(StateType stateType);
 
+	enum class RenderMode
+	{
+		NONE,
+		Build,
+		PreRender,
+		PostRender,
+		LENGTH
+	};
+
+	RenderMode mCurrentRenderMode;
+
 #pragma region AllStates
 	friend class STATEMAINMENU;
 #pragma endregion

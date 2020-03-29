@@ -13,6 +13,7 @@ public:
 		LuaManager::LuaOkay(L, luaL_dofile(L, LUA_SOURCE));
 
 		// register C++ functions
+		State::mCurrentRenderMode = State::RenderMode::NONE;
 	};
 
 	void Build() override;

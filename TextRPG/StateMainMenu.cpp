@@ -7,6 +7,7 @@ void StateMainMenu::ProcessEvents(const sf::Event& sfEvent)
 
 void StateMainMenu::Build()
 {
+	State::mCurrentRenderMode = State::RenderMode::Build;
 	lua_State* L = LuaManager::GetLuaState();
 
 	if (LuaManager::LuaOkay(L, luaL_loadfile(L, LUA_SOURCE)))
@@ -17,10 +18,13 @@ void StateMainMenu::Build()
 			LuaManager::LuaOkay(L, lua_pcall(L, 0, 0, 0));
 		}
 	}
+
+	State::mCurrentRenderMode = State::RenderMode::NONE;
 }
 
 void StateMainMenu::PreRender(sf::RenderTarget& target)
 {
+	State::mCurrentRenderMode = State::RenderMode::PreRender;
 	lua_State* L = LuaManager::GetLuaState();
 
 	if (LuaManager::LuaOkay(L, luaL_loadfile(L, LUA_SOURCE)))
@@ -31,10 +35,13 @@ void StateMainMenu::PreRender(sf::RenderTarget& target)
 			LuaManager::LuaOkay(L, lua_pcall(L, 0, 0, 0));
 		}
 	}
+
+	State::mCurrentRenderMode = State::RenderMode::NONE;
 }
 
 void StateMainMenu::PostRender(sf::RenderTarget& target)
 {
+	State::mCurrentRenderMode = State::RenderMode::PostRender;
 	lua_State* L = LuaManager::GetLuaState();
 
 	if (LuaManager::LuaOkay(L, luaL_loadfile(L, LUA_SOURCE)))
@@ -45,4 +52,6 @@ void StateMainMenu::PostRender(sf::RenderTarget& target)
 			LuaManager::LuaOkay(L, lua_pcall(L, 0, 0, 0));
 		}
 	}
+
+	State::mCurrentRenderMode = State::RenderMode::NONE;
 }
