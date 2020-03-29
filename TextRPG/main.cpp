@@ -3,6 +3,8 @@
 #include "imgui.h"
 #include "imgui-SFML.h"
 
+#include "LUA.h"
+
 #include "SFML/Graphics.hpp"
 #include "SFML/System/Clock.hpp"
 
@@ -10,6 +12,8 @@
 
 int main()
 {
+	lua_State *L = luaL_newstate();
+
 	bool debugWindow = false;
 
 	sf::RenderWindow window(sf::VideoMode(640, 480), "SFML works!");
@@ -53,7 +57,7 @@ int main()
 		
 		// All widgets must be created between update and render
 		ImGui::SFML::Update(window, deltaClock.restart());
-		stateManager->GetCurrentState()->Build();
+		stateManager->GetCurrentState()->Build(L);
 
 		if (debugWindow)
 		{
@@ -62,12 +66,14 @@ int main()
 
 		window.clear(bgColor);
 
-		stateManager->GetCurrentState()->PreRender(window);
-		ImGui::SFML::Render(window);		
-		stateManager->GetCurrentState()->PostRender(window);
+		stateManager->GetCurrentState()->PreRender(window, L);
+		ImGui::SFML::Render(window);
+		stateManager->GetCurrentState()->PostRender(window, L);
 		window.display();
 	}
 
 	ImGui::SFML::Shutdown();
 	StateManager::Shutdown();
+
+	lua_close(L);
 }

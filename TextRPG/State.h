@@ -1,6 +1,7 @@
 #pragma once
 #include "imgui.h"
 #include "imgui-SFML.h"
+#include "LUA.h"
 #include "SFML/Graphics.hpp"
 
 /*
@@ -9,6 +10,11 @@
 */
 
 #define STATEMAINMENU StateMainMenu
+#define STATEFACTIONCREATION StateFactionCreation
+#define STATEFACTIONOVERVIEW StateFactionOverview
+#define STATECHARACTERCREATION StateCharacterCreation
+#define STATECHARACTEROVERVIEW StateCharacterOverview
+#define STATELOADGAME StateLoadGame
 
 enum class StateType
 {
@@ -34,12 +40,12 @@ public:
 	virtual ~State() {};
 
 	/// <summary>Builds the imGui state. All widgets must be created between update and render</summary>
-	virtual void Build() {};
+	virtual void Build(lua_State* L) {};
 	/// <summary>Process SFML events</summary>
 	virtual void ProcessEvents(const sf::Event &sfEvent) {};
 
 	/// <summary>Renders prior to imGui, all elements are designed to be BEHIND imGui elements</summary>
-	virtual void PreRender(sf::RenderTarget &target) {};
+	virtual void PreRender(sf::RenderTarget &target, lua_State* L) {};
 	/// <summary>Renders after imGui, all elements are designed to be ABOVE imGui elements</summary>
-	virtual void PostRender(sf::RenderTarget &target) {};
+	virtual void PostRender(sf::RenderTarget &target, lua_State* L) {};
 };
