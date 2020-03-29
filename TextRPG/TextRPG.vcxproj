@@ -29,6 +29,7 @@
     <ClCompile Include="D:\User Data\Documents\C++ Libraries\imgui-sfml-master\imgui-SFML.cpp" />
     <ClCompile Include="Faction.cpp" />
     <ClCompile Include="HealthStats.cpp" />
+    <ClCompile Include="LocalizationManager.cpp" />
     <ClCompile Include="LUA.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="State.cpp" />
@@ -47,6 +48,7 @@
     <ClInclude Include="ColonyZone.h" />
     <ClInclude Include="Faction.h" />
     <ClInclude Include="Inventory.h" />
+    <ClInclude Include="LocalizationManager.h" />
     <ClInclude Include="LUA.h" />
     <ClInclude Include="State.h" />
     <ClInclude Include="StateMainMenu.h" />
@@ -59,6 +61,9 @@
   </ItemGroup>
   <ItemGroup>
     <Text Include="StateMainMenu.lua" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="loc.db" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <VCProjectVersion>16.0</VCProjectVersion>
@@ -117,6 +122,8 @@
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <LinkIncremental>true</LinkIncremental>
     <ExecutablePath>$(ExecutablePath)</ExecutablePath>
+    <IncludePath>$(IncludePath)</IncludePath>
+    <LibraryPath>$(LibraryPath)</LibraryPath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <LinkIncremental>false</LinkIncremental>
@@ -145,13 +152,13 @@
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
-      <AdditionalIncludeDirectories>D:\User Data\Documents\C++ Libraries\imgui-sfml-master;D:\User Data\Documents\C++ Libraries\imgui-master;D:\User Data\Documents\SFML\sfml\include</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>C:\SQLite\Project\sqlite3;D:\User Data\Documents\C++ Libraries\imgui-sfml-master;D:\User Data\Documents\C++ Libraries\imgui-master;D:\User Data\Documents\SFML\sfml\include</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
-      <AdditionalLibraryDirectories>C:\Users\Antonio\source\repos\TextRPG\TextRPG\Lua535;D:\User Data\Documents\SFML\sfml-build\lib\Debug</AdditionalLibraryDirectories>
-      <AdditionalDependencies>sfml-audio-d.lib;sfml-graphics-d.lib;sfml-main-d.lib;sfml-network-d.lib;sfml-system-d.lib;sfml-window-d.lib;opengl32.lib;lua53.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalLibraryDirectories>C:\Users\Antonio\source\repos\TextRPG\x64\Debug;C:\Users\Antonio\source\repos\TextRPG\TextRPG\Lua535;D:\User Data\Documents\SFML\sfml-build\lib\Debug</AdditionalLibraryDirectories>
+      <AdditionalDependencies>sfml-audio-d.lib;sfml-graphics-d.lib;sfml-main-d.lib;sfml-network-d.lib;sfml-system-d.lib;sfml-window-d.lib;opengl32.lib;lua53.lib;sqlite3.lib;%(AdditionalDependencies)</AdditionalDependencies>
       <ShowProgress>LinkVerbose</ShowProgress>
     </Link>
   </ItemDefinitionGroup>

@@ -92,6 +92,9 @@
     <ClCompile Include="LUA.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="LocalizationManager.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="UnitStatus.h">
@@ -145,10 +148,18 @@
     <ClInclude Include="LUA.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="LocalizationManager.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Text Include="StateMainMenu.lua">
       <Filter>LUA Files\States</Filter>
     </Text>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="loc.db">
+      <Filter>Source Files</Filter>
+    </None>
   </ItemGroup>
 </Project>

@@ -3,6 +3,7 @@
 #include "imgui.h"
 #include "imgui-SFML.h"
 
+#include "LocalizationManager.h"
 #include "LUA.h"
 
 #include "SFML/Graphics.hpp"
@@ -12,16 +13,20 @@
 
 int main()
 {
+	LocalizationManager* locManager = LocalizationManager::GetInstance();
+	StateManager* stateManager = StateManager::Init(new StateMainMenu());
+
 	bool debugWindow = false;
 
 	sf::RenderWindow window(sf::VideoMode(640, 480), "SFML works!");
-	ImGui::SFML::Init(window);
-
-	StateManager* stateManager = StateManager::Init(new StateMainMenu());
+	ImGui::SFML::Init(window);	
 
 	sf::Color bgColor;
 	float color[3] = { 0.f, 0.f, 0.f };
-	char windowTitle[255] = "ImGui + SFML = <3";
+
+	auto p = locManager->GetLocByKey("ENTRY_TITLE");
+
+	const char* windowTitle = p->c_str();
 	window.setTitle(windowTitle);
 
 	window.resetGLStates();
@@ -72,5 +77,6 @@ int main()
 
 	ImGui::SFML::Shutdown();
 	StateManager::Shutdown();
+	LocalizationManager::Shutdown();
 	LuaManager::Shutdown();
 }

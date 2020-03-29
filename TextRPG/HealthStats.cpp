@@ -15,5 +15,5 @@ HealthStats::HealthStats(uint16 startingAge)
 	std::random_device dev;
 	HealthStats::mUnitRandom = std::mt19937(dev());
 
-	HealthStats::mCurrentWeeksAlive = Random::WeeklyDistribution(mUnitRandom);
+	HealthStats::mCurrentWeeksAlive = (uint8)Random::WeeklyDistribution(mUnitRandom);
 }
