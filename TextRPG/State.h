@@ -40,12 +40,12 @@ public:
 	virtual ~State() {};
 
 	/// <summary>Builds the imGui state. All widgets must be created between update and render</summary>
-	virtual void Build(lua_State* L) {};
+	virtual void Build() {};
 	/// <summary>Process SFML events</summary>
 	virtual void ProcessEvents(const sf::Event &sfEvent) {};
 
 	/// <summary>Renders prior to imGui, all elements are designed to be BEHIND imGui elements</summary>
-	virtual void PreRender(sf::RenderTarget &target, lua_State* L) {};
+	virtual void PreRender(sf::RenderTarget &target) {};
 	/// <summary>Renders after imGui, all elements are designed to be ABOVE imGui elements</summary>
-	virtual void PostRender(sf::RenderTarget &target, lua_State* L) {};
+	virtual void PostRender(sf::RenderTarget &target) {};
 };

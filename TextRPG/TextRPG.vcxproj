@@ -29,6 +29,7 @@
     <ClCompile Include="D:\User Data\Documents\C++ Libraries\imgui-sfml-master\imgui-SFML.cpp" />
     <ClCompile Include="Faction.cpp" />
     <ClCompile Include="HealthStats.cpp" />
+    <ClCompile Include="LUA.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="State.cpp" />
     <ClCompile Include="StateMainMenu.cpp" />
@@ -55,6 +56,9 @@
     <ClInclude Include="Unit.h" />
     <ClInclude Include="UnitStatus.h" />
     <ClInclude Include="UnitTraits.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <Text Include="StateMainMenu.lua" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <VCProjectVersion>16.0</VCProjectVersion>

@@ -12,8 +12,6 @@
 
 int main()
 {
-	lua_State *L = luaL_newstate();
-
 	bool debugWindow = false;
 
 	sf::RenderWindow window(sf::VideoMode(640, 480), "SFML works!");
@@ -43,7 +41,7 @@ int main()
 			}
 			else if (sfEvent.type == sf::Event::Resized)
 			{
-				sf::FloatRect visibleArea(0, 0, sfEvent.size.width, sfEvent.size.height);
+				sf::FloatRect visibleArea(0, 0, (float)sfEvent.size.width, (float)sfEvent.size.height);
 				window.setView(sf::View(visibleArea));
 			}
 			else if (sfEvent.type == sf::Event::KeyReleased)
@@ -57,7 +55,7 @@ int main()
 		
 		// All widgets must be created between update and render
 		ImGui::SFML::Update(window, deltaClock.restart());
-		stateManager->GetCurrentState()->Build(L);
+		stateManager->GetCurrentState()->Build();
 
 		if (debugWindow)
 		{
@@ -66,14 +64,13 @@ int main()
 
 		window.clear(bgColor);
 
-		stateManager->GetCurrentState()->PreRender(window, L);
+		stateManager->GetCurrentState()->PreRender(window);
 		ImGui::SFML::Render(window);
-		stateManager->GetCurrentState()->PostRender(window, L);
+		stateManager->GetCurrentState()->PostRender(window);
 		window.display();
 	}
 
 	ImGui::SFML::Shutdown();
 	StateManager::Shutdown();
-
-	lua_close(L);
+	LuaManager::Shutdown();
 }

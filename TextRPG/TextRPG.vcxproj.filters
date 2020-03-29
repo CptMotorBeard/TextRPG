@@ -30,6 +30,12 @@
     <Filter Include="Source Files\GameStates">
       <UniqueIdentifier>{13ae8382-7761-455c-a145-15a9a69af371}</UniqueIdentifier>
     </Filter>
+    <Filter Include="LUA Files">
+      <UniqueIdentifier>{fb640fa7-eb2a-4eb8-9327-3e60bf3ccc92}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="LUA Files\States">
+      <UniqueIdentifier>{69e5f87e-d639-4c93-8929-8f7197fb1aa8}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
@@ -82,6 +88,9 @@
     </ClCompile>
     <ClCompile Include="StateMainMenu.cpp">
       <Filter>Source Files\GameStates</Filter>
+    </ClCompile>
+    <ClCompile Include="LUA.cpp">
+      <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -136,5 +145,10 @@
     <ClInclude Include="LUA.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <Text Include="StateMainMenu.lua">
+      <Filter>LUA Files\States</Filter>
+    </Text>
   </ItemGroup>
 </Project>

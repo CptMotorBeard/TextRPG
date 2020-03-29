@@ -1,15 +1,22 @@
 #pragma once
 #include "BaseIncludes.h"
-#include "LUA.h"
 #include "State.h"
+
+#define LUA_SOURCE "StateMainMenu.lua"
 
 class StateMainMenu : public State
 {
 public:
-	StateMainMenu() : State(StateType::StateMainMenu) {};
+	StateMainMenu() : State(StateType::StateMainMenu)
+	{
+		lua_State* L = LuaManager::GetLuaState();
+		LuaManager::LuaOkay(L, luaL_dofile(L, LUA_SOURCE));
 
-	void Build(lua_State* L) override;
+		// register C++ functions
+	};
+
+	void Build() override;
 	void ProcessEvents(const sf::Event &sfEvent) override;
-	void PostRender(sf::RenderTarget &target, lua_State* L) override;
-	void PreRender(sf::RenderTarget &target, lua_State* L) override;
+	void PostRender(sf::RenderTarget &target) override;
+	void PreRender(sf::RenderTarget &target) override;
 };
