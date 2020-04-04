@@ -15,22 +15,27 @@ int main()
 {
 	LocalizationManager* locManager = LocalizationManager::GetInstance();
 	StateManager* stateManager = StateManager::Init(new StateMainMenu());
-
+	
 	bool debugWindow = false;
 
-	sf::RenderWindow window(sf::VideoMode(640, 480), "SFML works!");
+	auto p = locManager->GetLocByKey("ENTRY_TITLE");
+	const char* windowTitle = p->c_str();
+
+	sf::RenderWindow window(sf::VideoMode(640, 480), windowTitle);
 	ImGui::SFML::Init(window);	
 
 	sf::Color bgColor;
 	float color[3] = { 0.f, 0.f, 0.f };
 
-	auto p = locManager->GetLocByKey("ENTRY_TITLE");
-
-	const char* windowTitle = p->c_str();
-	window.setTitle(windowTitle);
-
 	window.resetGLStates();
 	sf::Clock deltaClock;
+
+	ImGuiIO& io = ImGui::GetIO();
+
+	sf::Font sfRoboto = sf::Font();
+	sfRoboto.loadFromFile("Resources/Roboto Font/Roboto-Regular.ttf");
+	ImFont* pImguiRoboto = ImGui::GetIO().Fonts->AddFontFromFileTTF("Resources/Roboto Font/Roboto-Regular.ttf", 18);
+	ImGui::SFML::UpdateFontTexture();
 
 	while (window.isOpen())
 	{
@@ -57,18 +62,44 @@ int main()
 				}
 			}
 		}
-		
+
 		// All widgets must be created between update and render
 		ImGui::SFML::Update(window, deltaClock.restart());
-		stateManager->GetCurrentState()->Build();
+		if (ImGui::BeginMainMenuBar())
+		{
+			if (ImGui::BeginMenu("File"))
+			{
+				if (ImGui::MenuItem("Main Menu"))
+				{
+					stateManager->PopToBottom();
+				}
+				if (ImGui::MenuItem("Save Game"))
+				{
+					//stateManager->PushState(new StateSaveGame());
+				}
+				if (ImGui::MenuItem("Load Game"))
+				{
+					//StateManager->PushState(new StateLoadGame());
+				}
 
+				if (ImGui::MenuItem("Quit"))
+				{
+					window.close();
+				}
+				ImGui::EndMenu();
+			}
+			ImGui::EndMainMenuBar();
+		}
+		
+		stateManager->GetCurrentState()->Build();
+		
 		if (debugWindow)
 		{
 			ImGui::ShowMetricsWindow();
 		}
 
 		window.clear(bgColor);
-
+		ImGui::ShowDemoWindow();
 		stateManager->GetCurrentState()->PreRender(window);
 		ImGui::SFML::Render(window);
 		stateManager->GetCurrentState()->PostRender(window);

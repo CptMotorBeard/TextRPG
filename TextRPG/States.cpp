@@ -4,9 +4,9 @@ StateManager* StateManager::mInstance = nullptr;
 
 bool StateManager::StateExists(StateType stateType)
 {
-	for (std::vector<State*>::iterator iter = mStates.begin(); iter != mStates.end(); ++iter)
+	for (auto state : mStates)
 	{
-		if ((*iter)->GetStateType() == stateType)
+		if (state->GetStateType() == stateType)
 		{
 			return true;
 		}
@@ -22,8 +22,8 @@ StateManager::StateManager(State* initialState)
 }
 
 State* StateManager::GetCurrentState()
-{
-	return mStates[mStates.size() - 1];
+{	
+	return mStates.back();
 }
 
 void StateManager::PushState(State* newState)
@@ -53,7 +53,7 @@ State* StateManager::PopToState(StateType stateType)
 	{
 		while (GetCurrentState()->GetStateType() != stateType)
 		{
-			PopState();
+			delete(PopState());
 		}
 
 		return GetCurrentState();
@@ -71,7 +71,7 @@ State* StateManager::PopToBottom()
 {
 	while (mStates.size() > 1)
 	{
-		mStates.pop_back();
+		delete(PopState());
 	}
 
 	return GetCurrentState();
@@ -79,7 +79,7 @@ State* StateManager::PopToBottom()
 
 StateManager* StateManager::Init(State* initialState)
 {
-	delete mInstance;
+	assert(mInstance == nullptr && "Cannot initialize the state manager :: It is already initilized");
 	mInstance = new StateManager(initialState);
 	return mInstance;
 }
@@ -91,5 +91,12 @@ StateManager* StateManager::GetInstance()
 
 void StateManager::Shutdown()
 {
+	for (auto p : mInstance->mStates)
+	{
+		delete p;
+	}
+
+	mInstance->mStates.clear();
+
 	delete mInstance;
 };
