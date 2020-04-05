@@ -4,7 +4,7 @@ StateManager* StateManager::mInstance = nullptr;
 
 bool StateManager::StateExists(StateType stateType)
 {
-	for (auto state : mStates)
+	for (auto const& state : mStates)
 	{
 		if (state->GetStateType() == stateType)
 		{
@@ -15,20 +15,20 @@ bool StateManager::StateExists(StateType stateType)
 	return false;
 }
 
-StateManager::StateManager(State* initialState)
+StateManager::StateManager(std::shared_ptr<State> initialState)
 {
-	mStates = std::vector<State*>();
+	mStates = std::vector<std::shared_ptr<State>>();
 	mStates.push_back(initialState);
 }
 
-State* StateManager::GetCurrentState()
+std::shared_ptr<State> StateManager::GetCurrentState()
 {	
 	return mStates.back();
 }
 
-void StateManager::PushState(State* newState)
+void StateManager::PushState(std::shared_ptr<State> newState)
 {
-	State* stateExists = PopToState(newState->GetStateType());
+	std::shared_ptr<State> stateExists = PopToState(newState->GetStateType());
 	if (stateExists != nullptr)
 	{
 		PopState();
@@ -37,9 +37,9 @@ void StateManager::PushState(State* newState)
 	mStates.push_back(newState);
 }
 
-State* StateManager::PopState()
+std::shared_ptr<State> StateManager::PopState()
 {
-	State* topState = GetCurrentState();
+	std::shared_ptr<State> topState = GetCurrentState();
 	if (mStates.size() > 1)
 	{
 		mStates.pop_back();
@@ -47,13 +47,15 @@ State* StateManager::PopState()
 	return topState;
 }
 
-State* StateManager::PopToState(StateType stateType)
+std::shared_ptr<State> StateManager::PopToState(StateType stateType)
 {
 	if (StateExists(stateType))
 	{
 		while (GetCurrentState()->GetStateType() != stateType)
 		{
-			delete(PopState());
+			auto state = PopState();
+			const bool unique = state.unique();
+			assert(unique && "Shouldn't be holding on to states after they are popped");
 		}
 
 		return GetCurrentState();
@@ -62,22 +64,24 @@ State* StateManager::PopToState(StateType stateType)
 	return nullptr;
 }
 
-State* StateManager::PopToState(State state)
+std::shared_ptr<State> StateManager::PopToState(State state)
 {
 	return PopToState(state.GetStateType());
 }
 
-State* StateManager::PopToBottom()
+std::shared_ptr<State> StateManager::PopToBottom()
 {
 	while (mStates.size() > 1)
 	{
-		delete(PopState());
+		auto state = PopState();
+		const bool unique = state.unique();
+		assert(unique && "Shouldn't be holding on to states after they are popped");
 	}
 
 	return GetCurrentState();
 }
 
-StateManager* StateManager::Init(State* initialState)
+StateManager* StateManager::Init(std::shared_ptr<State> initialState)
 {
 	assert(mInstance == nullptr && "Cannot initialize the state manager :: It is already initilized");
 	mInstance = new StateManager(initialState);
@@ -91,9 +95,10 @@ StateManager* StateManager::GetInstance()
 
 void StateManager::Shutdown()
 {
-	for (auto p : mInstance->mStates)
+	for (auto const& state : mInstance->mStates)
 	{
-		delete p;
+		const bool unique = state.unique();
+		assert(unique && "A state was still being held after shutdown");
 	}
 
 	mInstance->mStates.clear();

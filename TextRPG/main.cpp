@@ -14,7 +14,7 @@
 int main()
 {
 	LocalizationManager* locManager = LocalizationManager::GetInstance();
-	StateManager* stateManager = StateManager::Init(new StateMainMenu());
+	StateManager* stateManager = StateManager::Init(std::make_shared<StateMainMenu>());
 	
 	bool debugWindow = false;
 
@@ -75,11 +75,11 @@ int main()
 				}
 				if (ImGui::MenuItem("Save Game"))
 				{
-					stateManager->PushState(new StateSaveGame());
+					stateManager->PushState(std::make_shared<StateSaveGame>());
 				}
 				if (ImGui::MenuItem("Load Game"))
 				{
-					stateManager->PushState(new StateLoadGame());
+					stateManager->PushState(std::make_shared<StateLoadGame>());
 				}
 
 				if (ImGui::MenuItem("Quit"))
