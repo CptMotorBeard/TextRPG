@@ -75,11 +75,11 @@ int main()
 				}
 				if (ImGui::MenuItem("Save Game"))
 				{
-					//stateManager->PushState(new StateSaveGame());
+					stateManager->PushState(new StateSaveGame());
 				}
 				if (ImGui::MenuItem("Load Game"))
 				{
-					//StateManager->PushState(new StateLoadGame());
+					stateManager->PushState(new StateLoadGame());
 				}
 
 				if (ImGui::MenuItem("Quit"))
@@ -100,9 +100,9 @@ int main()
 
 		window.clear(bgColor);
 		ImGui::ShowDemoWindow();
-		stateManager->GetCurrentState()->PreRender(window);
+		stateManager->GetCurrentState()->PreRender(window, &sfRoboto);
 		ImGui::SFML::Render(window);
-		stateManager->GetCurrentState()->PostRender(window);
+		stateManager->GetCurrentState()->PostRender(window, &sfRoboto);
 		window.display();
 	}
 

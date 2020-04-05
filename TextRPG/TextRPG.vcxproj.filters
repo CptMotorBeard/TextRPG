@@ -83,9 +83,6 @@
     <ClCompile Include="State.cpp">
       <Filter>Source Files\GameStates</Filter>
     </ClCompile>
-    <ClCompile Include="States.cpp">
-      <Filter>Source Files\GameStates</Filter>
-    </ClCompile>
     <ClCompile Include="StateMainMenu.cpp">
       <Filter>Source Files\GameStates</Filter>
     </ClCompile>
@@ -94,6 +91,9 @@
     </ClCompile>
     <ClCompile Include="LocalizationManager.cpp">
       <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="StateManager.cpp">
+      <Filter>Source Files\GameStates</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -151,9 +151,21 @@
     <ClInclude Include="LocalizationManager.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="StateLoadGame.h">
+      <Filter>Header Files\GameStates</Filter>
+    </ClInclude>
+    <ClInclude Include="StateSaveGame.h">
+      <Filter>Header Files\GameStates</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Text Include="StateMainMenu.lua">
+      <Filter>LUA Files\States</Filter>
+    </Text>
+    <Text Include="StateSaveGame.lua">
+      <Filter>LUA Files\States</Filter>
+    </Text>
+    <Text Include="StateLoadGame.Lua">
       <Filter>LUA Files\States</Filter>
     </Text>
   </ItemGroup>

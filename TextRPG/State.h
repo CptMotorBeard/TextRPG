@@ -1,8 +1,6 @@
 #pragma once
-#include "imgui.h"
-#include "imgui-SFML.h"
+#include "BaseIncludes.h"
 #include "LUA.h"
-#include "SFML/Graphics.hpp"
 
 /*
 	All states must be declared as a StateType. All states must be declared as friend classes. We want the states to be able to initialize what state type they are
@@ -35,6 +33,9 @@ class State
 private:
 	StateType mStateType;	
 	State(StateType stateType, const char* lua_source);
+
+	sf::Font* mCurrentFont;
+	std::vector<std::unique_ptr<sf::Drawable>> mAllDrawables;
 
 	enum class RenderMode
 	{
@@ -70,7 +71,12 @@ public:
 	virtual void ProcessEvents(const sf::Event& sfEvent) {};
 
 	/// <summary>Renders prior to imGui, all elements are designed to be BEHIND imGui elements</summary>
-	virtual void PreRender(sf::RenderTarget &target);
+	virtual void PreRender(sf::RenderTarget &target, sf::Font* font);
 	/// <summary>Renders after imGui, all elements are designed to be ABOVE imGui elements</summary>
-	virtual void PostRender(sf::RenderTarget &target);
+	virtual void PostRender(sf::RenderTarget &target, sf::Font* font);
+
+#pragma region LUA Blocks
+	void AddText(std::string text, int fontSize, float locX, float locY);
+#pragma endregion
+
 };

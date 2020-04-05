@@ -3,7 +3,7 @@ function Build()
 end
 
 function PreRender()
-	AddText("Main Menu State", 24, 10, 24);
+	AddText("Save State", 24, 10, 24);
 end
 
 function PostRender()

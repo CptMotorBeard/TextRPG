@@ -1,4 +1,3 @@
-#include "BaseIncludes.h"
 #include "LocalizationManager.h"
 
 LocalizationManager *LocalizationManager::mInstance = nullptr;

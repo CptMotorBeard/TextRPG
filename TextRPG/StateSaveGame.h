@@ -1,16 +1,14 @@
 #pragma once
 #include "State.h"
 
-class StateMainMenu : public State
+class StateSaveGame : public State
 {
 public:
-	StateMainMenu() : State(StateType::StateMainMenu, "StateMainMenu.lua")
+	StateSaveGame() : State(StateType::StateSaveGame, "StateSaveGame.lua")
 	{
 		lua_State* L = LuaManager::GetLuaState();
 		LuaManager::LuaOkay(L, luaL_dofile(L, LUA_SOURCE));
 
 		// register C++ functions
 	};
-
-	void ProcessEvents(const sf::Event &sfEvent) override;
 };

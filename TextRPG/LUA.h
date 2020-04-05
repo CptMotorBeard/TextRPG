@@ -1,6 +1,10 @@
 #pragma once
 #include <iostream>
 
+#include "imgui.h"
+#include "imgui-SFML.h"
+#include "SFML/Graphics.hpp"
+
 extern "C"
 {
 #include "Lua535/include/lua.h"
@@ -12,6 +16,7 @@ class LuaManager
 {
 private:
 	static lua_State* L;
+	static void InitializeNativeFunctions();
 
 public:
 	static bool LuaOkay(lua_State* L, int r);

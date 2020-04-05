@@ -1,11 +1,9 @@
 #pragma once
 #include "BaseIncludes.h"
-
-#include "imgui.h"
-#include "imgui-SFML.h"
-
-#include "SFML/Graphics.hpp"
 #include "State.h"
+
+class State;
+enum class StateType;
 
 class StateManager
 {
@@ -17,7 +15,6 @@ private:
 
 public:
 	StateManager(State* initialState);
-
 	State* GetCurrentState();
 
 	/// <summary>Push a new state onto the stack. If the state already exists on the stack, pop to it to avoid loops</summary>

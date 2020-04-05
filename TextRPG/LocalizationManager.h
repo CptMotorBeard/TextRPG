@@ -1,4 +1,5 @@
 #pragma once
+#include "BaseIncludes.h"
 #include "sqlite3.h"
 
 class LocalizationManager

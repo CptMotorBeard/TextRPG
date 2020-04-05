@@ -34,7 +34,7 @@
     <ClCompile Include="main.cpp" />
     <ClCompile Include="State.cpp" />
     <ClCompile Include="StateMainMenu.cpp" />
-    <ClCompile Include="States.cpp" />
+    <ClCompile Include="StateManager.cpp" />
     <ClCompile Include="Stats.cpp" />
     <ClCompile Include="Unit.cpp" />
     <ClCompile Include="UnitStatus.cpp" />
@@ -51,8 +51,10 @@
     <ClInclude Include="LocalizationManager.h" />
     <ClInclude Include="LUA.h" />
     <ClInclude Include="State.h" />
+    <ClInclude Include="StateLoadGame.h" />
     <ClInclude Include="StateMainMenu.h" />
     <ClInclude Include="StateManager.h" />
+    <ClInclude Include="StateSaveGame.h" />
     <ClInclude Include="Stats.h" />
     <ClInclude Include="HealthStats.h" />
     <ClInclude Include="Unit.h" />
@@ -61,6 +63,8 @@
   </ItemGroup>
   <ItemGroup>
     <Text Include="StateMainMenu.lua" />
+    <Text Include="StateSaveGame.lua" />
+    <Text Include="StateLoadGame.Lua" />
   </ItemGroup>
   <ItemGroup>
     <None Include="loc.db" />
