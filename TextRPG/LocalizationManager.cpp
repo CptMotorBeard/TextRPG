@@ -61,37 +61,40 @@ bool LocalizationManager::OpenDatabase(const char* databaseName)
 
 std::unique_ptr<std::string> LocalizationManager::GetLocByKey(const std::string& key)
 {
-	char lang[16];
-	sprintf_s(lang, 16, "%s%s", SQLOperations::Query::kLOC_VALUE, "en");
-
-	char query[128];
-	sprintf_s(query, 128, "SELECT %s FROM %s WHERE %s==\"%s\"", lang, SQLOperations::Query::kLOC_TABLE, SQLOperations::Query::kLOC_KEY, key.c_str());
-
-	sqlite3_stmt* stmt;
-	int err;
-
-	err = sqlite3_prepare_v2(mLocalizationDatabase, query, SQLOperations::Query::kREAD_FULL_QUERY, &stmt, SQLOperations::Query::kNO_TAIL);
-
-	if (err == SQLITE_OK)
+	if (LocalizeData)
 	{
-		err = sqlite3_step(stmt);
+		char lang[16];
+		sprintf_s(lang, 16, "%s%s", SQLOperations::Query::kLOC_VALUE, mLanguage);
 
-		if (err != SQLITE_ERROR)
+		char query[128];
+		sprintf_s(query, 128, "SELECT %s FROM %s WHERE %s==\"%s\"", lang, SQLOperations::Query::kLOC_TABLE, SQLOperations::Query::kLOC_KEY, key.c_str());
+
+		sqlite3_stmt* stmt;
+		int err;
+
+		err = sqlite3_prepare_v2(mLocalizationDatabase, query, SQLOperations::Query::kREAD_FULL_QUERY, &stmt, SQLOperations::Query::kNO_TAIL);
+
+		if (err == SQLITE_OK)
 		{
-			const char* LocValue = (const char*)sqlite3_column_text(stmt, SQLOperations::Query::kLEFTMOST_COLUMN);
+			err = sqlite3_step(stmt);
 
-			if (LocValue == NULL)
+			if (err != SQLITE_ERROR)
 			{
-				LocValue = key.c_str();
+				const char* LocValue = (const char*)sqlite3_column_text(stmt, SQLOperations::Query::kLEFTMOST_COLUMN);
+
+				if (LocValue == NULL)
+				{
+					LocValue = key.c_str();
+				}
+
+				return std::make_unique<std::string>(LocValue);
 			}
-
-			return std::make_unique<std::string>(LocValue);
 		}
-	}
 
-	char errMessage[128];
-	sprintf_s(errMessage, 128, "Error in retrieving loc key: %s", key.c_str());
-	std::cout << errMessage << std::endl;
+		char errMessage[128];
+		sprintf_s(errMessage, 128, "Error in retrieving loc key: %s", key.c_str());
+		std::cout << errMessage << std::endl;
+	}
 
 	return std::make_unique<std::string>(key);
 }

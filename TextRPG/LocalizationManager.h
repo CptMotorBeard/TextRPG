@@ -6,6 +6,7 @@ class LocalizationManager
 {
 public:
 	const char* kLOC_DB = "loc.db";
+	bool LocalizeData = true;	
 
 	LocalizationManager();
 	~LocalizationManager();
@@ -15,6 +16,8 @@ public:
 	static void Shutdown();
 
 private:
+	char mLanguage[3] = "en";
+
 	sqlite3* mLocalizationDatabase;
 	static LocalizationManager *mInstance;
 

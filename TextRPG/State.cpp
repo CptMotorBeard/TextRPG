@@ -1,4 +1,5 @@
 #include "State.h"
+#include "LocalizationManager.h"
 
 State::State(StateType stateType, const char *lua_source)
 {
@@ -96,7 +97,8 @@ void State::AddText(std::string text, int fontSize, float locx, float locy)
 {
 	std::unique_ptr<sf::Text> t = std::make_unique<sf::Text>();
 
-	t->setString(text);
+	auto localizedText = LocalizationManager::GetInstance()->GetLocByKey(text);
+	t->setString(*localizedText);
 	t->setFont(*mCurrentFont);
 	t->setFillColor(sf::Color::Red);
 	t->setCharacterSize(fontSize);
