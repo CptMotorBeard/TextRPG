@@ -8,6 +8,9 @@ State::State(StateType stateType, const char *lua_source)
 	State::LUA_SOURCE = lua_source;
 
 	mAllDrawables = std::vector<std::unique_ptr<sf::Drawable>>();
+
+	lua_State* L = LuaManager::GetLuaState();
+	LuaManager::LuaOkay(L, luaL_dofile(L, State::LUA_SOURCE));
 }
 
 const StateType& State::GetStateType()

@@ -4,13 +4,7 @@
 class StateMainMenu : public State
 {
 public:
-	StateMainMenu() : State(StateType::StateMainMenu, "StateMainMenu.lua")
-	{
-		lua_State* L = LuaManager::GetLuaState();
-		LuaManager::LuaOkay(L, luaL_dofile(L, LUA_SOURCE));
+	StateMainMenu() : State(StateType::StateMainMenu, "StateMainMenu.lua") { };
 
-		// register C++ functions
-	};
-
-	void ProcessEvents(const sf::Event &sfEvent) override;
+	void ProcessEvents(const sf::Event& sfEvent) override;
 };
