@@ -81,7 +81,8 @@ std::unique_ptr<std::string> LocalizationManager::GetLocByKey(const std::string&
 				{
 					LocValue = key.c_str();
 				}
-
+				
+				sqlite3_finalize(stmt);
 				return std::make_unique<std::string>(LocValue);
 			}
 		}
@@ -89,6 +90,8 @@ std::unique_ptr<std::string> LocalizationManager::GetLocByKey(const std::string&
 		char errMessage[128];
 		sprintf_s(errMessage, 128, "Error in retrieving loc key: %s", key.c_str());
 		std::cout << errMessage << std::endl;
+
+		sqlite3_finalize(stmt);
 	}
 
 	return std::make_unique<std::string>(key);
