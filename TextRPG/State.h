@@ -34,8 +34,7 @@ private:
 	StateType mStateType;	
 	State(StateType stateType, const char* lua_source);
 
-	sf::Font* mCurrentFont;
-	std::vector<std::unique_ptr<sf::Drawable>> mAllDrawables;
+	std::vector<std::shared_ptr<sf::Drawable>> mAllDrawables;
 
 	enum class RenderMode
 	{
@@ -71,9 +70,9 @@ public:
 	virtual void ProcessEvents(const sf::Event& sfEvent) {};
 
 	/// <summary>Renders prior to imGui, all elements are designed to be BEHIND imGui elements</summary>
-	virtual void PreRender(sf::RenderTarget &target, sf::Font* font);
+	virtual void PreRender(sf::RenderTarget &target);
 	/// <summary>Renders after imGui, all elements are designed to be ABOVE imGui elements</summary>
-	virtual void PostRender(sf::RenderTarget &target, sf::Font* font);
+	virtual void PostRender(sf::RenderTarget &target);
 
 #pragma region LUA Blocks
 	void AddText(std::string text, int fontSize, float locX, float locY);

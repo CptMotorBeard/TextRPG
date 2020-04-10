@@ -10,11 +10,15 @@
 #include "SFML/System/Clock.hpp"
 
 #include "GameStates.h"
+#include "GameManager.h"
+
+#include "SFML-extensions.h"
 
 int main()
 {
+	GameManager* gameManager = GameManager::Init();
 	LocalizationManager* locManager = LocalizationManager::GetInstance();
-	StateManager* stateManager = StateManager::Init(std::make_shared<StateMainMenu>());
+	StateManager* stateManager = StateManager::Init(StateMainMenu());	
 	
 	bool debugWindow = false;
 
@@ -32,10 +36,12 @@ int main()
 
 	ImGuiIO& io = ImGui::GetIO();
 
-	sf::Font sfRoboto = sf::Font();
-	sfRoboto.loadFromFile("Resources/Roboto Font/Roboto-Regular.ttf");
 	ImFont* pImguiRoboto = ImGui::GetIO().Fonts->AddFontFromFileTTF("Resources/Roboto Font/Roboto-Regular.ttf", 18);
 	ImGui::SFML::UpdateFontTexture();
+
+	SFML_Button b("Test", sf::FloatRect(100, 100, 100, 25),
+		[]() { StateManager::GetInstance()->PushState(StateSaveGame()); }
+		);
 
 	while (window.isOpen())
 	{
@@ -44,6 +50,7 @@ int main()
 		{
 			ImGui::SFML::ProcessEvent(sfEvent);
 			stateManager->GetCurrentState()->ProcessEvents(sfEvent);
+			b.ProcessEvents(sfEvent);
 
 			if (sfEvent.type == sf::Event::Closed)
 			{
@@ -75,11 +82,11 @@ int main()
 				}
 				if (ImGui::MenuItem("Save Game"))
 				{
-					stateManager->PushState(std::make_shared<StateSaveGame>());
+					stateManager->PushState(StateSaveGame());
 				}
 				if (ImGui::MenuItem("Load Game"))
 				{
-					stateManager->PushState(std::make_shared<StateLoadGame>());
+					stateManager->PushState(StateLoadGame());
 				}
 
 				if (ImGui::MenuItem("Quit"))
@@ -100,9 +107,10 @@ int main()
 
 		window.clear(bgColor);
 		ImGui::ShowDemoWindow();
-		stateManager->GetCurrentState()->PreRender(window, &sfRoboto);
+		stateManager->GetCurrentState()->PreRender(window);
+		b.Draw(window);
 		ImGui::SFML::Render(window);
-		stateManager->GetCurrentState()->PostRender(window, &sfRoboto);
+		stateManager->GetCurrentState()->PostRender(window);
 		window.display();
 	}
 
@@ -110,4 +118,5 @@ int main()
 	StateManager::Shutdown();
 	LocalizationManager::Shutdown();
 	LuaManager::Shutdown();
+	GameManager::Shutdown();
 }

@@ -28,6 +28,7 @@
     <ClCompile Include="D:\User Data\Documents\C++ Libraries\imgui-master\imgui_widgets.cpp" />
     <ClCompile Include="D:\User Data\Documents\C++ Libraries\imgui-sfml-master\imgui-SFML.cpp" />
     <ClCompile Include="Faction.cpp" />
+    <ClCompile Include="GameManager.cpp" />
     <ClCompile Include="HealthStats.cpp" />
     <ClCompile Include="LocalizationManager.cpp" />
     <ClCompile Include="LUA.cpp" />
@@ -38,8 +39,10 @@
     <ClCompile Include="Stats.cpp" />
     <ClCompile Include="Unit.cpp" />
     <ClCompile Include="UnitStatus.cpp" />
+    <ClCompile Include="World.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="GameManager.h" />
     <ClInclude Include="GameStates.h" />
     <ClInclude Include="BaseIncludes.h" />
     <ClInclude Include="ColonyBuildings.h" />
@@ -50,7 +53,12 @@
     <ClInclude Include="Inventory.h" />
     <ClInclude Include="LocalizationManager.h" />
     <ClInclude Include="LUA.h" />
+    <ClInclude Include="SFML-extensions.h" />
     <ClInclude Include="State.h" />
+    <ClInclude Include="StateCharacterCreation.h" />
+    <ClInclude Include="StateCharacterOverview.h" />
+    <ClInclude Include="StateFactionCreation.h" />
+    <ClInclude Include="StateFactionOverview.h" />
     <ClInclude Include="StateLoadGame.h" />
     <ClInclude Include="StateMainMenu.h" />
     <ClInclude Include="StateManager.h" />
@@ -60,6 +68,7 @@
     <ClInclude Include="Unit.h" />
     <ClInclude Include="UnitStatus.h" />
     <ClInclude Include="UnitTraits.h" />
+    <ClInclude Include="World.h" />
   </ItemGroup>
   <ItemGroup>
     <Text Include="StateMainMenu.lua" />

@@ -1,5 +1,6 @@
 #include "State.h"
 #include "LocalizationManager.h"
+#include "GameManager.h"
 
 State::State(StateType stateType, const char *lua_source)
 {
@@ -7,7 +8,7 @@ State::State(StateType stateType, const char *lua_source)
 	State::mCurrentRenderMode = State::RenderMode::NONE;
 	State::LUA_SOURCE = lua_source;
 
-	mAllDrawables = std::vector<std::unique_ptr<sf::Drawable>>();
+	mAllDrawables = std::vector<std::shared_ptr<sf::Drawable>>();
 
 	lua_State* L = LuaManager::GetLuaState();
 	LuaManager::LuaOkay(L, luaL_dofile(L, State::LUA_SOURCE));
@@ -35,15 +36,9 @@ void State::Build()
 	State::mCurrentRenderMode = State::RenderMode::NONE;
 }
 
-void State::PreRender(sf::RenderTarget& target, sf::Font *font)
+void State::PreRender(sf::RenderTarget& target)
 {
 	State::mCurrentRenderMode = State::RenderMode::PreRender;
-	mCurrentFont = font;
-
-	for (auto& d : mAllDrawables)
-	{
-		d.release();
-	}
 
 	mAllDrawables.clear();
 	
@@ -65,15 +60,9 @@ void State::PreRender(sf::RenderTarget& target, sf::Font *font)
 	}
 }
 
-void State::PostRender(sf::RenderTarget& target, sf::Font* font)
+void State::PostRender(sf::RenderTarget& target)
 {
 	State::mCurrentRenderMode = State::RenderMode::PostRender;
-	mCurrentFont = font;
-
-	for (auto& d : mAllDrawables)
-	{
-		d.release();
-	}
 
 	mAllDrawables.clear();
 
@@ -98,14 +87,14 @@ void State::PostRender(sf::RenderTarget& target, sf::Font* font)
 
 void State::AddText(std::string text, int fontSize, float locx, float locy)
 {
-	std::unique_ptr<sf::Text> t = std::make_unique<sf::Text>();
+	sf::Text t;
 
 	auto localizedText = LocalizationManager::GetInstance()->GetLocByKey(text);
-	t->setString(*localizedText);
-	t->setFont(*mCurrentFont);
-	t->setFillColor(sf::Color::Red);
-	t->setCharacterSize(fontSize);
-	t->setPosition(locx, locy);
+	t.setString(*localizedText);
+	t.setFont(*GameManager::GetInstance()->GetGlobalFont());
+	t.setFillColor(sf::Color::Red);
+	t.setCharacterSize(fontSize);
+	t.setPosition(locx, locy);
 
-	mAllDrawables.push_back(std::move(t));
+	mAllDrawables.push_back(std::make_shared<sf::Text>(t));
 }
