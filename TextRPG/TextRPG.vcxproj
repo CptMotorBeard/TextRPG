@@ -33,6 +33,7 @@
     <ClCompile Include="LocalizationManager.cpp" />
     <ClCompile Include="LUA.cpp" />
     <ClCompile Include="main.cpp" />
+    <ClCompile Include="SFML-extensions.cpp" />
     <ClCompile Include="State.cpp" />
     <ClCompile Include="StateMainMenu.cpp" />
     <ClCompile Include="StateManager.cpp" />

@@ -46,7 +46,6 @@ int main()
 		{
 			ImGui::SFML::ProcessEvent(sfEvent);
 			stateManager->GetCurrentState()->ProcessEvents(sfEvent);
-
 			if (sfEvent.type == sf::Event::Closed)
 			{
 				window.close();
