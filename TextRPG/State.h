@@ -1,6 +1,11 @@
 #pragma once
 #include "BaseIncludes.h"
+
+#include "imgui.h"
+#include "imgui-SFML.h"
 #include "LUA.h"
+#include "SFML/Graphics.hpp"
+#include "SFML-extensions.h"
 
 /*
 	All states must be declared as a StateType. All states must be declared as friend classes. We want the states to be able to initialize what state type they are
@@ -35,6 +40,7 @@ private:
 	State(StateType stateType, const char* lua_source);
 
 	std::vector<std::shared_ptr<sf::Drawable>> mAllDrawables;
+	std::vector<std::shared_ptr<sf_ext::SFML_Button>> mAllButtons;
 
 	enum class RenderMode
 	{

@@ -15,5 +15,5 @@ public:
 	Leader mLeader;
 	Colony mColony;
 
-	Faction();	
+	Faction();
 };

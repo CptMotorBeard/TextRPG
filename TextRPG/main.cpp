@@ -39,10 +39,6 @@ int main()
 	ImFont* pImguiRoboto = ImGui::GetIO().Fonts->AddFontFromFileTTF("Resources/Roboto Font/Roboto-Regular.ttf", 18);
 	ImGui::SFML::UpdateFontTexture();
 
-	SFML_Button b("Test", sf::FloatRect(100, 100, 100, 25),
-		[]() { StateManager::GetInstance()->PushState(StateSaveGame()); }
-		);
-
 	while (window.isOpen())
 	{
 		sf::Event sfEvent;
@@ -50,7 +46,6 @@ int main()
 		{
 			ImGui::SFML::ProcessEvent(sfEvent);
 			stateManager->GetCurrentState()->ProcessEvents(sfEvent);
-			b.ProcessEvents(sfEvent);
 
 			if (sfEvent.type == sf::Event::Closed)
 			{
@@ -108,7 +103,6 @@ int main()
 		window.clear(bgColor);
 		ImGui::ShowDemoWindow();
 		stateManager->GetCurrentState()->PreRender(window);
-		b.Draw(window);
 		ImGui::SFML::Render(window);
 		stateManager->GetCurrentState()->PostRender(window);
 		window.display();

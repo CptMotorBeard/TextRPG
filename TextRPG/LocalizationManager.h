@@ -9,7 +9,6 @@ public:
 	bool LocalizeData = true;	
 
 	LocalizationManager();
-	~LocalizationManager();
 	std::unique_ptr<std::string> GetLocByKey(const std::string& key);
 
 	static LocalizationManager* GetInstance();

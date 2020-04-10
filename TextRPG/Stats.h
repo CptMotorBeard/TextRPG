@@ -15,7 +15,6 @@ public:
 	{
 		mStatType = statType;
 		mBaseValue = startingValue;
-		mModifiers = std::vector<int8>();
 	};
 
 	int16 GetTotalModifier()

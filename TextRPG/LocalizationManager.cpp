@@ -22,11 +22,6 @@ LocalizationManager::LocalizationManager()
 	OpenDatabase(LocalizationManager::kLOC_DB);
 };
 
-LocalizationManager::~LocalizationManager()
-{
-	sqlite3_close(mLocalizationDatabase);
-}
-
 LocalizationManager* LocalizationManager::GetInstance()
 {
 	if (mInstance == nullptr)

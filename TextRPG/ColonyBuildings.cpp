@@ -2,5 +2,5 @@
 
 ColonyBuilding::ColonyBuilding()
 {
-	ColonyBuilding::mUnits = std::vector<Unit>();
+
 }

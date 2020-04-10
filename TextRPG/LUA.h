@@ -1,10 +1,6 @@
 #pragma once
 #include <iostream>
 
-#include "imgui.h"
-#include "imgui-SFML.h"
-#include "SFML/Graphics.hpp"
-
 extern "C"
 {
 #include "Lua535/include/lua.h"

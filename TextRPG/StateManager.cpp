@@ -17,7 +17,6 @@ bool StateManager::StateExists(StateType stateType)
 
 StateManager::StateManager(State initialState)
 {
-	mStates = std::vector<std::unique_ptr<State>>();
 	mStates.push_back(std::make_unique<State>(initialState));
 }
 
