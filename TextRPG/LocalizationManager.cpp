@@ -74,12 +74,17 @@ std::unique_ptr<std::string> LocalizationManager::GetLocByKey(const std::string&
 			err = sqlite3_step(stmt);
 
 			if (err != SQLITE_ERROR)
-			{
-				const char* LocValue = (const char*)sqlite3_column_text(stmt, SQLOperations::Query::kLEFTMOST_COLUMN);
+			{	
+				std::string LocValue;
+				char* results = (char*)sqlite3_column_text(stmt, SQLOperations::Query::kLEFTMOST_COLUMN);
 
-				if (LocValue == NULL)
+				if (results == NULL)
 				{
-					LocValue = key.c_str();
+					LocValue = key;
+				}
+				else
+				{
+					LocValue = std::string(results);
 				}
 				
 				sqlite3_finalize(stmt);
