@@ -1,8 +1,9 @@
 #include "SFML-extensions.h"
+#include "GameManager.h"
 
 namespace sf_ext
 {
-	void SFML_Button::SetupButton(sf::Text text, sf::FloatRect rect, void(*callback)(), sf::Color backColour)
+	void SFML_Button::SetupButton(sf::Text text, sf::FloatRect rect, std::function<void(void)> callback, sf::Color backColour)
 	{
 		mButtonHitbox = rect;
 		mButtonColour = backColour;
@@ -14,7 +15,7 @@ namespace sf_ext
 		mButtonText = text;
 
 		sf::FloatRect textBounds = mButtonText.getGlobalBounds();
-		float verticalOffset = textBounds.height / 2;
+		float verticalOffset = (rect.height / 2) - (textBounds.height / 2);
 		float horizontalOffset = (rect.width / 2) - (textBounds.width / 2);
 
 		mButtonText.setPosition(rect.left + horizontalOffset, rect.top + verticalOffset);
@@ -22,7 +23,7 @@ namespace sf_ext
 		mCallback = callback;
 	}
 
-	SFML_Button::SFML_Button(std::string string, sf::FloatRect rect, void(*callback)(), sf::Color backColour)
+	SFML_Button::SFML_Button(std::string string, sf::FloatRect rect, std::function<void(void)> callback, sf::Color backColour)
 	{
 		unsigned int fontSize = 12;
 		sf::Color fontColor = sf::Color::Black;
@@ -34,7 +35,7 @@ namespace sf_ext
 		SetupButton(t, rect, callback, backColour);
 	};
 
-	SFML_Button::SFML_Button(sf::Text text, sf::FloatRect rect, void(*callback)(), sf::Color backColour)
+	SFML_Button::SFML_Button(sf::Text text, sf::FloatRect rect, std::function<void(void)> callback, sf::Color backColour)
 	{
 		SetupButton(text, rect, callback, backColour);
 	};

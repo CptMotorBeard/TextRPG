@@ -1,7 +1,7 @@
 #pragma once
+#include <functional>
 
 #include "BaseIncludes.h"
-#include "GameManager.h"
 #include "SFML/Graphics.hpp"
 
 namespace sf_ext
@@ -17,13 +17,13 @@ namespace sf_ext
 
 		bool mHolding = false;		
 
-		void(*mCallback)();
+		std::function<void(void)> mCallback;
 
-		void SetupButton(sf::Text text, sf::FloatRect rect, void(*callback)(), sf::Color backColour = sf::Color::White);
+		void SetupButton(sf::Text text, sf::FloatRect rect, std::function<void(void)> callback, sf::Color backColour = sf::Color::White);
 
 	public:
-		SFML_Button(std::string string, sf::FloatRect rect, void(*callback)(), sf::Color backColour = sf::Color::White);
-		SFML_Button(sf::Text text, sf::FloatRect rect, void(*callback)(), sf::Color backColour = sf::Color::White);
+		SFML_Button(std::string string, sf::FloatRect rect, std::function<void(void)> callback, sf::Color backColour = sf::Color::White);
+		SFML_Button(sf::Text text, sf::FloatRect rect, std::function<void(void)> callback, sf::Color backColour = sf::Color::White);
 
 		void Draw(sf::RenderTarget& target);
 

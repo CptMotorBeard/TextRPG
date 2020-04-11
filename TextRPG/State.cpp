@@ -2,14 +2,39 @@
 #include "LocalizationManager.h"
 #include "GameManager.h"
 
+#include <fstream>
+
 State::State(StateType stateType, const char *lua_source)
 {
 	State::mStateType = stateType;
 	State::mCurrentRenderMode = State::RenderMode::NONE;
 	State::LUA_SOURCE = lua_source;
+	State::mHash = 0;
+	State::mRebuild = true;
+
+	HashFile();
 
 	lua_State* L = LuaManager::GetLuaState();
 	LuaManager::LuaOkay(L, luaL_dofile(L, State::LUA_SOURCE));
+}
+
+void State::HashFile()
+{
+	std::ifstream file;
+	file.open(LUA_SOURCE);
+	if (file.good())
+	{
+		std::string luafile = "";
+		std::string line;
+
+		while (std::getline(file, line))
+		{
+			luafile += line;
+		}
+
+		mHash = std::hash<std::string>{}(luafile);
+	}
+	file.close();
 }
 
 const StateType& State::GetStateType()
@@ -17,69 +42,79 @@ const StateType& State::GetStateType()
 	return mStateType;
 }
 
+void State::RecalculateHash()
+{
+	uint64 h = uint64(mHash);
+	HashFile();
+	mRebuild = h != mHash;
+
+	if (mRebuild)
+	{
+		lua_State* L = LuaManager::GetLuaState();
+		LuaManager::LuaOkay(L, luaL_dofile(L, State::LUA_SOURCE));
+	}
+}
+
 void State::Build()
 {
 	State::mCurrentRenderMode = State::RenderMode::Build;
-	lua_State* L = LuaManager::GetLuaState();
 
-	if (LuaManager::LuaOkay(L, luaL_dofile(L, LUA_SOURCE)))
+	if (mRebuild)
 	{
-		lua_getglobal(L, "Build");
-		if (lua_isfunction(L, -1))
+		lua_State* L = LuaManager::GetLuaState();
+
+		if (LuaManager::LuaOkay(L, luaL_loadfile(L, LUA_SOURCE)))
 		{
-			LuaManager::LuaOkay(L, lua_pcall(L, 0, 0, 0));
+			lua_getglobal(L, "Build");
+			if (lua_isfunction(L, -1))
+			{
+				LuaManager::LuaOkay(L, lua_pcall(L, 0, 0, 0));
+			}
 		}
+	}	
+
+	State::mCurrentRenderMode = State::RenderMode::NONE;
+}
+
+void State::Render(sf::RenderTarget& target)
+{
+	State::mCurrentRenderMode = State::RenderMode::Render;
+
+	if (mRebuild)
+	{
+		mAllDrawables.clear();
+		mAllButtons.clear();
+
+		lua_State* L = LuaManager::GetLuaState();
+
+		if (LuaManager::LuaOkay(L, luaL_loadfile(L, LUA_SOURCE)))
+		{
+			lua_getglobal(L, "PreRender");
+			if (lua_isfunction(L, -1))
+			{
+				LuaManager::LuaOkay(L, lua_pcall(L, 0, 0, 0));
+			}
+		}
+	}
+
+	for (auto const& d : mAllDrawables)
+	{
+		target.draw(*d);
+	}
+
+	for (auto const& b : mAllButtons)
+	{
+		b->Draw(target);
 	}
 
 	State::mCurrentRenderMode = State::RenderMode::NONE;
 }
 
-void State::PreRender(sf::RenderTarget& target)
+void State::ProcessEvents(const sf::Event &sfEvent)
 {
-	State::mCurrentRenderMode = State::RenderMode::PreRender;
-
-	mAllDrawables.clear();
-	
-	lua_State* L = LuaManager::GetLuaState();
-
-	if (LuaManager::LuaOkay(L, luaL_dofile(L, LUA_SOURCE)))
+	for (auto const& b : mAllButtons)
 	{
-		lua_getglobal(L, "PreRender");
-		if (lua_isfunction(L, -1))
-		{
-			LuaManager::LuaOkay(L, lua_pcall(L, 0, 0, 0));
-		}
-	}
-	State::mCurrentRenderMode = State::RenderMode::NONE;
-	
-	for (auto const& d : mAllDrawables)
-	{
-		target.draw(*d);
-	}
-}
-
-void State::PostRender(sf::RenderTarget& target)
-{
-	State::mCurrentRenderMode = State::RenderMode::PostRender;
-
-	mAllDrawables.clear();
-
-	lua_State* L = LuaManager::GetLuaState();
-
-	if (LuaManager::LuaOkay(L, luaL_dofile(L, LUA_SOURCE)))
-	{
-		lua_getglobal(L, "PostRender");
-		if (lua_isfunction(L, -1))
-		{
-			LuaManager::LuaOkay(L, lua_pcall(L, 0, 0, 0));
-		}
-	}
-
-	State::mCurrentRenderMode = State::RenderMode::NONE;
-
-	for (auto const& d : mAllDrawables)
-	{
-		target.draw(*d);
+		b->ProcessEvents(sfEvent);
 	}
 }
 
@@ -95,4 +130,17 @@ void State::AddText(std::string text, int fontSize, float locx, float locy)
 	t.setPosition(locx, locy);
 
 	mAllDrawables.push_back(std::make_shared<sf::Text>(t));
+}
+
+void State::AddButton(std::string text, sf::FloatRect rect, std::string callbackName)
+{
+	auto localizedText = LocalizationManager::GetInstance()->GetLocByKey(text);
+
+	sf_ext::SFML_Button b(*localizedText, rect,
+		[=]() {
+		LuaManager::CallbackFunction(callbackName, LUA_SOURCE);
+		}
+	);
+
+	mAllButtons.push_back(std::make_shared<sf_ext::SFML_Button>(b));
 }

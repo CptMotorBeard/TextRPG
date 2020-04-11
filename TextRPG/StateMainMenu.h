@@ -5,6 +5,4 @@ class StateMainMenu : public State
 {
 public:
 	StateMainMenu() : State(StateType::StateMainMenu, "StateMainMenu.lua") { };
-
-	void ProcessEvents(const sf::Event& sfEvent) override;
 };

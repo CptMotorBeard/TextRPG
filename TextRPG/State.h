@@ -1,4 +1,5 @@
 #pragma once
+
 #include "BaseIncludes.h"
 
 #include "imgui.h"
@@ -36,23 +37,25 @@ enum class StateType
 class State
 {
 private:
-	StateType mStateType;	
-	State(StateType stateType, const char* lua_source);
-
-	std::vector<std::shared_ptr<sf::Drawable>> mAllDrawables;
-	std::vector<std::shared_ptr<sf_ext::SFML_Button>> mAllButtons;
-
 	enum class RenderMode
 	{
 		NONE,
 		Build,
-		PreRender,
-		PostRender,
+		Render,
 		LENGTH
 	};
 
+	StateType mStateType;	
+	State(StateType stateType, const char* lua_source);
+	void HashFile();
+
+	std::vector<std::shared_ptr<sf::Drawable>> mAllDrawables;
+	std::vector<std::shared_ptr<sf_ext::SFML_Button>> mAllButtons;
+
 	RenderMode mCurrentRenderMode;
 	const char* LUA_SOURCE;
+	uint64 mHash;
+	bool mRebuild;
 
 #pragma region AllStates
 	friend class STATEMAINMENU;
@@ -70,18 +73,18 @@ public:
 
 	virtual ~State() {};
 
+	virtual void RecalculateHash();
 	/// <summary>Builds the imGui state. All widgets must be created between update and render</summary>
 	virtual void Build();
 	/// <summary>Process SFML events</summary>
-	virtual void ProcessEvents(const sf::Event& sfEvent) {};
+	virtual void ProcessEvents(const sf::Event& sfEvent);
 
 	/// <summary>Renders prior to imGui, all elements are designed to be BEHIND imGui elements</summary>
-	virtual void PreRender(sf::RenderTarget &target);
-	/// <summary>Renders after imGui, all elements are designed to be ABOVE imGui elements</summary>
-	virtual void PostRender(sf::RenderTarget &target);
+	virtual void Render(sf::RenderTarget &target);
 
 #pragma region LUA Blocks
 	void AddText(std::string text, int fontSize, float locX, float locY);
+	void AddButton(std::string text, sf::FloatRect rect, std::string callbackName);
 #pragma endregion
 
 };

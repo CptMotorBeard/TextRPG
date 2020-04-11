@@ -16,7 +16,7 @@ private:
 
 public:
 	static bool LuaOkay(lua_State* L, int r);
-
+	static bool CallbackFunction(std::string functionName, const char* sourceFile);
 	static lua_State* GetLuaState();
 	static void Shutdown();
 };

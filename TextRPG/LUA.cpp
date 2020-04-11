@@ -28,6 +28,20 @@ lua_State* LuaManager::GetLuaState()
 	return L;
 }
 
+bool LuaManager::CallbackFunction(std::string functionName, const char* sourceFile)
+{
+	if (LuaManager::LuaOkay(L, luaL_dofile(L, sourceFile)))
+	{
+		lua_getglobal(L, functionName.c_str());
+		if (lua_isfunction(L, -1))
+		{
+			return LuaManager::LuaOkay(L, lua_pcall(L, 0, 0, 0));
+		}
+	}
+
+	return false;
+}
+
 #pragma region Native Functions
 
 /// <summary> void AddText(string text, int fontSize, float locX, float locY) </summary>
@@ -48,8 +62,23 @@ int lua_AddText(lua_State* L)
 
 int lua_AddButton(lua_State* L)
 {
-	// (string text, table [height, width, x, y] rect, function callback, table [r, g, b, a] backColour)
-	// (table[string, fontSize, table [r, g, b, a] fontColour, table [r, g, b, a] fontOutline] text, table [height, width, x, y] rect, function callback, table [r, g, b, a] backColour)
+	// (string text, table [height, width, x, y] rect, string callbackName, table [r, g, b, a] backColour)
+	// (table[string, fontSize, table [r, g, b, a] fontColour, table [r, g, b, a] fontOutline] text, table [height, width, x, y] rect, string callbackName, table [r, g, b, a] backColour)
+
+	std::string text = lua_tostring(L, 1);
+	// Table for Rect
+	lua_getfield(L, 2, "height");
+	float height = (float)lua_tonumber(L, -1);
+	lua_getfield(L, 2, "width");
+	float width = (float)lua_tonumber(L, -1);
+	lua_getfield(L, 2, "x");
+	float locx = (float)lua_tonumber(L, -1);
+	lua_getfield(L, 2, "y");
+	float locy = (float)lua_tonumber(L, -1);
+
+	std::string callbackName = lua_tostring(L, 3);
+
+	StateManager::GetInstance()->GetCurrentState()->AddButton(text, sf::FloatRect(height, width, locx, locy), callbackName);
 
 	return 0;
 }

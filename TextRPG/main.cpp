@@ -39,6 +39,8 @@ int main()
 	ImFont* pImguiRoboto = ImGui::GetIO().Fonts->AddFontFromFileTTF("Resources/Roboto Font/Roboto-Regular.ttf", 18);
 	ImGui::SFML::UpdateFontTexture();
 
+	window.setFramerateLimit(24);
+
 	while (window.isOpen())
 	{
 		sf::Event sfEvent;
@@ -101,10 +103,11 @@ int main()
 
 		window.clear(bgColor);
 		ImGui::ShowDemoWindow();
-		stateManager->GetCurrentState()->PreRender(window);
+		stateManager->GetCurrentState()->Render(window);
 		ImGui::SFML::Render(window);
-		stateManager->GetCurrentState()->PostRender(window);
 		window.display();
+
+		stateManager->GetCurrentState()->RecalculateHash();
 	}
 
 	ImGui::SFML::Shutdown();
