@@ -5,7 +5,7 @@
 class StateManager
 {
 private:
-	static StateManager* mInstance;
+	static std::unique_ptr<StateManager> mInstance;
 	std::vector<std::unique_ptr<State>> mStates;
 
 	bool StateExists(StateType stateType);
@@ -33,6 +33,4 @@ public:
 	static StateManager* Init(State initialState);
 
 	static StateManager* GetInstance();
-
-	static void Shutdown();
 };

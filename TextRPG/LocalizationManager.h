@@ -18,7 +18,7 @@ private:
 	char mLanguage[3] = "en";
 
 	sqlite3* mLocalizationDatabase;
-	static LocalizationManager *mInstance;
+	static std::unique_ptr<LocalizationManager> mInstance;
 
 	bool OpenDatabase(const char* databaseName);
 };

@@ -1,6 +1,6 @@
 #include "StateManager.h"
 
-StateManager* StateManager::mInstance = nullptr;
+std::unique_ptr<StateManager> StateManager::mInstance = nullptr;
 
 bool StateManager::StateExists(StateType stateType)
 {
@@ -79,18 +79,11 @@ State* StateManager::PopToBottom()
 StateManager* StateManager::Init(State initialState)
 {
 	assert(mInstance == nullptr && "Cannot initialize the state manager :: It is already initilized");
-	mInstance = new StateManager(initialState);
-	return mInstance;
+	mInstance = std::make_unique<StateManager>(initialState);
+	return mInstance.get();
 }
 
 StateManager* StateManager::GetInstance()
 {
-	return mInstance;
-};
-
-void StateManager::Shutdown()
-{
-	mInstance->mStates.clear();
-
-	delete mInstance;
+	return mInstance.get();
 };

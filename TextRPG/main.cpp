@@ -16,7 +16,7 @@
 
 int main()
 {
-	GameManager* gameManager = GameManager::Init();
+	GameManager* gameManager = GameManager::GetInstance();
 	LocalizationManager* locManager = LocalizationManager::GetInstance();
 	StateManager* stateManager = StateManager::Init(StateMainMenu());	
 	
@@ -111,8 +111,6 @@ int main()
 	}
 
 	ImGui::SFML::Shutdown();
-	StateManager::Shutdown();
 	LocalizationManager::Shutdown();
 	LuaManager::Shutdown();
-	GameManager::Shutdown();
 }

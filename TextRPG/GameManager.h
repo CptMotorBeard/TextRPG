@@ -5,12 +5,10 @@
 class GameManager
 {
 private:
-	static GameManager *mInstance;	
+	static std::unique_ptr<GameManager> mInstance;
 	std::unique_ptr<sf::Font> mGlobalFont;
 
-public:	
-	static GameManager* Init();
-	static void Shutdown();
+public:
 	static GameManager* GetInstance();
 
 	sf::Font* GetGlobalFont();
