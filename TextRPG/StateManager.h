@@ -2,9 +2,6 @@
 #include "BaseIncludes.h"
 #include "State.h"
 
-class State;
-enum class StateType;
-
 class StateManager
 {
 private:

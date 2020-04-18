@@ -29,6 +29,7 @@
     <ClCompile Include="D:\User Data\Documents\C++ Libraries\imgui-sfml-master\imgui-SFML.cpp" />
     <ClCompile Include="Faction.cpp" />
     <ClCompile Include="GameManager.cpp" />
+    <ClCompile Include="GameStateFactoryManager.cpp" />
     <ClCompile Include="HealthStats.cpp" />
     <ClCompile Include="LocalizationManager.cpp" />
     <ClCompile Include="LUA.cpp" />
@@ -44,6 +45,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="GameManager.h" />
+    <ClInclude Include="GameStateFactoryManager.h" />
     <ClInclude Include="GameStates.h" />
     <ClInclude Include="BaseIncludes.h" />
     <ClInclude Include="ColonyBuildings.h" />

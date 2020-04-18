@@ -6,7 +6,7 @@
 		void AddButton(string text, table [height, width, x, y] rect, string callbackName, table [r, g, b, a] backColour=Color::White)
 
 	-- State Management --
-		void PushGameState(State* newState)
+		void PushGameState(string newState)
 		State* GetStateSaveGame()
 ]]--
 
@@ -14,19 +14,52 @@ function Build()
 	
 end
 
-function GotoSaveGame()
+function GoToNewGame()
 	print "[LUA] button callback"
-	PushGameState(GetStateSaveGame())
+	PushGameState("CharacterCreation")
+end
+
+function GoToSaveGame()
+	print "[LUA] button callback"
+	PushGameState("SaveGame")
+end
+
+function GoToLoadGame()
+	print "[LUA] button callback"
+	PushGameState("LoadGame")
+end
+
+function QuitGame()
+	print "[LUA] button callback"
+	NativeQuitGame()
 end
 
 function Render()
 	AddText("Main Menu State", 24, 10, 24)
 
 	rect = {}
-	rect["height"] = 50
-	rect["width"] = 200
-	rect["x"] = 100
-	rect["y"] = 100
+	rect["height"] = 30
+	rect["width"] = 145
+	
+	padding = 15
+	initialX = 245
+	initialY = 275
 
-	AddButton("[LUA] Button", rect, "GotoSaveGame");
+	offset = padding + rect["height"]
+
+	rect["x"] = initialX
+	rect["y"] = initialY
+	AddButton("[LUA] Button New", rect, "GoToNewGame");
+
+	rect["x"] = initialX
+	rect["y"] = initialY + (offset)
+	AddButton("[LUA] Button Save", rect, "GoToSaveGame");
+
+	rect["x"] = initialX
+	rect["y"] = initialY + (2 * offset)
+	AddButton("[LUA] Button Load", rect, "GoToLoadGame");
+
+	rect["x"] = initialX
+	rect["y"] = initialY + (3 * offset)
+	AddButton("[LUA] Button Quit", rect, "QuitGame");
 end

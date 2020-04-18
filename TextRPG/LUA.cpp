@@ -1,5 +1,6 @@
 #include "LUA.h"
 #include "GameStates.h"
+#include "GameStateFactoryManager.h"
 
 lua_State *LuaManager::L = nullptr;
 
@@ -78,58 +79,23 @@ int lua_AddButton(lua_State* L)
 
 	std::string callbackName = lua_tostring(L, 3);
 
-	StateManager::GetInstance()->GetCurrentState()->AddButton(text, sf::FloatRect(height, width, locx, locy), callbackName);
+	StateManager::GetInstance()->GetCurrentState()->AddButton(text, sf::FloatRect(locx, locy, width, height), callbackName);
 
 	return 0;
 }
 
-/// <summary> void PushGameState(State* newState) </summary>
+/// <summary> void PushGameState(string newState) </summary>
 int lua_PushGameState(lua_State* L)
 {
 	if (lua_gettop(L) >= 1)
 	{
-		State* s = static_cast<State *>(lua_touserdata(L, 1));
-		if (s != NULL)
-		{
-			StateType t = s->GetStateType();
+		std::string state = lua_tostring(L, 1);
 
-			switch (t)
-			{
-			case StateType::StateMainMenu:
-				StateManager::GetInstance()->PushState(StateMainMenu());
-				break;
-			case StateType::StateFactionCreation:
-				StateManager::GetInstance()->PushState(StateFactionCreation());
-				break;
-			case StateType::StateFactionOverview:
-				StateManager::GetInstance()->PushState(StateCharacterOverview());
-				break;
-			case StateType::StateCharacterCreation:
-				StateManager::GetInstance()->PushState(StateCharacterCreation());
-				break;
-			case StateType::StateCharacterOverview:
-				StateManager::GetInstance()->PushState(StateCharacterOverview());
-				break;
-			case StateType::StateLoadGame:
-				StateManager::GetInstance()->PushState(StateLoadGame());
-				break;
-			case StateType::StateSaveGame:
-				StateManager::GetInstance()->PushState(StateSaveGame());
-				break;
-			default:
-				break;
-			}
-		}
+		State* newState = GameStateFactoryManager::GetInstance()->Create(state);
+		StateManager::GetInstance()->PushState(*newState);
 	}
 
 	return 0;
-}
-
-/// <summary> State* GetStateSaveGame() </summary>
-int lua_GetStateSaveGame(lua_State* L)
-{
-	lua_pushlightuserdata(L, new StateSaveGame());
-	return 1;
 }
 #pragma endregion
 
@@ -139,7 +105,6 @@ void LuaManager::InitializeNativeFunctions()
 	lua_register(L, "AddButton", lua_AddButton);
 
 	lua_register(L, "PushGameState", lua_PushGameState);
-	lua_register(L, "GetStateSaveGame", lua_GetStateSaveGame);
 }
 
 void LuaManager::Shutdown()

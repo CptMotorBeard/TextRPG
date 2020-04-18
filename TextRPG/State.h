@@ -13,14 +13,6 @@
 	but after that we don't want anything to be able to touch that value. defines keep things in one place.
 */
 
-#define STATEMAINMENU StateMainMenu
-#define STATEFACTIONCREATION StateFactionCreation
-#define STATEFACTIONOVERVIEW StateFactionOverview
-#define STATECHARACTERCREATION StateCharacterCreation
-#define STATECHARACTEROVERVIEW StateCharacterOverview
-#define STATELOADGAME StateLoadGame
-#define STATESAVEGAME StateSaveGame
-
 enum class StateType
 {
 	DEFAULT,
@@ -58,13 +50,13 @@ private:
 	bool mRebuild;
 
 #pragma region AllStates
-	friend class STATEMAINMENU;
-	friend class STATEFACTIONCREATION;
-	friend class STATEFACTIONOVERVIEW;
-	friend class STATECHARACTERCREATION;
-	friend class STATECHARACTEROVERVIEW;
-	friend class STATELOADGAME;
-	friend class STATESAVEGAME;
+	friend class StateMainMenu;
+	friend class StateFactionCreation;
+	friend class StateFactionOverview;
+	friend class StateCharacterCreation;
+	friend class StateCharacterOverview;
+	friend class StateLoadGame;
+	friend class StateSaveGame;
 #pragma endregion
 
 public:	
@@ -87,4 +79,11 @@ public:
 	void AddButton(std::string text, sf::FloatRect rect, std::string callbackName);
 #pragma endregion
 
+};
+
+class StateFactory
+{
+public:
+	virtual State* Create() = 0;
+	virtual std::unique_ptr<StateFactory> Clone() = 0;
 };

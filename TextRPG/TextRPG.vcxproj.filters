@@ -36,6 +36,12 @@
     <Filter Include="LUA Files\States">
       <UniqueIdentifier>{69e5f87e-d639-4c93-8929-8f7197fb1aa8}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Header Files\GameStates\StateFactory">
+      <UniqueIdentifier>{808da6a7-a333-4459-b367-0a6528d12c85}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\GameStates\StateFactory">
+      <UniqueIdentifier>{4c1bbe71-ff7e-46a9-868e-f323de57468f}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
@@ -103,6 +109,9 @@
     </ClCompile>
     <ClCompile Include="SFML-extensions.cpp">
       <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="GameStateFactoryManager.cpp">
+      <Filter>Source Files\GameStates\StateFactory</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -186,6 +195,9 @@
     </ClInclude>
     <ClInclude Include="GameManager.h">
       <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="GameStateFactoryManager.h">
+      <Filter>Header Files\GameStates\StateFactory</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
