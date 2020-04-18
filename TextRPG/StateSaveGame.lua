@@ -2,10 +2,6 @@ function Build()
 	
 end
 
-function PreRender()
+function Render()
 	AddText("Save State", 24, 10, 24);
-end
-
-function PostRender()
-	
 end

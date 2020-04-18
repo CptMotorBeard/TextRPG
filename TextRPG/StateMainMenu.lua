@@ -19,7 +19,7 @@ function GotoSaveGame()
 	PushGameState(GetStateSaveGame())
 end
 
-function PreRender()
+function Render()
 	AddText("Main Menu State", 24, 10, 24)
 
 	rect = {}
@@ -29,8 +29,4 @@ function PreRender()
 	rect["y"] = 100
 
 	AddButton("[LUA] Button", rect, "GotoSaveGame");
-end
-
-function PostRender()
-	
 end

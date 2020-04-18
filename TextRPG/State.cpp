@@ -89,7 +89,7 @@ void State::Render(sf::RenderTarget& target)
 
 		if (LuaManager::LuaOkay(L, luaL_loadfile(L, LUA_SOURCE)))
 		{
-			lua_getglobal(L, "PreRender");
+			lua_getglobal(L, "Render");
 			if (lua_isfunction(L, -1))
 			{
 				LuaManager::LuaOkay(L, lua_pcall(L, 0, 0, 0));
