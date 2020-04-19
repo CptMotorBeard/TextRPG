@@ -51,6 +51,9 @@
     <Filter Include="Source Files\Colony">
       <UniqueIdentifier>{bb79479a-c088-4554-bebe-0c02624c0679}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Header Files\Colony\Resources">
+      <UniqueIdentifier>{d6075408-b6d8-42ae-91e6-8a967d5dd7b0}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
@@ -232,6 +235,9 @@
     <ClInclude Include="SFML-manager.h">
       <Filter>Header Files\Managers</Filter>
     </ClInclude>
+    <ClInclude Include="Resources.h">
+      <Filter>Header Files\Colony\Resources</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\LUA\StateMainMenu.lua">
@@ -241,6 +247,39 @@
       <Filter>LUA Files\States</Filter>
     </None>
     <None Include="Resources\LUA\StateLoadGame.Lua">
+      <Filter>LUA Files\States</Filter>
+    </None>
+    <None Include="Resources\LUA\StateFactionCreation.lua">
+      <Filter>LUA Files\States</Filter>
+    </None>
+    <None Include="Resources\LUA\StateFactionOverview.lua">
+      <Filter>LUA Files\States</Filter>
+    </None>
+    <None Include="Resources\LUA\StateInventory.lua">
+      <Filter>LUA Files\States</Filter>
+    </None>
+    <None Include="Resources\LUA\StateUnitUpgrades.lua">
+      <Filter>LUA Files\States</Filter>
+    </None>
+    <None Include="Resources\LUA\StateWorldOverview.lua">
+      <Filter>LUA Files\States</Filter>
+    </None>
+    <None Include="Resources\LUA\StateBuildingUpgrades.lua">
+      <Filter>LUA Files\States</Filter>
+    </None>
+    <None Include="Resources\LUA\StateCharacterCreation.lua">
+      <Filter>LUA Files\States</Filter>
+    </None>
+    <None Include="Resources\LUA\StateCharacterOverview.lua">
+      <Filter>LUA Files\States</Filter>
+    </None>
+    <None Include="Resources\LUA\StateCityUpgrades.lua">
+      <Filter>LUA Files\States</Filter>
+    </None>
+    <None Include="Resources\LUA\StateCombat.lua">
+      <Filter>LUA Files\States</Filter>
+    </None>
+    <None Include="Resources\LUA\StateDiplomacy.lua">
       <Filter>LUA Files\States</Filter>
     </None>
   </ItemGroup>

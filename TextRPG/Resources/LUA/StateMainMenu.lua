@@ -7,7 +7,12 @@
 
 	-- State Management --
 		void PushGameState(string newState)
-		State* GetStateSaveGame()
+		void PopGameState()
+		void PopGameStateHome()
+		
+	-- Engine Functions --
+		table[width=, height=] GetScreenDimensions()
+		void Shutdown()
 ]]--
 
 function Build()

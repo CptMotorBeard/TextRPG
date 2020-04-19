@@ -56,6 +56,7 @@
     <ClInclude Include="Inventory.h" />
     <ClInclude Include="LocalizationManager.h" />
     <ClInclude Include="LUA.h" />
+    <ClInclude Include="Resources.h" />
     <ClInclude Include="SFML-extensions.h" />
     <ClInclude Include="SFML-manager.h" />
     <ClInclude Include="State.h" />
@@ -82,9 +83,20 @@
     <ClInclude Include="World.h" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="Resources\LUA\StateBuildingUpgrades.lua" />
+    <None Include="Resources\LUA\StateCharacterCreation.lua" />
+    <None Include="Resources\LUA\StateCharacterOverview.lua" />
+    <None Include="Resources\LUA\StateCityUpgrades.lua" />
+    <None Include="Resources\LUA\StateCombat.lua" />
+    <None Include="Resources\LUA\StateDiplomacy.lua" />
+    <None Include="Resources\LUA\StateFactionCreation.lua" />
+    <None Include="Resources\LUA\StateFactionOverview.lua" />
+    <None Include="Resources\LUA\StateInventory.lua" />
     <None Include="Resources\LUA\StateLoadGame.Lua" />
     <None Include="Resources\LUA\StateMainMenu.lua" />
     <None Include="Resources\LUA\StateSaveGame.lua" />
+    <None Include="Resources\LUA\StateUnitUpgrades.lua" />
+    <None Include="Resources\LUA\StateWorldOverview.lua" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <VCProjectVersion>16.0</VCProjectVersion>

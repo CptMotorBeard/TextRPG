@@ -24,7 +24,7 @@ function GoBack()
 end
 
 function Render()
-	AddText("Load Game State", 24, 10, 24)
+	AddText("Diplomacy State", 24, 10, 24)
 	ScreenDimensions = GetScreenDimensions()
 
 	rect = {}
