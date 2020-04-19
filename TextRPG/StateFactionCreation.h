@@ -4,7 +4,7 @@
 class StateFactionCreation : public State
 {
 public:
-	StateFactionCreation() : State(StateType::STATEFACTIONCREATION, "StateFactionCreation.lua") { };
+	StateFactionCreation() : State(StateType::STATEFACTIONCREATION, "Resources/LUA/StateFactionCreation.lua") { };
 };
 
 class StateFactionCreationFactory : public StateFactory

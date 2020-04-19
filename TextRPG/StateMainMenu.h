@@ -4,7 +4,7 @@
 class StateMainMenu : public State
 {
 public:
-	StateMainMenu() : State(StateType::STATEMAINMENU, "StateMainMenu.lua") { };
+	StateMainMenu() : State(StateType::STATEMAINMENU, "Resources/LUA/StateMainMenu.lua") { };
 };
 
 class StateMainMenuFactory : public StateFactory

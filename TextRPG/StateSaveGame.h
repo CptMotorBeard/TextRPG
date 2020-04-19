@@ -4,7 +4,7 @@
 class StateSaveGame : public State
 {
 public:
-	StateSaveGame() : State(StateType::STATESAVEGAME, "StateSaveGame.lua") { };
+	StateSaveGame() : State(StateType::STATESAVEGAME, "Resources/LUA/StateSaveGame.lua") { };
 };
 
 class StateSaveGameFactory : public StateFactory

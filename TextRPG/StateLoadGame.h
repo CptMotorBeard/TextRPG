@@ -4,7 +4,7 @@
 class StateLoadGame : public State
 {
 public:
-	StateLoadGame() : State(StateType::STATELOADGAME, "StateLoadGame.lua") { };
+	StateLoadGame() : State(StateType::STATELOADGAME, "Resources/LUA/StateLoadGame.lua") { };
 };
 
 class StateLoadGameFactory : public StateFactory

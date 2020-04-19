@@ -5,7 +5,7 @@
 class LocalizationManager
 {
 public:
-	const char* kLOC_DB = "loc.db";
+	const char* kLOC_DB = "Resources/loc.db";
 	bool LocalizeData = true;	
 
 	LocalizationManager();

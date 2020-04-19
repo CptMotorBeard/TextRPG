@@ -4,7 +4,7 @@
 class StateBuildingUpgrades : public State
 {
 public:
-	StateBuildingUpgrades() : State(StateType::STATEBUILDINGUPGRADES, "StateBuildingUpgradesFactory.lua") { };
+	StateBuildingUpgrades() : State(StateType::STATEBUILDINGUPGRADES, "Resources/LUA/StateBuildingUpgradesFactory.lua") { };
 };
 
 class StateBuildingUpgradesFactory : public StateFactory

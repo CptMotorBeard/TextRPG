@@ -4,7 +4,7 @@
 class StateCharacterOverview : public State
 {
 public:
-	StateCharacterOverview() : State(StateType::STATECHARACTEROVERVIEW, "StateCharacterOverview.lua") { };
+	StateCharacterOverview() : State(StateType::STATECHARACTEROVERVIEW, "Resources/LUA/StateCharacterOverview.lua") { };
 };
 
 class StateCharacterOverviewFactory : public StateFactory

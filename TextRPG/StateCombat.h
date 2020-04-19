@@ -4,7 +4,7 @@
 class StateCombat : public State
 {
 public:
-	StateCombat() : State(StateType::STATECOMBAT, "StateCombat.lua") { };
+	StateCombat() : State(StateType::STATECOMBAT, "Resources/LUA/StateCombat.lua") { };
 };
 
 class StateCombatFactory : public StateFactory

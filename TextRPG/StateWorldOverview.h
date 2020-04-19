@@ -4,7 +4,7 @@
 class StateWorldOverview : public State
 {
 public:
-	StateWorldOverview() : State(StateType::STATEWORLDOVERVIEW, "StateWorldOverview.lua") { };
+	StateWorldOverview() : State(StateType::STATEWORLDOVERVIEW, "Resources/LUA/StateWorldOverview.lua") { };
 };
 
 class StateWorldOverviewFactory : public StateFactory

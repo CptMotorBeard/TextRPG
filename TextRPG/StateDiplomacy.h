@@ -4,7 +4,7 @@
 class StateDiplomacy : public State
 {
 public:
-	StateDiplomacy() : State(StateType::STATEDIPLOMACY, "StateDiplomacy.lua") { };
+	StateDiplomacy() : State(StateType::STATEDIPLOMACY, "Resources/LUA/StateDiplomacy.lua") { };
 };
 
 class StateDiplomacyFactory : public StateFactory

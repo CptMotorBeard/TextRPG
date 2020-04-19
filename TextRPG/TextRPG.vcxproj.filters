@@ -42,6 +42,9 @@
     <Filter Include="Source Files\GameStates\StateFactory">
       <UniqueIdentifier>{4c1bbe71-ff7e-46a9-868e-f323de57468f}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Header Files\GameStates\States">
+      <UniqueIdentifier>{e639af72-dee7-4091-869c-3c53d8de0cc7}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
@@ -148,15 +151,6 @@
     <ClInclude Include="Faction.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="StateMainMenu.h">
-      <Filter>Header Files\GameStates</Filter>
-    </ClInclude>
-    <ClInclude Include="StateManager.h">
-      <Filter>Header Files\GameStates</Filter>
-    </ClInclude>
-    <ClInclude Include="State.h">
-      <Filter>Header Files\GameStates</Filter>
-    </ClInclude>
     <ClInclude Include="GameStates.h">
       <Filter>Header Files\GameStates</Filter>
     </ClInclude>
@@ -165,24 +159,6 @@
     </ClInclude>
     <ClInclude Include="LocalizationManager.h">
       <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="StateLoadGame.h">
-      <Filter>Header Files\GameStates</Filter>
-    </ClInclude>
-    <ClInclude Include="StateSaveGame.h">
-      <Filter>Header Files\GameStates</Filter>
-    </ClInclude>
-    <ClInclude Include="StateCharacterCreation.h">
-      <Filter>Header Files\GameStates</Filter>
-    </ClInclude>
-    <ClInclude Include="StateCharacterOverview.h">
-      <Filter>Header Files\GameStates</Filter>
-    </ClInclude>
-    <ClInclude Include="StateFactionOverview.h">
-      <Filter>Header Files\GameStates</Filter>
-    </ClInclude>
-    <ClInclude Include="StateFactionCreation.h">
-      <Filter>Header Files\GameStates</Filter>
     </ClInclude>
     <ClInclude Include="World.h">
       <Filter>Header Files</Filter>
@@ -196,26 +172,53 @@
     <ClInclude Include="GameStateFactoryManager.h">
       <Filter>Header Files\GameStates\StateFactory</Filter>
     </ClInclude>
+    <ClInclude Include="State.h">
+      <Filter>Header Files\GameStates</Filter>
+    </ClInclude>
+    <ClInclude Include="StateCharacterCreation.h">
+      <Filter>Header Files\GameStates\States</Filter>
+    </ClInclude>
+    <ClInclude Include="StateCharacterOverview.h">
+      <Filter>Header Files\GameStates\States</Filter>
+    </ClInclude>
+    <ClInclude Include="StateFactionCreation.h">
+      <Filter>Header Files\GameStates\States</Filter>
+    </ClInclude>
+    <ClInclude Include="StateFactionOverview.h">
+      <Filter>Header Files\GameStates\States</Filter>
+    </ClInclude>
+    <ClInclude Include="StateLoadGame.h">
+      <Filter>Header Files\GameStates\States</Filter>
+    </ClInclude>
+    <ClInclude Include="StateMainMenu.h">
+      <Filter>Header Files\GameStates\States</Filter>
+    </ClInclude>
+    <ClInclude Include="StateSaveGame.h">
+      <Filter>Header Files\GameStates\States</Filter>
+    </ClInclude>
     <ClInclude Include="StateBuildingUpgrades.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="StateCombat.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="StateDiplomacy.h">
-      <Filter>Header Files</Filter>
+      <Filter>Header Files\GameStates\States</Filter>
     </ClInclude>
     <ClInclude Include="StateCityUpgrades.h">
-      <Filter>Header Files</Filter>
+      <Filter>Header Files\GameStates\States</Filter>
+    </ClInclude>
+    <ClInclude Include="StateCombat.h">
+      <Filter>Header Files\GameStates\States</Filter>
+    </ClInclude>
+    <ClInclude Include="StateDiplomacy.h">
+      <Filter>Header Files\GameStates\States</Filter>
     </ClInclude>
     <ClInclude Include="StateInventory.h">
-      <Filter>Header Files</Filter>
+      <Filter>Header Files\GameStates\States</Filter>
     </ClInclude>
     <ClInclude Include="StateUnitUpgrades.h">
-      <Filter>Header Files</Filter>
+      <Filter>Header Files\GameStates\States</Filter>
     </ClInclude>
     <ClInclude Include="StateWorldOverview.h">
-      <Filter>Header Files</Filter>
+      <Filter>Header Files\GameStates\States</Filter>
+    </ClInclude>
+    <ClInclude Include="StateManager.h">
+      <Filter>Header Files\GameStates</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

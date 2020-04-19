@@ -4,7 +4,7 @@
 class StateInventory : public State
 {
 public:
-	StateInventory() : State(StateType::STATEINVENTORY, "StateInventory.lua") { };
+	StateInventory() : State(StateType::STATEINVENTORY, "Resources/LUA/StateInventory.lua") { };
 };
 
 class StateInventoryFactory : public StateFactory
