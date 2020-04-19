@@ -13,51 +13,43 @@
 #include "GameManager.h"
 
 #include "SFML-extensions.h"
+#include "SFML-manager.h"
 
 int main()
 {
 	GameManager* gameManager = GameManager::GetInstance();
 	LocalizationManager* locManager = LocalizationManager::GetInstance();
 	StateManager* stateManager = StateManager::Init(StateMainMenu());	
+	SFML_Manager* sfmlManager;
 	
-	bool debugWindow = false;
-
 	auto p = locManager->GetLocByKey("ENTRY_TITLE");
 	const char* windowTitle = p->c_str();
 
-	sf::RenderWindow window(sf::VideoMode(640, 480), windowTitle);
-	ImGui::SFML::Init(window);	
+	sfmlManager = SFML_Manager::Initialize(sf::VideoMode(640, 480), windowTitle);
+	ImGui::SFML::Init(sfmlManager->Window);
+
+	bool debugWindow = false;
 
 	sf::Color bgColor;
 	float color[3] = { 0.f, 0.f, 0.f };
 
-	window.resetGLStates();
-	sf::Clock deltaClock;
+	sfmlManager->Window.resetGLStates();
 
 	ImGuiIO& io = ImGui::GetIO();
 
 	ImFont* pImguiRoboto = ImGui::GetIO().Fonts->AddFontFromFileTTF("Resources/Roboto Font/Roboto-Regular.ttf", 18);
 	ImGui::SFML::UpdateFontTexture();
 
-	window.setFramerateLimit(24);
+	sfmlManager->Window.setFramerateLimit(24);
 
-	while (window.isOpen())
+	while (sfmlManager->Window.isOpen())
 	{
 		sf::Event sfEvent;
-		while (window.pollEvent(sfEvent))
+		while (sfmlManager->ProcessEvents(sfEvent))
 		{
 			ImGui::SFML::ProcessEvent(sfEvent);
-			stateManager->GetCurrentState()->ProcessEvents(sfEvent);
-			if (sfEvent.type == sf::Event::Closed)
-			{
-				window.close();
-			}
-			else if (sfEvent.type == sf::Event::Resized)
-			{
-				sf::FloatRect visibleArea(0, 0, (float)sfEvent.size.width, (float)sfEvent.size.height);
-				window.setView(sf::View(visibleArea));
-			}
-			else if (sfEvent.type == sf::Event::KeyReleased)
+			stateManager->GetCurrentState()->ProcessEvents(sfEvent);			
+			if (sfEvent.type == sf::Event::KeyReleased)
 			{
 				if (sfEvent.key.code == sf::Keyboard::Tilde)
 				{
@@ -67,7 +59,7 @@ int main()
 		}
 
 		// All widgets must be created between update and render
-		ImGui::SFML::Update(window, deltaClock.restart());
+		ImGui::SFML::Update(sfmlManager->Window, sfmlManager->DeltaClock.restart());
 		if (ImGui::BeginMainMenuBar())
 		{
 			if (ImGui::BeginMenu("File"))
@@ -87,7 +79,7 @@ int main()
 
 				if (ImGui::MenuItem("Quit"))
 				{
-					window.close();
+					sfmlManager->Window.close();
 				}
 				ImGui::EndMenu();
 			}
@@ -101,11 +93,11 @@ int main()
 			ImGui::ShowMetricsWindow();
 		}
 
-		window.clear(bgColor);
+		sfmlManager->Window.clear(bgColor);
 		ImGui::ShowDemoWindow();
-		stateManager->GetCurrentState()->Render(window);
-		ImGui::SFML::Render(window);
-		window.display();
+		stateManager->GetCurrentState()->Render(sfmlManager->Window);
+		ImGui::SFML::Render(sfmlManager->Window);
+		sfmlManager->Window.display();
 
 		stateManager->GetCurrentState()->RecalculateHash();
 	}

@@ -1,6 +1,7 @@
 #include "State.h"
 #include "LocalizationManager.h"
 #include "GameManager.h"
+#include "SFML-manager.h"
 
 #include <fstream>
 
@@ -112,6 +113,11 @@ void State::Render(sf::RenderTarget& target)
 
 void State::ProcessEvents(const sf::Event &sfEvent)
 {
+	if (SFML_Manager::GetInstance()->WindowWasResized)
+	{
+		mRebuild = true;
+	}
+
 	for (auto const& b : mAllButtons)
 	{
 		b->ProcessEvents(sfEvent);

@@ -35,6 +35,7 @@
     <ClCompile Include="LUA.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="SFML-extensions.cpp" />
+    <ClCompile Include="SFML-manager.cpp" />
     <ClCompile Include="State.cpp" />
     <ClCompile Include="StateManager.cpp" />
     <ClCompile Include="Stats.cpp" />
@@ -56,6 +57,7 @@
     <ClInclude Include="LocalizationManager.h" />
     <ClInclude Include="LUA.h" />
     <ClInclude Include="SFML-extensions.h" />
+    <ClInclude Include="SFML-manager.h" />
     <ClInclude Include="State.h" />
     <ClInclude Include="StateBuildingUpgrades.h" />
     <ClInclude Include="StateCharacterCreation.h" />
@@ -80,12 +82,9 @@
     <ClInclude Include="World.h" />
   </ItemGroup>
   <ItemGroup>
-    <Text Include="StateMainMenu.lua" />
-    <Text Include="StateSaveGame.lua" />
-    <Text Include="StateLoadGame.Lua" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="loc.db" />
+    <None Include="Resources\LUA\StateLoadGame.Lua" />
+    <None Include="Resources\LUA\StateMainMenu.lua" />
+    <None Include="Resources\LUA\StateSaveGame.lua" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <VCProjectVersion>16.0</VCProjectVersion>

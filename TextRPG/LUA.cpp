@@ -1,6 +1,7 @@
 #include "LUA.h"
 #include "GameStates.h"
 #include "GameStateFactoryManager.h"
+#include "SFML-manager.h"
 
 lua_State *LuaManager::L = nullptr;
 
@@ -97,14 +98,43 @@ int lua_PushGameState(lua_State* L)
 
 	return 0;
 }
+
+/// <summary> void PopGameState() </summary>
+int lua_PopGameState(lua_State* L)
+{
+	StateManager::GetInstance()->PopState();
+
+	return 0;
+}
+
+/// <summary> void PopGameStateHome() </summary>
+int lua_PopGameStateHome(lua_State* L)
+{
+	StateManager::GetInstance()->PopToBottom();
+
+	return 0;
+}
+
+int lua_Shutdown(lua_State* L)
+{
+	SFML_Manager::GetInstance()->Window.close();
+	return 0;
+}
 #pragma endregion
 
 void LuaManager::InitializeNativeFunctions()
 {
+	// SFML calls
 	lua_register(L, "AddText", lua_AddText);
 	lua_register(L, "AddButton", lua_AddButton);
 
+	// State Calls
 	lua_register(L, "PushGameState", lua_PushGameState);
+	lua_register(L, "PopGameState", lua_PopGameState);
+	lua_register(L, "PopGameStateHome", lua_PopGameStateHome);
+
+	// Engine calls
+	lua_register(L, "Shutdown", lua_Shutdown);
 }
 
 void LuaManager::Shutdown()

@@ -1,10 +1,11 @@
 #pragma once
-#include <unordered_map>
+#include <assert.h>
 #include <map>
 #include <iostream>
 #include <random>
 #include <stdio.h>
 #include <stdint.h>
+#include <unordered_map>
 #include <vector>
 
 #define int8  std::int8_t

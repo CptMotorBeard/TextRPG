@@ -31,7 +31,7 @@ end
 
 function QuitGame()
 	print "[LUA] button callback"
-	NativeQuitGame()
+	Shutdown()
 end
 
 function Render()

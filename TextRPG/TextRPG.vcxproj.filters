@@ -15,14 +15,8 @@
     <Filter Include="Header Files\People">
       <UniqueIdentifier>{39b0c71f-0099-4186-8dce-7621055e52fc}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Header Files\Base">
-      <UniqueIdentifier>{12bc72bc-d881-49d6-8fd6-6954d26c2507}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Source Files\People">
       <UniqueIdentifier>{97cf2778-70b1-43c7-9906-acfa3787ac14}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Source Files\Base">
-      <UniqueIdentifier>{bb79479a-c088-4554-bebe-0c02624c0679}</UniqueIdentifier>
     </Filter>
     <Filter Include="Header Files\GameStates">
       <UniqueIdentifier>{9fea2855-9023-41d8-b0a2-f9603f73116e}</UniqueIdentifier>
@@ -44,6 +38,18 @@
     </Filter>
     <Filter Include="Header Files\GameStates\States">
       <UniqueIdentifier>{e639af72-dee7-4091-869c-3c53d8de0cc7}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Managers">
+      <UniqueIdentifier>{127c92ea-a0ab-40b8-b4c8-d2292bf030c5}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Managers">
+      <UniqueIdentifier>{2c6e7794-ebf8-4254-8ee3-24da2ae278fa}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Colony">
+      <UniqueIdentifier>{12bc72bc-d881-49d6-8fd6-6954d26c2507}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Colony">
+      <UniqueIdentifier>{bb79479a-c088-4554-bebe-0c02624c0679}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -75,16 +81,16 @@
       <Filter>Source Files\People</Filter>
     </ClCompile>
     <ClCompile Include="Colony.cpp">
-      <Filter>Source Files\Base</Filter>
+      <Filter>Source Files\Colony</Filter>
     </ClCompile>
     <ClCompile Include="Unit.cpp">
       <Filter>Source Files\People</Filter>
     </ClCompile>
     <ClCompile Include="ColonyBuildings.cpp">
-      <Filter>Source Files\Base</Filter>
+      <Filter>Source Files\Colony</Filter>
     </ClCompile>
     <ClCompile Include="ColonyZone.cpp">
-      <Filter>Source Files\Base</Filter>
+      <Filter>Source Files\Colony</Filter>
     </ClCompile>
     <ClCompile Include="Faction.cpp">
       <Filter>Source Files</Filter>
@@ -92,19 +98,10 @@
     <ClCompile Include="State.cpp">
       <Filter>Source Files\GameStates</Filter>
     </ClCompile>
-    <ClCompile Include="LUA.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="LocalizationManager.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="StateManager.cpp">
       <Filter>Source Files\GameStates</Filter>
     </ClCompile>
     <ClCompile Include="World.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="GameManager.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="SFML-extensions.cpp">
@@ -112,6 +109,18 @@
     </ClCompile>
     <ClCompile Include="GameStateFactoryManager.cpp">
       <Filter>Source Files\GameStates\StateFactory</Filter>
+    </ClCompile>
+    <ClCompile Include="GameManager.cpp">
+      <Filter>Source Files\Managers</Filter>
+    </ClCompile>
+    <ClCompile Include="LocalizationManager.cpp">
+      <Filter>Source Files\Managers</Filter>
+    </ClCompile>
+    <ClCompile Include="LUA.cpp">
+      <Filter>Source Files\Managers</Filter>
+    </ClCompile>
+    <ClCompile Include="SFML-manager.cpp">
+      <Filter>Source Files\Managers</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -137,16 +146,16 @@
       <Filter>Header Files\People</Filter>
     </ClInclude>
     <ClInclude Include="Colony.h">
-      <Filter>Header Files\Base</Filter>
+      <Filter>Header Files\Colony</Filter>
     </ClInclude>
     <ClInclude Include="ColonyZone.h">
-      <Filter>Header Files\Base</Filter>
+      <Filter>Header Files\Colony</Filter>
     </ClInclude>
     <ClInclude Include="ColonyBuildings.h">
-      <Filter>Header Files\Base</Filter>
+      <Filter>Header Files\Colony</Filter>
     </ClInclude>
     <ClInclude Include="ColonyUpgrades.h">
-      <Filter>Header Files\Base</Filter>
+      <Filter>Header Files\Colony</Filter>
     </ClInclude>
     <ClInclude Include="Faction.h">
       <Filter>Header Files</Filter>
@@ -154,19 +163,10 @@
     <ClInclude Include="GameStates.h">
       <Filter>Header Files\GameStates</Filter>
     </ClInclude>
-    <ClInclude Include="LUA.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="LocalizationManager.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="World.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="SFML-extensions.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="GameManager.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="GameStateFactoryManager.h">
@@ -220,21 +220,28 @@
     <ClInclude Include="StateManager.h">
       <Filter>Header Files\GameStates</Filter>
     </ClInclude>
+    <ClInclude Include="GameManager.h">
+      <Filter>Header Files\Managers</Filter>
+    </ClInclude>
+    <ClInclude Include="LocalizationManager.h">
+      <Filter>Header Files\Managers</Filter>
+    </ClInclude>
+    <ClInclude Include="LUA.h">
+      <Filter>Header Files\Managers</Filter>
+    </ClInclude>
+    <ClInclude Include="SFML-manager.h">
+      <Filter>Header Files\Managers</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
-    <Text Include="StateMainMenu.lua">
+    <None Include="Resources\LUA\StateMainMenu.lua">
       <Filter>LUA Files\States</Filter>
-    </Text>
-    <Text Include="StateSaveGame.lua">
+    </None>
+    <None Include="Resources\LUA\StateSaveGame.lua">
       <Filter>LUA Files\States</Filter>
-    </Text>
-    <Text Include="StateLoadGame.Lua">
+    </None>
+    <None Include="Resources\LUA\StateLoadGame.Lua">
       <Filter>LUA Files\States</Filter>
-    </Text>
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="loc.db">
-      <Filter>Source Files</Filter>
     </None>
   </ItemGroup>
 </Project>
