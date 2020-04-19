@@ -23,6 +23,13 @@ enum class StateType
 	STATECHARACTEROVERVIEW,
 	STATELOADGAME,
 	STATESAVEGAME,
+	STATEWORLDOVERVIEW,
+	STATEDIPLOMACY,
+	STATECOMBAT,
+	STATEINVENTORY,
+	STATECITYUPGRADES,
+	STATEBUILDINGUPGRADES,
+	STATEUNITUPGRADES,
 	LENGTH
 };
 
@@ -38,7 +45,7 @@ private:
 	};
 
 	StateType mStateType;	
-	State(StateType stateType, const char* lua_source);
+	
 	void HashFile();
 
 	std::vector<std::shared_ptr<sf::Drawable>> mAllDrawables;
@@ -49,17 +56,8 @@ private:
 	uint64 mHash;
 	bool mRebuild;
 
-#pragma region AllStates
-	friend class StateMainMenu;
-	friend class StateFactionCreation;
-	friend class StateFactionOverview;
-	friend class StateCharacterCreation;
-	friend class StateCharacterOverview;
-	friend class StateLoadGame;
-	friend class StateSaveGame;
-#pragma endregion
-
 public:	
+	State(StateType stateType, const char* lua_source);
 	State() : State(StateType::DEFAULT, "") {};	
 	const StateType& GetStateType();
 
