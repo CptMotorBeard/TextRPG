@@ -36,14 +36,15 @@ end
 
 function Render()
 	AddText("Main Menu State", 24, 10, 24)
+	ScreenDimensions = GetScreenDimensions()
 
 	rect = {}
-	rect["height"] = 30
 	rect["width"] = 145
+	rect["height"] = 30	
 	
 	padding = 15
-	initialX = 245
-	initialY = 275
+	initialX = (ScreenDimensions["width"] / 2) - (rect["width"] / 2)
+	initialY = (ScreenDimensions["height"] / 2)	- (rect["height"] / 2)
 
 	offset = padding + rect["height"]
 

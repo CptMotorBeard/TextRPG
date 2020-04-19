@@ -115,6 +115,28 @@ int lua_PopGameStateHome(lua_State* L)
 	return 0;
 }
 
+/// <summary> table[width=, height=] GetScreenDimensions() </summary>
+int lua_GetScreenDimensions(lua_State* L)
+{
+	lua_newtable(L);
+	int top = lua_gettop(L);
+
+	sf::Vector2u windowSize = SFML_Manager::GetInstance()->Window.getSize();
+
+	std::string height = "width";
+	lua_pushlstring(L, height.c_str(), height.size());
+	lua_pushinteger(L, windowSize.x);
+	lua_settable(L, top);
+
+	std::string width = "height";
+	lua_pushlstring(L, width.c_str(), width.size());
+	lua_pushinteger(L, windowSize.y);
+	lua_settable(L, top);
+
+	return 1;
+}
+
+/// <summary> void Shutdown() </summary>
 int lua_Shutdown(lua_State* L)
 {
 	SFML_Manager::GetInstance()->Window.close();
@@ -135,6 +157,7 @@ void LuaManager::InitializeNativeFunctions()
 
 	// Engine calls
 	lua_register(L, "Shutdown", lua_Shutdown);
+	lua_register(L, "GetScreenDimensions", lua_GetScreenDimensions);
 }
 
 void LuaManager::Shutdown()
