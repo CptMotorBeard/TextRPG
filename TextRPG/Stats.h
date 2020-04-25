@@ -49,6 +49,15 @@ public:
 	};
 };
 
+class StatString
+{
+public:
+	const char* LongValue;
+	const char* ShortValue;
+
+	StatString(const char* _longValue, const char* _shortValue) : LongValue(_longValue), ShortValue(_shortValue) {};
+};
+
 enum class AttributeType
 {
 	Strength,
@@ -57,29 +66,76 @@ enum class AttributeType
 	Intelligence,
 	Wisdom,
 	Charisma,
+	Luck,
 	LENGTH
 };
 
 class Attribute : public Stat<AttributeType>
 {
 public:
-	static const AttributeType AllAttributes[(int)AttributeType::LENGTH];
-	static std::string AttributeString(AttributeType type);
+	const std::map<AttributeType, StatString> AllAttributes
+	{
+		{AttributeType::Strength, StatString("Strength", "STR")},
+		{AttributeType::Dexterity, StatString("Dexterity", "DEX")},
+		{AttributeType::Constitution, StatString("Constitution", "CON")},
+		{AttributeType::Intelligence, StatString("Intelligence", "INT")},
+		{AttributeType::Wisdom, StatString("Wisdom", "WIS")},
+		{AttributeType::Charisma, StatString("Charisma", "CHA")},
+		{AttributeType::Luck, StatString("Luck", "LCK")}
+	};
 
 	Attribute(AttributeType attributeType) : Stat(attributeType, 10) {};
 };
 
 enum class SkillType
 {
-	Test,
+	Firearms,
+	MeleeWeapons,
+	Explosives,
+	Unarmed,
+	FirstAid,
+	Medicine,
+	Lockpicking,
+	Hacking,
+	Repair,
+	Mechanics,
+	Electrician,
+	Science,
+	Stealth,
+	Pickpocket,
+	Survival,
+	Botany,
+	Barter,
+	Deception,
+	Persuasion,
 	LENGTH
 };
 
 class Skill : public Stat<SkillType>
 {
 public:
-	static const SkillType AllSkills[(int)SkillType::LENGTH];
-	static std::string SkillString(SkillType type);
+	const std::map<SkillType, const char*> AllSkills
+	{
+		{ SkillType::Firearms, "Firearms" },
+		{ SkillType::MeleeWeapons, "Melee Weapons" },
+		{ SkillType::Explosives, "Explosives" },
+		{ SkillType::Unarmed, "Unarmed" },
+		{ SkillType::FirstAid, "First Aid" },
+		{ SkillType::Medicine, "Medicine" },
+		{ SkillType::Lockpicking, "Lockpicking" },
+		{ SkillType::Hacking, "Hacking" },
+		{ SkillType::Repair, "Repair" },
+		{ SkillType::Mechanics, "Mechanics" },
+		{ SkillType::Electrician, "Electrician" },
+		{ SkillType::Science, "Science" },
+		{ SkillType::Stealth, "Stealth" },
+		{ SkillType::Pickpocket, "Pickpocket" },
+		{ SkillType::Survival, "Survival" },
+		{ SkillType::Botany, "Botany" },
+		{ SkillType::Barter, "Barter" },
+		{ SkillType::Deception, "Deception" },
+		{ SkillType::Persuasion, "Persuasion" }
+	};
 
 	Skill(SkillType skillType) : Stat(skillType, 0) {};
 };

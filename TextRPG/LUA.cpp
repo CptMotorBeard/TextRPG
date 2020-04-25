@@ -51,10 +51,27 @@ int lua_AddText(lua_State* L)
 {
 	if (lua_gettop(L) >= 4)
 	{
-		std::string text = lua_tostring(L, 1);
-		int fontSize = (int)lua_tonumber(L, 2);
-		float locx = (float)lua_tonumber(L, 3);
-		float locy = (float)lua_tonumber(L, 4);
+		std::string text;
+		int fontSize = 0;
+		float locx = 0;
+		float locy = 0;
+
+		if (lua_isstring(L, 1))
+		{
+			text = lua_tostring(L, 1);			
+		}
+		if (lua_isnumber(L, 2))
+		{
+			fontSize = (int)lua_tonumber(L, 2);
+		}
+		if (lua_isnumber(L, 3))
+		{
+			locx = (float)lua_tonumber(L, 3);
+		}
+		if (lua_isnumber(L, 4))
+		{
+			locy = (float)lua_tonumber(L, 4);
+		}
 
 		StateManager::GetInstance()->GetCurrentState()->AddText(text, fontSize, locx, locy);
 	}
@@ -67,18 +84,46 @@ int lua_AddButton(lua_State* L)
 	// (string text, table [height, width, x, y] rect, string callbackName, table [r, g, b, a] backColour)
 	// (table[string, fontSize, table [r, g, b, a] fontColour, table [r, g, b, a] fontOutline] text, table [height, width, x, y] rect, string callbackName, table [r, g, b, a] backColour)
 
-	std::string text = lua_tostring(L, 1);
+	std::string text;
+	if (lua_isstring(L, 1))
+	{
+		text = lua_tostring(L, 1);
+	}
+
 	// Table for Rect
 	lua_getfield(L, 2, "height");
-	float height = (float)lua_tonumber(L, -1);
-	lua_getfield(L, 2, "width");
-	float width = (float)lua_tonumber(L, -1);
-	lua_getfield(L, 2, "x");
-	float locx = (float)lua_tonumber(L, -1);
-	lua_getfield(L, 2, "y");
-	float locy = (float)lua_tonumber(L, -1);
+	float height = 0;
+	if (lua_isnumber(L, -1))
+	{
+		height = (float)lua_tonumber(L, -1);
+	}
 
-	std::string callbackName = lua_tostring(L, 3);
+	lua_getfield(L, 2, "width");
+	float width = 0;
+	if (lua_isnumber(L, -1))
+	{
+		width = (float)lua_tonumber(L, -1);
+	}
+
+	lua_getfield(L, 2, "x");
+	float locx = 0;
+	if (lua_isnumber(L, -1))
+	{
+		locx = (float)lua_tonumber(L, -1);
+	}
+
+	lua_getfield(L, 2, "y");
+	float locy = 0;
+	if (lua_isnumber(L, -1))
+	{
+		locy = (float)lua_tonumber(L, -1);
+	}
+
+	std::string callbackName;
+	if (lua_isstring(L, 3))
+	{
+		callbackName = lua_tostring(L, 3);
+	}
 
 	StateManager::GetInstance()->GetCurrentState()->AddButton(text, sf::FloatRect(locx, locy, width, height), callbackName);
 
@@ -90,7 +135,11 @@ int lua_PushGameState(lua_State* L)
 {
 	if (lua_gettop(L) >= 1)
 	{
-		std::string state = lua_tostring(L, 1);
+		std::string state;
+		if (lua_isstring(L, 1))
+		{
+			state = lua_tostring(L, 1);
+		}
 
 		State* newState = GameStateFactoryManager::GetInstance()->Create(state);
 		StateManager::GetInstance()->PushState(*newState);

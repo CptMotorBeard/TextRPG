@@ -12,7 +12,6 @@ private:
 public:
 	UnitStatus Status;
 	std::vector<UnitTraits> Traits;
-	std::vector<PersonalityTraits> Personality;
 
 	Inventory UnitInventory;
 

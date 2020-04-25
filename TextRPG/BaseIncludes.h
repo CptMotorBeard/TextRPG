@@ -2,6 +2,7 @@
 #include <assert.h>
 #include <map>
 #include <iostream>
+#include "nlohmann/json.hpp"
 #include <random>
 #include <stdio.h>
 #include <stdint.h>
