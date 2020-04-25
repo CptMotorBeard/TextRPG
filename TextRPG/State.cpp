@@ -63,6 +63,7 @@ void State::Build()
 	if (mRebuild)
 	{
 		lua_State* L = LuaManager::GetLuaState();
+		mimguiBuild.clear();
 
 		if (LuaManager::LuaOkay(L, luaL_loadfile(L, LUA_SOURCE)))
 		{
@@ -72,7 +73,12 @@ void State::Build()
 				LuaManager::LuaOkay(L, lua_pcall(L, 0, 0, 0));
 			}
 		}
-	}	
+	}
+
+	for (auto f : mimguiBuild)
+	{
+		f();
+	}
 
 	State::mCurrentRenderMode = State::RenderMode::NONE;
 }
@@ -149,4 +155,14 @@ void State::AddButton(std::string text, sf::FloatRect rect, std::string callback
 	);
 
 	mAllButtons.push_back(std::make_shared<sf_ext::SFML_Button>(b));
+}
+
+void State::imguiBegin(const char * text)
+{
+	mimguiBuild.push_back([text](){ImGui::Begin(text);});
+}
+
+void State::imguiEnd()
+{
+	mimguiBuild.push_back([](){ImGui::End();});
 }

@@ -1,5 +1,7 @@
 #pragma once
 
+#include <functional>
+
 #include "BaseIncludes.h"
 
 #include "imgui.h"
@@ -48,6 +50,7 @@ private:
 	
 	void HashFile();
 
+	std::vector< std::function<void(void)>> mimguiBuild;
 	std::vector<std::shared_ptr<sf::Drawable>> mAllDrawables;
 	std::vector<std::shared_ptr<sf_ext::SFML_Button>> mAllButtons;
 
@@ -75,6 +78,8 @@ public:
 #pragma region LUA Blocks
 	void AddText(std::string text, int fontSize, float locX, float locY);
 	void AddButton(std::string text, sf::FloatRect rect, std::string callbackName);
+	void imguiBegin(const char * text);
+	void imguiEnd();
 #pragma endregion
 
 };

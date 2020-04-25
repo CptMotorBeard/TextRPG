@@ -10,6 +10,10 @@
 		void PopGameState()
 		void PopGameStateHome()
 		
+	-- ImGui --
+		void ImGuiBegin(string title)
+		void ImGuiEnd()
+		
 	-- Engine Functions --
 		table[width=, height=] GetScreenDimensions()
 		void Shutdown()

@@ -46,6 +46,7 @@ bool LuaManager::CallbackFunction(std::string functionName, const char* sourceFi
 
 #pragma region Native Functions
 
+#pragma region SFML
 /// <summary> void AddText(string text, int fontSize, float locX, float locY) </summary>
 int lua_AddText(lua_State* L)
 {
@@ -129,7 +130,9 @@ int lua_AddButton(lua_State* L)
 
 	return 0;
 }
+#pragma endregion
 
+#pragma region GameState
 /// <summary> void PushGameState(string newState) </summary>
 int lua_PushGameState(lua_State* L)
 {
@@ -163,7 +166,36 @@ int lua_PopGameStateHome(lua_State* L)
 
 	return 0;
 }
+#pragma endregion
 
+#pragma region IMGUI
+/// <summary>void ImGuiBegin(string title)</summary>
+int lua_imguiBegin(lua_State* L)
+{
+	const char* text = "";
+	if (lua_gettop(L) >= 1)
+	{
+		if (lua_isstring(L, 1))
+		{
+			text = lua_tostring(L, 1);
+		}
+	}
+
+	StateManager::GetInstance()->GetCurrentState()->imguiBegin(text);
+
+	return 0;
+}
+
+/// <summary>void ImGuiEnd()</summary>
+int lua_imguiEnd(lua_State* L)
+{
+	StateManager::GetInstance()->GetCurrentState()->imguiEnd();
+
+	return 0;
+}
+#pragma endregion
+
+#pragma region Engine
 /// <summary> table[width=, height=] GetScreenDimensions() </summary>
 int lua_GetScreenDimensions(lua_State* L)
 {
@@ -193,6 +225,8 @@ int lua_Shutdown(lua_State* L)
 }
 #pragma endregion
 
+#pragma endregion
+
 void LuaManager::InitializeNativeFunctions()
 {
 	// SFML calls
@@ -203,6 +237,10 @@ void LuaManager::InitializeNativeFunctions()
 	lua_register(L, "PushGameState", lua_PushGameState);
 	lua_register(L, "PopGameState", lua_PopGameState);
 	lua_register(L, "PopGameStateHome", lua_PopGameStateHome);
+
+	// IMGUI calls
+	lua_register(L, "ImGuiBegin", lua_imguiBegin);
+	lua_register(L, "ImGuiEnd", lua_imguiEnd);
 
 	// Engine calls
 	lua_register(L, "Shutdown", lua_Shutdown);
