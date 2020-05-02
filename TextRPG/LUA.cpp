@@ -30,7 +30,7 @@ lua_State* LuaManager::GetLuaState()
 	return L;
 }
 
-bool LuaManager::CallbackFunction(std::string functionName, const char* sourceFile)
+bool LuaManager::CallbackFunction(const std::string &functionName, const char* sourceFile)
 {
 	if (LuaManager::LuaOkay(L, luaL_dofile(L, sourceFile)))
 	{

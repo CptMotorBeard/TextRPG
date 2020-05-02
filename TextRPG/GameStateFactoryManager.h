@@ -2,6 +2,8 @@
 #include "BaseIncludes.h"
 #include "State.h"
 
+#define REGISTER_FACTORY(FactoryString) mInstance->RegisterFactory(#FactoryString, new State##FactoryString##Factory())
+
 class GameStateFactoryManager
 {
 private:
@@ -10,6 +12,6 @@ private:
 public:
 	static GameStateFactoryManager* GetInstance();
 
-	void RegisterFactory(std::string stateType, StateFactory* stateFactory);
-	State* Create(std::string stateType);
+	void RegisterFactory(const std::string &stateType, StateFactory* stateFactory);
+	State* Create(const std::string &stateType);
 };

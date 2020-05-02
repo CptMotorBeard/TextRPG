@@ -2,7 +2,7 @@
 
 std::unique_ptr<SFML_Manager> SFML_Manager::mInstance = nullptr;
 
-SFML_Manager* SFML_Manager::Initialize(sf::VideoMode mode, const sf::String& title)
+SFML_Manager* SFML_Manager::Initialize(const sf::VideoMode &mode, const sf::String& title)
 {
 	mInstance = std::make_unique<SFML_Manager>(mode, title);
 
@@ -15,7 +15,7 @@ SFML_Manager* SFML_Manager::GetInstance()
 	return mInstance.get();
 }
 
-SFML_Manager::SFML_Manager(sf::VideoMode mode, const sf::String& title)
+SFML_Manager::SFML_Manager(const sf::VideoMode &mode, const sf::String& title)
 {
 	WindowWasResized = false;
 	Window.create(mode, title);

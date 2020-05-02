@@ -1,22 +1,4 @@
 #pragma once
 #include "State.h"
 
-class StateCharacterCreation : public State
-{
-public:
-	StateCharacterCreation() : State(StateType::STATECHARACTERCREATION, "Resources/LUA/StateCharacterCreation.lua") { };
-};
-
-class StateCharacterCreationFactory : public StateFactory
-{
-public:
-	virtual StateCharacterCreation* Create() override
-	{
-		return new StateCharacterCreation();
-	};
-
-	virtual std::unique_ptr<StateFactory> Clone() override
-	{
-		return std::make_unique<StateCharacterCreationFactory>(*this);
-	}
-};
+MAKE_STATE(StateCharacterCreation)

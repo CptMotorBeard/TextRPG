@@ -2,7 +2,7 @@
 
 std::unique_ptr<StateManager> StateManager::mInstance = nullptr;
 
-bool StateManager::StateExists(StateType stateType)
+bool StateManager::StateExists(const StateType &stateType)
 {
 	for (auto const& state : mStates)
 	{
@@ -43,6 +43,8 @@ State* StateManager::PopState()
 	{
 		mStates.pop_back();
 	}
+
+	GetCurrentState()->ForceRebuild();
 	return topState;
 }
 

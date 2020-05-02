@@ -1,6 +1,8 @@
 #pragma once
 #include "BaseIncludes.h"
 
+#define ALL_STAT_MAP(enumType, stringValue, shortValue) { enumType :: stringValue, StatString(#stringValue, #shortValue)}
+
 template <typename E>
 class Stat
 {
@@ -11,7 +13,7 @@ private:
 	std::vector<int8> mModifiers;
 
 public:
-	Stat(E statType, uint16 startingValue)
+	Stat(const E &statType, uint16 startingValue)
 	{
 		mStatType = statType;
 		mBaseValue = startingValue;
@@ -34,12 +36,7 @@ public:
 	uint16 GetValue()
 	{
 		int16 modifier = GetTotalModifier();
-		if (modifier > mBaseValue)
-		{
-			return 0;
-		}
-
-		return mBaseValue - modifier;
+		return mBaseValue + modifier;
 	};
 
 	uint16 AddModifier(int8 modifier)
@@ -104,6 +101,6 @@ enum class SkillType
 class Skill : public Stat<SkillType>
 {
 public:
-	static const std::map<SkillType, const char*> AllSkills;
+	static const std::map<SkillType, StatString> AllSkills;
 	Skill(SkillType skillType) : Stat(skillType, 0) {};
 };

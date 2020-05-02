@@ -47,6 +47,7 @@ void State::RecalculateHash()
 {
 	uint64 h = uint64(mHash);
 	HashFile();
+
 	mRebuild = h != mHash;
 
 	if (mRebuild)
@@ -54,6 +55,13 @@ void State::RecalculateHash()
 		lua_State* L = LuaManager::GetLuaState();
 		LuaManager::LuaOkay(L, luaL_dofile(L, State::LUA_SOURCE));
 	}
+}
+
+void State::ForceRebuild()
+{
+	lua_State* L = LuaManager::GetLuaState();
+	LuaManager::LuaOkay(L, luaL_dofile(L, State::LUA_SOURCE));
+	mRebuild = true;
 }
 
 void State::Build()
@@ -132,6 +140,11 @@ void State::ProcessEvents(const sf::Event &sfEvent)
 
 void State::AddText(std::string text, int fontSize, float locx, float locy)
 {
+	if (mCurrentRenderMode != RenderMode::Render)
+	{
+		return;
+	}
+
 	sf::Text t;
 
 	auto localizedText = LocalizationManager::GetInstance()->GetLocByKey(text);
@@ -146,6 +159,11 @@ void State::AddText(std::string text, int fontSize, float locx, float locy)
 
 void State::AddButton(std::string text, sf::FloatRect rect, std::string callbackName)
 {
+	if (mCurrentRenderMode != RenderMode::Render)
+	{
+		return;
+	}
+
 	auto localizedText = LocalizationManager::GetInstance()->GetLocByKey(text);
 
 	sf_ext::SFML_Button b(*localizedText, rect,
@@ -159,10 +177,22 @@ void State::AddButton(std::string text, sf::FloatRect rect, std::string callback
 
 void State::imguiBegin(const char * text)
 {
-	mimguiBuild.push_back([text](){ImGui::Begin(text);});
+	if (mCurrentRenderMode != RenderMode::Build)
+	{
+		return;
+	}
+
+	mimguiBuild.push_back([text]() {ImGui::Begin(text); });
 }
 
 void State::imguiEnd()
 {
-	mimguiBuild.push_back([](){ImGui::End();});
+	if (mCurrentRenderMode != RenderMode::Build)
+	{
+		return;
+	}
+
+	mimguiBuild.push_back([]() {ImGui::End(); });
 }
+
+StateFactory::~StateFactory() {}

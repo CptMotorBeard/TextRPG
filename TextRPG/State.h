@@ -18,20 +18,20 @@
 enum class StateType
 {
 	DEFAULT,
-	STATEMAINMENU,
-	STATEFACTIONCREATION,
-	STATEFACTIONOVERVIEW,
-	STATECHARACTERCREATION,
-	STATECHARACTEROVERVIEW,
-	STATELOADGAME,
-	STATESAVEGAME,
-	STATEWORLDOVERVIEW,
-	STATEDIPLOMACY,
-	STATECOMBAT,
-	STATEINVENTORY,
-	STATECITYUPGRADES,
-	STATEBUILDINGUPGRADES,
-	STATEUNITUPGRADES,
+	StateMainMenu,
+	StateFactionCreation,
+	StateFactionOverview,
+	StateCharacterCreation,
+	StateCharacterOverview,
+	StateLoadGame,
+	StateSaveGame,
+	StateWorldOverview,
+	StateDiplomacy,
+	StateCombat,
+	StateInventory,
+	StateCityUpgrades,
+	StateBuildingUpgrades,
+	StateUnitUpgrades,
 	LENGTH
 };
 
@@ -67,6 +67,7 @@ public:
 	virtual ~State() {};
 
 	virtual void RecalculateHash();
+	virtual void ForceRebuild();
 	/// <summary>Builds the imGui state. All widgets must be created between update and render</summary>
 	virtual void Build();
 	/// <summary>Process SFML events</summary>
@@ -88,5 +89,32 @@ class StateFactory
 {
 public:
 	virtual State* Create() = 0;
-	virtual std::unique_ptr<StateFactory> Clone() = 0;
+	virtual std::unique_ptr<StateFactory> make_unique() = 0;
+	virtual ~StateFactory() = 0;
+};
+
+#define MAKE_STATE(stateName)	\
+class stateName : public State	\
+{	\
+public:	\
+	stateName() : State(StateType:: stateName, "Resources/LUA/"#stateName".lua") { };	\
+};	\
+\
+class stateName##Factory : public StateFactory	\
+{	\
+public:	\
+	virtual stateName* Create() override	\
+	{	\
+		return new stateName();	\
+	};	\
+\
+	virtual std::unique_ptr<StateFactory> make_unique() override	\
+	{	\
+		return std::make_unique<stateName##Factory>(*this);	\
+	}	\
+\
+	virtual ~stateName##Factory() override	\
+	{	\
+		return;	\
+	}	\
 };

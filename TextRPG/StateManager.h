@@ -8,7 +8,7 @@ private:
 	static std::unique_ptr<StateManager> mInstance;
 	std::vector<std::unique_ptr<State>> mStates;
 
-	bool StateExists(StateType stateType);
+	bool StateExists(const StateType &stateType);
 
 public:
 	StateManager(State initialState);
