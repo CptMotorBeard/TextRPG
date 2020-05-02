@@ -74,7 +74,11 @@ namespace sf_ext
 			{
 				mButtonRectangle.setFillColor(mButtonColour);
 				mHolding = false;
-				mCallback();
+
+				if (mCallback)
+				{
+					mCallback();
+				}				
 			}
 		}
 		else if (sfEvent.type == sf::Event::MouseMoved)
