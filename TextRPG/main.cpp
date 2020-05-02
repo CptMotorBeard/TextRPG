@@ -90,7 +90,54 @@ int main()
 		
 		if (debugWindow)
 		{
-			ImGui::ShowMetricsWindow();
+			ImGui::Begin("State Manager");
+			std::vector<std::string> allStates = stateManager->AllStatesAsStrings();
+
+			ImGui::BeginChild("All States", ImVec2(0, 100));
+			for (auto state = allStates.rbegin(); state != allStates.rend(); ++state)
+			{
+				if (state == allStates.rbegin())
+				{
+					ImGui::TextColored(ImVec4(0, 60, 255, 255), state->c_str());
+				}
+				else
+				{
+					if (ImGui::Selectable(state->c_str()))
+					{
+						StateType type = StateType::StateMainMenu;
+
+						for (auto const& statePair : State::StateStringMap)
+						{
+							if (statePair.second == *state)
+							{
+								type = statePair.first;
+								break;
+							}
+						}
+
+						stateManager->PopToState(type);
+					}
+				}				
+			}
+
+			ImGui::EndChild();
+
+			ImGui::BeginChild("Add New State");
+			ImGui::Columns(3, "mycolumns3", false);
+			ImGui::Separator();
+
+			for (auto const& statePair : State::StateStringMap)
+			{
+				if (ImGui::Selectable(statePair.second.c_str()))
+				{
+					std::string luafile = "Resources/LUA/" + statePair.second + ".lua";
+					stateManager->PushState(State(statePair.first, luafile.c_str()));					
+				}
+				ImGui::NextColumn();
+			}
+			ImGui::EndChild();
+
+			ImGui::End();
 		}
 
 		sfmlManager->Window.clear(bgColor);

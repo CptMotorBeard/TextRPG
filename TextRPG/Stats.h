@@ -22,7 +22,7 @@ public:
 	int16 GetTotalModifier()
 	{
 		int16 total = 0;
-		for (auto attributeModifier : Stat::mModifiers)
+		for (auto const &attributeModifier : Stat::mModifiers)
 		{
 			total += attributeModifier;
 		}

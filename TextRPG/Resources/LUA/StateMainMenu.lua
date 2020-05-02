@@ -16,8 +16,7 @@
 ]]--
 
 function Build()
-	ImGuiBegin("Text")
-	ImGuiEnd()
+
 end
 
 function GoToNewGame()

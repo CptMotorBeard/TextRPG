@@ -17,6 +17,8 @@
 
 enum class StateType
 {
+#define STATE_STRING_MAP_ITEM(state) { StateType :: state, std::string(#state) }
+
 	DEFAULT,
 	StateMainMenu,
 	StateFactionCreation,
@@ -55,14 +57,16 @@ private:
 	std::vector<std::shared_ptr<sf_ext::SFML_Button>> mAllButtons;
 
 	RenderMode mCurrentRenderMode;
-	const char* LUA_SOURCE;
+	std::string LUA_SOURCE;
 	uint64 mHash;
 	bool mRebuild;
 
 public:	
-	State(StateType stateType, const char* lua_source);
+	static const std::map<StateType, std::string> StateStringMap;
+
+	State(StateType stateType, const std::string &lua_source);
 	State() : State(StateType::DEFAULT, "") {};	
-	const StateType& GetStateType();
+	const StateType& GetStateType();	
 
 	virtual ~State() {};
 

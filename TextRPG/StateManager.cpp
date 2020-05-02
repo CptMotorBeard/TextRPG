@@ -17,58 +17,75 @@ bool StateManager::StateExists(const StateType &stateType)
 
 StateManager::StateManager(State initialState)
 {
-	mStates.push_back(std::make_unique<State>(initialState));
+	mStates.push_back(std::make_shared<State>(initialState));
 }
 
-State* StateManager::GetCurrentState()
+StateManager::~StateManager()
+{
+	for (auto const &state : mStates)
+	{
+		assert(state.use_count() == 1);
+	}
+}
+
+std::shared_ptr<State> StateManager::GetCurrentState()
 {	
-	return mStates.back().get();
+	return mStates.back();
 }
 
 void StateManager::PushState(State newState)
 {
-	State* stateExists = PopToState(newState.GetStateType());
+	std::shared_ptr<State> stateExists = PopToState(newState.GetStateType());
 	if (stateExists != nullptr)
 	{
 		PopState();
 	}
 
-	mStates.push_back(std::make_unique<State>(newState));
+	if (newState.GetStateType() != GetCurrentState()->GetStateType())
+	{
+		mStates.push_back(std::make_unique<State>(newState));
+		GetCurrentState()->ForceRebuild();
+	}	
 }
 
-State* StateManager::PopState()
+std::shared_ptr<State> StateManager::PopState(bool rebuild)
 {
-	State* topState = GetCurrentState();
+	std::shared_ptr<State> topState = GetCurrentState();
 	if (mStates.size() > 1)
 	{
 		mStates.pop_back();
 	}
 
-	GetCurrentState()->ForceRebuild();
+	if (rebuild)
+	{
+		GetCurrentState()->ForceRebuild();
+	}
+
 	return topState;
 }
 
-State* StateManager::PopToState(StateType stateType)
+std::shared_ptr<State> StateManager::PopToState(StateType stateType)
 {
 	if (StateExists(stateType))
 	{
 		while (GetCurrentState()->GetStateType() != stateType)
 		{
-			auto state = PopState();
+			auto state = PopState(false);
 		}
 
+		GetCurrentState()->ForceRebuild();
 		return GetCurrentState();
 	}
 
 	return nullptr;
 }
 
-State* StateManager::PopToState(State state)
+std::shared_ptr<State> StateManager::PopToState(State state)
 {
 	return PopToState(state.GetStateType());
 }
 
-State* StateManager::PopToBottom()
+std::shared_ptr<State> StateManager::PopToBottom()
 {
 	while (mStates.size() > 1)
 	{
@@ -76,6 +93,24 @@ State* StateManager::PopToBottom()
 	}
 
 	return GetCurrentState();
+}
+
+std::vector<std::string> StateManager::AllStatesAsStrings()
+{
+	std::vector<std::string> ret;
+
+	for (auto const &state : mStates)
+	{
+		auto stateType = state->GetStateType();
+		auto stateString = State::StateStringMap.find(stateType);
+
+		if (stateString != State::StateStringMap.end())
+		{
+			ret.push_back(stateString->second);
+		}
+	}
+
+	return ret;
 }
 
 StateManager* StateManager::Init(State initialState)
