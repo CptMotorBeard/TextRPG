@@ -13,6 +13,7 @@ private:
 	std::vector<int8> mModifiers;
 
 public:
+	Stat() {};
 	Stat(const E &statType, uint16 startingValue)
 	{
 		mStatType = statType;
@@ -26,6 +27,8 @@ public:
 		{
 			total += attributeModifier;
 		}
+
+		return total;
 	};
 
 	const uint16& GetBaseValue()
@@ -44,6 +47,17 @@ public:
 		mModifiers.push_back(modifier);
 		return GetValue();
 	};
+
+	uint16 RemoveModifier(int8 modifier)
+	{
+		auto position = std::find(mModifiers.begin(), mModifiers.end(), modifier);
+		if (position != mModifiers.end())
+		{
+			mModifiers.erase(position);
+		}
+
+		return GetValue();
+	}
 };
 
 class StatString
@@ -71,6 +85,7 @@ class Attribute : public Stat<AttributeType>
 {
 public:
 	static const std::map<AttributeType, StatString> AllAttributes;
+	Attribute() {};
 	Attribute(AttributeType attributeType) : Stat(attributeType, 10) {};
 };
 
@@ -102,5 +117,6 @@ class Skill : public Stat<SkillType>
 {
 public:
 	static const std::map<SkillType, StatString> AllSkills;
+	Skill() {};
 	Skill(SkillType skillType) : Stat(skillType, 0) {};
 };
