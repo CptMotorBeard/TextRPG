@@ -28,12 +28,6 @@ void DebugLogger::Clear()
 
 void DisplayText(const char* textStart, const char* textEnd)
 {
-	if (*textStart != '#')
-	{
-		ImGui::TextUnformatted(textStart, textEnd);
-		return;
-	}
-
 	ImVec4 vec4colour;
 	std::string line(textStart);
 	size_t lineLength = textEnd - textStart;
