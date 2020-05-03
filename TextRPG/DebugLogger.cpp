@@ -33,7 +33,7 @@ void DisplayText(const char* textStart, const char* textEnd)
 	size_t lineLength = textEnd - textStart;
 	line = line.substr(0, lineLength);
 
-	std::regex colourRegex("##.{8}.*\\$\\$");
+	std::regex colourRegex("##.{8}.*?\\$\\$");
 
 	auto coloursIterBegin = std::sregex_iterator(line.begin(), line.end(), colourRegex);
 	auto coloursIterEnd = std::sregex_iterator();
