@@ -27,6 +27,7 @@
     <ClCompile Include="D:\User Data\Documents\C++ Libraries\imgui-master\imgui_draw.cpp" />
     <ClCompile Include="D:\User Data\Documents\C++ Libraries\imgui-master\imgui_widgets.cpp" />
     <ClCompile Include="D:\User Data\Documents\C++ Libraries\imgui-sfml-master\imgui-SFML.cpp" />
+    <ClCompile Include="DebugLogger.cpp" />
     <ClCompile Include="Faction.cpp" />
     <ClCompile Include="GameManager.cpp" />
     <ClCompile Include="GameStateFactoryManager.cpp" />
@@ -45,6 +46,7 @@
     <ClCompile Include="World.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="DebugLogger.h" />
     <ClInclude Include="GameManager.h" />
     <ClInclude Include="GameStateFactoryManager.h" />
     <ClInclude Include="GameStates.h" />

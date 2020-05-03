@@ -1,4 +1,5 @@
 #include "BaseIncludes.h"
+#include "DebugLogger.h"
 
 #include "imgui.h"
 #include "imgui-SFML.h"
@@ -58,13 +59,14 @@ void CreateStateManagerDebugWindow(StateManager* stateManager)
 	ImGui::BeginChild("All States", ImVec2(0, 100));
 	for (auto state = allStates.rbegin(); state != allStates.rend(); ++state)
 	{
+		const char* stateString = state->c_str();
 		if (state == allStates.rbegin())
 		{
-			ImGui::TextColored(ImVec4(0, 60, 255, 255), state->c_str());
+			ImGui::TextColored(ImVec4(0, 60, 255, 255), stateString);
 		}
 		else
 		{
-			if (ImGui::Selectable(state->c_str()))
+			if (ImGui::Selectable(stateString))
 			{
 				StateType type = StateType::StateMainMenu;
 
@@ -78,6 +80,7 @@ void CreateStateManagerDebugWindow(StateManager* stateManager)
 				}
 
 				stateManager->PopToState(type);
+				DebugLogger::GetInstance()->LogMessage("Pop to state %s", stateString);
 			}
 		}
 	}
@@ -94,6 +97,8 @@ void CreateStateManagerDebugWindow(StateManager* stateManager)
 		{
 			std::string luafile = "Resources/LUA/" + statePair.second + ".lua";
 			stateManager->PushState(State(statePair.first, luafile.c_str()));
+
+			DebugLogger::GetInstance()->LogMessage("Push state %s", statePair.second.c_str());
 		}
 		ImGui::NextColumn();
 	}
@@ -104,6 +109,7 @@ void CreateStateManagerDebugWindow(StateManager* stateManager)
 
 int main()
 {
+	DebugLogger* debugLogger = DebugLogger::GetInstance();
 	GameManager* gameManager = GameManager::GetInstance();
 	LocalizationManager* locManager = LocalizationManager::GetInstance();
 	StateManager* stateManager = StateManager::Init(StateMainMenu());	
@@ -182,6 +188,7 @@ int main()
 		{
 			CreateStateManagerDebugWindow(stateManager);
 			CreateFrameDebugWindow(deltaTime);
+			debugLogger->Draw();
 		}
 
 		sfmlManager->Window.clear(bgColor);

@@ -134,6 +134,9 @@
     <ClCompile Include="imguiWindows.cpp">
       <Filter>Source Files\imguiWindows</Filter>
     </ClCompile>
+    <ClCompile Include="DebugLogger.cpp">
+      <Filter>Source Files\Managers</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="UnitStatus.h">
@@ -249,6 +252,9 @@
     </ClInclude>
     <ClInclude Include="imguiWindows.h">
       <Filter>Header Files\imgui Windows</Filter>
+    </ClInclude>
+    <ClInclude Include="DebugLogger.h">
+      <Filter>Header Files\Managers</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
