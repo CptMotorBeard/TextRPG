@@ -15,8 +15,12 @@
 		void Shutdown()
 ]]--
 
+leader = CreateNewLeader()
+
 function Build()
-	
+	if (PushCharacterCreationWindow(leader)) then
+		GoBack()
+	end
 end
 
 function GoBack()

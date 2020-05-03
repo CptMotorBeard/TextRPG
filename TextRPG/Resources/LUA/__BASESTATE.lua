@@ -6,6 +6,22 @@
 		void AddButton(string text, table [height, width, x, y] rect, string callbackName, table [r, g, b, a] backColour=Color::White)
 
 	-- State Management --
+		[STATES]:
+			MainMenu
+			FactionCreation
+			FactionOverview
+			CharacterCreation
+			CharacterOverview
+			LoadGame
+			SaveGame
+			WorldOverview
+			Diplomacy
+			Combat
+			Inventory
+			CityUpgrades
+			BuildingUpgrades
+			UnitUpgrades
+	
 		void PushGameState(string newState)
 		void PopGameState()
 		void PopGameStateHome()

@@ -10,6 +10,7 @@ private:
 	uint8 mWeight;
 
 public:
+	std::string Name;
 	UnitStatus Status;
 	std::vector<UnitTraits> Traits;
 
@@ -19,9 +20,9 @@ public:
 	Unit(uint16 startingAge, uint8 startingHeight, uint8 startingWeight);
 };
 
-class Leader : Unit
+class Leader : public Unit
 {
 public:
-	Leader() {};
+	Leader() : Leader(0, 0, 0) {};
 	Leader(uint16 startingAge, uint8 startingHeight, uint8 startingWeight) : Unit(startingAge, startingHeight, startingWeight) {};
 };

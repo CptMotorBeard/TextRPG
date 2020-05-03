@@ -54,6 +54,12 @@
     <Filter Include="Header Files\Colony\Resources">
       <UniqueIdentifier>{d6075408-b6d8-42ae-91e6-8a967d5dd7b0}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Header Files\imgui Windows">
+      <UniqueIdentifier>{c034613f-d28a-4fdb-80a9-3b074d5d49eb}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\imguiWindows">
+      <UniqueIdentifier>{d793ed16-d131-4b5d-997e-797a6d346156}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
@@ -124,6 +130,9 @@
     </ClCompile>
     <ClCompile Include="SFML-manager.cpp">
       <Filter>Source Files\Managers</Filter>
+    </ClCompile>
+    <ClCompile Include="imguiWindows.cpp">
+      <Filter>Source Files\imguiWindows</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -237,6 +246,9 @@
     </ClInclude>
     <ClInclude Include="Resources.h">
       <Filter>Header Files\Colony\Resources</Filter>
+    </ClInclude>
+    <ClInclude Include="imguiWindows.h">
+      <Filter>Header Files\imgui Windows</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

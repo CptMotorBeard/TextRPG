@@ -31,6 +31,7 @@
     <ClCompile Include="GameManager.cpp" />
     <ClCompile Include="GameStateFactoryManager.cpp" />
     <ClCompile Include="HealthStats.cpp" />
+    <ClCompile Include="imguiWindows.cpp" />
     <ClCompile Include="LocalizationManager.cpp" />
     <ClCompile Include="LUA.cpp" />
     <ClCompile Include="main.cpp" />
@@ -53,6 +54,7 @@
     <ClInclude Include="ColonyUpgrades.h" />
     <ClInclude Include="ColonyZone.h" />
     <ClInclude Include="Faction.h" />
+    <ClInclude Include="imguiWindows.h" />
     <ClInclude Include="Inventory.h" />
     <ClInclude Include="LocalizationManager.h" />
     <ClInclude Include="LUA.h" />

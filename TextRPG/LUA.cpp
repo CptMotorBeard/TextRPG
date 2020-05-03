@@ -186,6 +186,24 @@ int lua_imguiBegin(lua_State* L)
 	return 0;
 }
 
+/// <summary> bool PushCharacterCreationWindow(Unit) </summary>
+int lua_PushCharacterCreationWindow(lua_State* L)
+{
+	if (lua_gettop(L) > 0)
+	{
+		if (lua_isuserdata(L, 1))
+		{
+			Unit* u = (Unit*)lua_touserdata(L, 1);
+			bool b = StateManager::GetInstance()->GetCurrentState()->PushCharacterCreationWindow(u);
+			lua_pushboolean(L, b);
+
+			return 1;
+		}		
+	}
+
+	return 0;
+}
+
 /// <summary>void ImGuiEnd()</summary>
 int lua_imguiEnd(lua_State* L)
 {
@@ -196,6 +214,22 @@ int lua_imguiEnd(lua_State* L)
 #pragma endregion
 
 #pragma region Engine
+/// <summary> Unit CreateNewLeader() </summary>
+int lua_CreateNewUnit(lua_State* L)
+{
+	Unit* u = new Unit();
+	lua_pushlightuserdata(L, u);
+	return 1;
+}
+
+/// <summary> Leader:Unit CreateNewLeader() </summary>
+int lua_CreateNewLeader(lua_State* L)
+{
+	Leader* u = new Leader();
+	lua_pushlightuserdata(L, u);
+	return 1;
+}
+
 /// <summary> table[width=, height=] GetScreenDimensions() </summary>
 int lua_GetScreenDimensions(lua_State* L)
 {
@@ -240,9 +274,12 @@ void LuaManager::InitializeNativeFunctions()
 
 	// IMGUI calls
 	lua_register(L, "ImGuiBegin", lua_imguiBegin);
+	lua_register(L, "PushCharacterCreationWindow", lua_PushCharacterCreationWindow);
 	lua_register(L, "ImGuiEnd", lua_imguiEnd);
 
 	// Engine calls
+	lua_register(L, "CreateNewUnit", lua_CreateNewUnit);
+	lua_register(L, "CreateNewLeader", lua_CreateNewLeader);
 	lua_register(L, "Shutdown", lua_Shutdown);
 	lua_register(L, "GetScreenDimensions", lua_GetScreenDimensions);
 }

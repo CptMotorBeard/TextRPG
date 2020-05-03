@@ -2,6 +2,7 @@
 #include "LocalizationManager.h"
 #include "GameManager.h"
 #include "SFML-manager.h"
+#include "imguiWindows.h"
 
 #include <fstream>
 
@@ -86,24 +87,15 @@ void State::Build()
 {
 	State::mCurrentRenderMode = State::RenderMode::Build;
 
-	if (mRebuild)
-	{
-		lua_State* L = LuaManager::GetLuaState();
-		mimguiBuild.clear();
+	lua_State* L = LuaManager::GetLuaState();
 
-		if (LuaManager::LuaOkay(L, luaL_loadfile(L, LUA_SOURCE.c_str())))
+	if (LuaManager::LuaOkay(L, luaL_loadfile(L, LUA_SOURCE.c_str())))
+	{
+		lua_getglobal(L, "Build");
+		if (lua_isfunction(L, -1))
 		{
-			lua_getglobal(L, "Build");
-			if (lua_isfunction(L, -1))
-			{
-				LuaManager::LuaOkay(L, lua_pcall(L, 0, 0, 0));
-			}
+			LuaManager::LuaOkay(L, lua_pcall(L, 0, 0, 0));
 		}
-	}
-
-	for (auto const &f : mimguiBuild)
-	{
-		f();
 	}
 
 	State::mCurrentRenderMode = State::RenderMode::NONE;
@@ -200,7 +192,17 @@ void State::imguiBegin(const char * text)
 		return;
 	}
 
-	mimguiBuild.push_back([text]() {ImGui::Begin(text); });
+	ImGui::Begin(text);
+}
+
+bool State::PushCharacterCreationWindow(Unit* character)
+{
+	if (mCurrentRenderMode != RenderMode::Build)
+	{
+		return false;
+	}
+
+	return imguiWindow::PushNewCharacterCreationWindow(character);
 }
 
 void State::imguiEnd()
@@ -210,7 +212,7 @@ void State::imguiEnd()
 		return;
 	}
 
-	mimguiBuild.push_back([]() {ImGui::End(); });
+	ImGui::End();
 }
 
 StateFactory::~StateFactory() {}

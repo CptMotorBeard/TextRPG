@@ -9,6 +9,7 @@
 #include "LUA.h"
 #include "SFML/Graphics.hpp"
 #include "SFML-extensions.h"
+#include "Unit.h"
 
 /*
 	All states must be declared as a StateType. All states must be declared as friend classes. We want the states to be able to initialize what state type they are
@@ -52,7 +53,6 @@ private:
 	
 	void HashFile();
 
-	std::vector< std::function<void(void)>> mimguiBuild;
 	std::vector<std::shared_ptr<sf::Drawable>> mAllDrawables;
 	std::vector<std::shared_ptr<sf_ext::SFML_Button>> mAllButtons;
 
@@ -84,6 +84,7 @@ public:
 	void AddText(std::string text, int fontSize, float locX, float locY);
 	void AddButton(std::string text, sf::FloatRect rect, std::string callbackName);
 	void imguiBegin(const char * text);
+	bool PushCharacterCreationWindow(Unit* character);
 	void imguiEnd();
 #pragma endregion
 
