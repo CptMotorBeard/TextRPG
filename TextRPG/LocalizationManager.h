@@ -2,6 +2,14 @@
 #include "BaseIncludes.h"
 #include "sqlite3.h"
 
+namespace LocalizationKey
+{
+	namespace ENTRY
+	{
+		const char* TITLE = "ENTRY_TITLE";
+	}
+}
+
 class LocalizationManager
 {
 public:

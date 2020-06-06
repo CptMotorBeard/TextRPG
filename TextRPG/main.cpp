@@ -115,7 +115,7 @@ int main()
 
 	StateManager& stateManager = StateManager::Init(new StateMainMenu());
 	
-	auto p = locManager.GetLocByKey("ENTRY_TITLE");
+	auto p = locManager.GetLocByKey(LocalizationKey::ENTRY::TITLE);
 	const char* windowTitle = p->c_str();
 
 	SFML_Manager& sfmlManager = SFML_Manager::Initialize(sf::VideoMode(640, 480), windowTitle);
