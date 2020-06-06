@@ -90,6 +90,9 @@ std::shared_ptr<State> StateManager::PopToBottom()
 std::vector<std::string> StateManager::AllStatesAsStrings()
 {
 	std::vector<std::string> ret;
+	ret.resize(mStates.size());
+
+	int index = 0;
 
 	for (auto const &state : mStates)
 	{
@@ -98,7 +101,8 @@ std::vector<std::string> StateManager::AllStatesAsStrings()
 
 		if (stateString != State::StateStringMap.end())
 		{
-			ret.push_back(stateString->second);
+			ret[index] = stateString->second;
+			++index;
 		}
 	}
 

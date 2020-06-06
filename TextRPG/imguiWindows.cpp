@@ -93,13 +93,17 @@ bool imguiWindow::PushNewCharacterCreationWindow(Unit* character)
 	ImGui::SetColumnWidth(2, 65);
 
 	static std::vector<bool*> skillsSelected;
-	for (auto& skill : Skill::AllSkills)
-	{
-		bool* b = new bool;
-		skillsSelected.push_back(b);
-	}
+	skillsSelected.resize(Skill::AllSkills.size());
 
 	int index = 0;
+
+	for (auto& skill : Skill::AllSkills)
+	{
+		skillsSelected[index] = new bool();
+		++index;
+	}
+
+	index = 0;
 	for (const auto& skill : Skill::AllSkills)
 	{
 		ImGui::Text(skill.second.ShortValue);
