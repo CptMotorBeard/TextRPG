@@ -1,16 +1,20 @@
 #include "DebugLogger.h"
 #include <regex>
 
-std::unique_ptr<DebugLogger> DebugLogger::mInstance = nullptr;
-
-DebugLogger* DebugLogger::GetInstance()
+DebugLogger& DebugLogger::GetInstance()
 {
+	static DebugLogger* mInstance = nullptr;
 	if (mInstance == nullptr)
 	{
-		mInstance = std::make_unique<DebugLogger>();
+		mInstance = new DebugLogger();
 	}
 
-	return mInstance.get();
+	return *mInstance;
+}
+
+void DebugLogger::Shutdown()
+{
+	delete this;
 }
 
 DebugLogger::DebugLogger()

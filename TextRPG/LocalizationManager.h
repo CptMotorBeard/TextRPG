@@ -9,16 +9,17 @@ public:
 	bool LocalizeData = true;	
 
 	LocalizationManager();
+	LocalizationManager(const LocalizationManager& other) = delete;
+
 	std::unique_ptr<std::string> GetLocByKey(const std::string& key);
 
-	static LocalizationManager* GetInstance();
-	static void Shutdown();
+	static LocalizationManager& GetInstance();
+	void Shutdown();
 
 private:
 	char mLanguage[3] = "en";
 
 	sqlite3* mLocalizationDatabase;
-	static std::unique_ptr<LocalizationManager> mInstance;
 
 	bool OpenDatabase(const char* databaseName);
 };

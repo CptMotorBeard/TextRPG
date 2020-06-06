@@ -1,21 +1,26 @@
 #include "GameManager.h"
 
-std::unique_ptr<GameManager> GameManager::mInstance = nullptr;
-
-GameManager* GameManager::GetInstance()
+GameManager& GameManager::GetInstance()
 {
+	static GameManager* mInstance = nullptr;
 	if (mInstance == nullptr)
 	{
-		mInstance = std::make_unique<GameManager>();
+		mInstance = new GameManager();
 
-		mInstance->mGlobalFont = std::make_unique<sf::Font>();
+		mInstance->mGlobalFont = new sf::Font();
 		mInstance->mGlobalFont->loadFromFile("Resources/Roboto Font/Roboto-Regular.ttf");
 	}
 
-	return mInstance.get();
+	return *mInstance;
+}
+
+void GameManager::Shutdown()
+{
+	delete mGlobalFont;
+	delete this;
 }
 
 sf::Font* GameManager::GetGlobalFont()
 {
-	return mGlobalFont.get();
+	return mGlobalFont;
 }

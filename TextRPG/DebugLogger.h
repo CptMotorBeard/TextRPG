@@ -17,13 +17,15 @@ private:
 	ImVector<int>       LineOffsets;
 	bool                AutoScroll;
 
-	static std::unique_ptr<DebugLogger> mInstance;
 	void LogMessage(LogLevel level, const char* msg, va_list args);
 
-public:
-	static DebugLogger* GetInstance();
-
 	DebugLogger();
+	DebugLogger(const DebugLogger& other) = delete;
+
+public:
+	static DebugLogger& GetInstance();
+	void Shutdown();
+	
 	void Clear();
 	void Draw();
 

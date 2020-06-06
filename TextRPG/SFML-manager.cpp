@@ -1,18 +1,23 @@
 #include "SFML-manager.h"
 
-std::unique_ptr<SFML_Manager> SFML_Manager::mInstance = nullptr;
+SFML_Manager* SFML_Manager::mInstance = nullptr;
 
-SFML_Manager* SFML_Manager::Initialize(const sf::VideoMode &mode, const sf::String& title)
+SFML_Manager& SFML_Manager::Initialize(const sf::VideoMode &mode, const sf::String& title)
 {
-	mInstance = std::make_unique<SFML_Manager>(mode, title);
+	mInstance = new SFML_Manager(mode, title);
 
-	return mInstance.get();
+	return *mInstance;
 }
 
-SFML_Manager* SFML_Manager::GetInstance()
+SFML_Manager& SFML_Manager::GetInstance()
 {
 	assert(mInstance != nullptr && "SFML_Manager was never initialized");
-	return mInstance.get();
+	return *mInstance;
+}
+
+void SFML_Manager::Shutdown()
+{
+	delete this;
 }
 
 SFML_Manager::SFML_Manager(const sf::VideoMode &mode, const sf::String& title)

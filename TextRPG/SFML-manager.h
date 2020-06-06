@@ -5,15 +5,22 @@
 class SFML_Manager
 {
 private:
-	static std::unique_ptr<SFML_Manager> mInstance;
+	
+	SFML_Manager() = delete;
+	SFML_Manager(const SFML_Manager& other) = delete;
+	SFML_Manager(const sf::VideoMode& mode, const sf::String& title);
+
+	static SFML_Manager* mInstance;
+
 public:
-	static SFML_Manager* Initialize(const sf::VideoMode &mode, const sf::String &title);
-	static SFML_Manager* GetInstance();
+	static SFML_Manager& Initialize(const sf::VideoMode &mode, const sf::String &title);
+	static SFML_Manager& GetInstance();
+
+	void Shutdown();
 
 	sf::RenderWindow Window;
 	sf::Clock DeltaClock;
 	bool WindowWasResized;
-
-	SFML_Manager(const sf::VideoMode &mode, const sf::String& title);
+	
 	bool ProcessEvents(sf::Event& sfEvent);
 };

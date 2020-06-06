@@ -75,7 +75,7 @@ int lua_AddText(lua_State* L)
 			locy = (float)lua_tonumber(L, 4);
 		}
 
-		StateManager::GetInstance()->GetCurrentState()->AddText(text, fontSize, locx, locy);
+		StateManager::GetInstance().GetCurrentState()->AddText(text, fontSize, locx, locy);
 	}
 
 	return 0;
@@ -127,7 +127,7 @@ int lua_AddButton(lua_State* L)
 		callbackName = lua_tostring(L, 3);
 	}
 
-	StateManager::GetInstance()->GetCurrentState()->AddButton(text, sf::FloatRect(locx, locy, width, height), callbackName);
+	StateManager::GetInstance().GetCurrentState()->AddButton(text, sf::FloatRect(locx, locy, width, height), callbackName);
 
 	return 0;
 }
@@ -146,7 +146,7 @@ int lua_PushGameState(lua_State* L)
 		}
 
 		State* newState = GameStateFactoryManager::GetInstance()->Create(state);
-		StateManager::GetInstance()->PushState(*newState);
+		StateManager::GetInstance().PushState(*newState);
 	}
 
 	return 0;
@@ -155,7 +155,7 @@ int lua_PushGameState(lua_State* L)
 /// <summary> void PopGameState() </summary>
 int lua_PopGameState(lua_State* L)
 {
-	StateManager::GetInstance()->PopState();
+	StateManager::GetInstance().PopState();
 
 	return 0;
 }
@@ -163,7 +163,7 @@ int lua_PopGameState(lua_State* L)
 /// <summary> void PopGameStateHome() </summary>
 int lua_PopGameStateHome(lua_State* L)
 {
-	StateManager::GetInstance()->PopToBottom();
+	StateManager::GetInstance().PopToBottom();
 
 	return 0;
 }
@@ -182,7 +182,7 @@ int lua_imguiBegin(lua_State* L)
 		}
 	}
 
-	StateManager::GetInstance()->GetCurrentState()->imguiBegin(text);
+	StateManager::GetInstance().GetCurrentState()->imguiBegin(text);
 
 	return 0;
 }
@@ -195,7 +195,7 @@ int lua_PushCharacterCreationWindow(lua_State* L)
 		if (lua_isuserdata(L, 1))
 		{
 			Unit* u = (Unit*)lua_touserdata(L, 1);
-			bool b = StateManager::GetInstance()->GetCurrentState()->PushCharacterCreationWindow(u);
+			bool b = StateManager::GetInstance().GetCurrentState()->PushCharacterCreationWindow(u);
 			lua_pushboolean(L, b);
 
 			return 1;
@@ -208,7 +208,7 @@ int lua_PushCharacterCreationWindow(lua_State* L)
 /// <summary>void ImGuiEnd()</summary>
 int lua_imguiEnd(lua_State* L)
 {
-	StateManager::GetInstance()->GetCurrentState()->imguiEnd();
+	StateManager::GetInstance().GetCurrentState()->imguiEnd();
 
 	return 0;
 }
@@ -237,7 +237,7 @@ int lua_GetScreenDimensions(lua_State* L)
 	lua_newtable(L);
 	int top = lua_gettop(L);
 
-	sf::Vector2u windowSize = SFML_Manager::GetInstance()->Window.getSize();
+	sf::Vector2u windowSize = SFML_Manager::GetInstance().Window.getSize();
 
 	std::string height = "width";
 	lua_pushlstring(L, height.c_str(), height.size());
@@ -255,7 +255,7 @@ int lua_GetScreenDimensions(lua_State* L)
 /// <summary> void Shutdown() </summary>
 int lua_Shutdown(lua_State* L)
 {
-	SFML_Manager::GetInstance()->Window.close();
+	SFML_Manager::GetInstance().Window.close();
 	return 0;
 }
 #pragma endregion

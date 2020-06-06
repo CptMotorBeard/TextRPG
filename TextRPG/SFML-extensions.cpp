@@ -29,7 +29,7 @@ namespace sf_ext
 		unsigned int fontSize = 12;
 		sf::Color fontColor = sf::Color::Black;
 
-		sf::Text t(string, *GameManager::GetInstance()->GetGlobalFont());
+		sf::Text t(string, *GameManager::GetInstance().GetGlobalFont());
 		t.setCharacterSize(fontSize);
 		t.setFillColor(fontColor);
 

@@ -1,15 +1,19 @@
 #pragma once
+
 #include "BaseIncludes.h"
 #include "SFML/Graphics.hpp"
 
 class GameManager
 {
-private:
-	static std::unique_ptr<GameManager> mInstance;
-	std::unique_ptr<sf::Font> mGlobalFont;
+private:	
+	sf::Font* mGlobalFont;
+
+	GameManager() {};
+	GameManager(const GameManager& other) = delete;
 
 public:
-	static GameManager* GetInstance();
+	static GameManager& GetInstance();
+	void Shutdown();
 
 	sf::Font* GetGlobalFont();
 };

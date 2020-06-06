@@ -1,6 +1,6 @@
 #include "StateManager.h"
 
-std::unique_ptr<StateManager> StateManager::mInstance = nullptr;
+StateManager* StateManager::mInstance = nullptr;
 
 bool StateManager::StateExists(const StateType &stateType)
 {
@@ -18,14 +18,6 @@ bool StateManager::StateExists(const StateType &stateType)
 StateManager::StateManager(State initialState)
 {
 	mStates.push_back(std::make_shared<State>(initialState));
-}
-
-StateManager::~StateManager()
-{
-	for (auto const &state : mStates)
-	{
-		assert(state.use_count() == 1);
-	}
 }
 
 std::shared_ptr<State> StateManager::GetCurrentState()
@@ -113,14 +105,25 @@ std::vector<std::string> StateManager::AllStatesAsStrings()
 	return ret;
 }
 
-StateManager* StateManager::Init(State initialState)
+StateManager& StateManager::Init(State initialState)
 {
 	assert(mInstance == nullptr && "Cannot initialize the state manager :: It is already initilized");
-	mInstance = std::make_unique<StateManager>(initialState);
-	return mInstance.get();
+	mInstance = new StateManager(initialState);
+	return *mInstance;
 }
 
-StateManager* StateManager::GetInstance()
+StateManager& StateManager::GetInstance()
 {
-	return mInstance.get();
+	assert(mInstance != nullptr && "Need to initialize the state manager");
+	return *mInstance;
 };
+
+void StateManager::Shutdown()
+{
+	for (auto const& state : mStates)
+	{
+		assert(state.use_count() == 1);
+	}
+
+	delete this;
+}

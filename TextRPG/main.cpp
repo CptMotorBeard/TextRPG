@@ -51,10 +51,10 @@ void CreateFrameDebugWindow(int32 dt)
 	ImGui::End();
 }
 
-void CreateStateManagerDebugWindow(StateManager* stateManager)
+void CreateStateManagerDebugWindow(StateManager& stateManager)
 {
 	ImGui::Begin("State Manager");
-	std::vector<std::string> allStates = stateManager->AllStatesAsStrings();
+	std::vector<std::string> allStates = stateManager.AllStatesAsStrings();
 
 	ImGui::BeginChild("All States", ImVec2(0, 100));
 	for (auto state = allStates.rbegin(); state != allStates.rend(); ++state)
@@ -79,8 +79,8 @@ void CreateStateManagerDebugWindow(StateManager* stateManager)
 					}
 				}
 
-				stateManager->PopToState(type);
-				DebugLogger::GetInstance()->LogMessage("Pop to state %s", stateString);
+				stateManager.PopToState(type);
+				DebugLogger::GetInstance().LogMessage("Pop to state %s", stateString);
 			}
 		}
 	}
@@ -96,9 +96,9 @@ void CreateStateManagerDebugWindow(StateManager* stateManager)
 		if (ImGui::Selectable(statePair.second.c_str()))
 		{
 			std::string luafile = "Resources/LUA/" + statePair.second + ".lua";
-			stateManager->PushState(State(statePair.first, luafile.c_str()));
+			stateManager.PushState(State(statePair.first, luafile.c_str()));
 
-			DebugLogger::GetInstance()->LogMessage("Push state %s", statePair.second.c_str());
+			DebugLogger::GetInstance().LogMessage("Push state %s", statePair.second.c_str());
 		}
 		ImGui::NextColumn();
 	}
@@ -109,41 +109,40 @@ void CreateStateManagerDebugWindow(StateManager* stateManager)
 
 int main()
 {
-	DebugLogger* debugLogger = DebugLogger::GetInstance();
-	GameManager* gameManager = GameManager::GetInstance();
-	LocalizationManager* locManager = LocalizationManager::GetInstance();
-	StateManager* stateManager = StateManager::Init(StateMainMenu());	
-	SFML_Manager* sfmlManager;
+	DebugLogger& debugLogger = DebugLogger::GetInstance();
+	GameManager& gameManager = GameManager::GetInstance();
+	LocalizationManager& locManager = LocalizationManager::GetInstance();
+	StateManager& stateManager = StateManager::Init(StateMainMenu());
 	
-	auto p = locManager->GetLocByKey("ENTRY_TITLE");
+	auto p = locManager.GetLocByKey("ENTRY_TITLE");
 	const char* windowTitle = p->c_str();
 
-	sfmlManager = SFML_Manager::Initialize(sf::VideoMode(640, 480), windowTitle);
-	ImGui::SFML::Init(sfmlManager->Window);
+	SFML_Manager& sfmlManager = SFML_Manager::Initialize(sf::VideoMode(640, 480), windowTitle);
+	ImGui::SFML::Init(sfmlManager.Window);
 
 	bool debugWindow = false;
 
 	sf::Color bgColor;
 	float color[3] = { 0.f, 0.f, 0.f };
 
-	sfmlManager->Window.resetGLStates();
+	sfmlManager.Window.resetGLStates();
 
 	ImGuiIO& io = ImGui::GetIO();
 
 	ImFont* pImguiRoboto = ImGui::GetIO().Fonts->AddFontFromFileTTF("Resources/Roboto Font/Roboto-Regular.ttf", 18);
 	ImGui::SFML::UpdateFontTexture();
 
-	sfmlManager->Window.setFramerateLimit(24);
+	sfmlManager.Window.setFramerateLimit(24);
 
 	io.FontDefault = pImguiRoboto;
 
-	while (sfmlManager->Window.isOpen())
+	while (sfmlManager.Window.isOpen())
 	{
 		sf::Event sfEvent;
-		while (sfmlManager->ProcessEvents(sfEvent))
+		while (sfmlManager.ProcessEvents(sfEvent))
 		{
 			ImGui::SFML::ProcessEvent(sfEvent);
-			stateManager->GetCurrentState()->ProcessEvents(sfEvent);			
+			stateManager.GetCurrentState()->ProcessEvents(sfEvent);			
 			if (sfEvent.type == sf::Event::KeyReleased)
 			{
 				if (sfEvent.key.code == sf::Keyboard::Tilde)
@@ -154,27 +153,27 @@ int main()
 		}
 
 		// All widgets must be created between update and render
-		int32 deltaTime = sfmlManager->DeltaClock.getElapsedTime().asMilliseconds();
-		ImGui::SFML::Update(sfmlManager->Window, sfmlManager->DeltaClock.restart());
+		int32 deltaTime = sfmlManager.DeltaClock.getElapsedTime().asMilliseconds();
+		ImGui::SFML::Update(sfmlManager.Window, sfmlManager.DeltaClock.restart());
 		if (ImGui::BeginMainMenuBar())
 		{
 			if (ImGui::BeginMenu("File"))
 			{
 				if (ImGui::MenuItem("Main Menu"))
 				{
-					stateManager->PopToBottom();
+					stateManager.PopToBottom();
 				}
 				if (ImGui::MenuItem("Save Game"))
 				{
-					stateManager->PushState(StateSaveGame());
+					stateManager.PushState(StateSaveGame());
 				}
 				if (ImGui::MenuItem("Load Game"))
 				{
-					stateManager->PushState(StateLoadGame());
+					stateManager.PushState(StateLoadGame());
 				}
 				if (ImGui::MenuItem("Quit"))
 				{
-					sfmlManager->Window.close();
+					sfmlManager.Window.close();
 				}
 
 				ImGui::EndMenu();
@@ -182,25 +181,31 @@ int main()
 			ImGui::EndMainMenuBar();
 		}
 		
-		stateManager->GetCurrentState()->Build();
+		stateManager.GetCurrentState()->Build();
 		
 		if (debugWindow)
 		{
 			CreateStateManagerDebugWindow(stateManager);
 			CreateFrameDebugWindow(deltaTime);
-			debugLogger->Draw();
+			debugLogger.Draw();
 		}
 
-		sfmlManager->Window.clear(bgColor);
+		sfmlManager.Window.clear(bgColor);
 		ImGui::ShowDemoWindow();
-		stateManager->GetCurrentState()->Render(sfmlManager->Window);
-		ImGui::SFML::Render(sfmlManager->Window);
-		sfmlManager->Window.display();
+		stateManager.GetCurrentState()->Render(sfmlManager.Window);
+		ImGui::SFML::Render(sfmlManager.Window);
+		sfmlManager.Window.display();
 
-		stateManager->GetCurrentState()->RecalculateHash();
+		stateManager.GetCurrentState()->RecalculateHash();
 	}
 
 	ImGui::SFML::Shutdown();
-	LocalizationManager::Shutdown();
+	
+
+	debugLogger.Shutdown();
+	gameManager.Shutdown();
+	locManager.Shutdown();
+	stateManager.Shutdown();
+
 	LuaManager::Shutdown();
 }

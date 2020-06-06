@@ -6,14 +6,18 @@
 class StateManager
 {
 private:
-	static std::unique_ptr<StateManager> mInstance;
 	std::vector<std::shared_ptr<State>> mStates;
 
 	bool StateExists(const StateType &stateType);
 
-public:
+	StateManager() = delete;
+	StateManager(const StateManager& other) = delete;
 	StateManager(State initialState);
-	~StateManager();
+
+	static StateManager* mInstance;
+
+public:	
+	void Shutdown();
 
 	std::shared_ptr<State> GetCurrentState();
 
@@ -35,7 +39,7 @@ public:
 	std::vector<std::string> AllStatesAsStrings();
 
 	// Singleton
-	static StateManager* Init(State initialState);
+	static StateManager& Init(State initialState);
 
-	static StateManager* GetInstance();
+	static StateManager& GetInstance();
 };

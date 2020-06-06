@@ -1,7 +1,5 @@
 #include "LocalizationManager.h"
 
-std::unique_ptr<LocalizationManager> LocalizationManager::mInstance = nullptr;
-
 namespace SQLOperations
 {
 	namespace Query
@@ -22,19 +20,21 @@ LocalizationManager::LocalizationManager()
 	OpenDatabase(LocalizationManager::kLOC_DB);
 };
 
-LocalizationManager* LocalizationManager::GetInstance()
+LocalizationManager& LocalizationManager::GetInstance()
 {
+	LocalizationManager* mInstance = nullptr;
 	if (mInstance == nullptr)
 	{
-		mInstance = std::make_unique<LocalizationManager>();
+		mInstance = new LocalizationManager();
 	}
 
-	return mInstance.get();
+	return *mInstance;
 }
 
 void LocalizationManager::Shutdown()
 {
-	sqlite3_close(mInstance->mLocalizationDatabase);
+	sqlite3_close(mLocalizationDatabase);
+	delete this;
 }
 
 bool LocalizationManager::OpenDatabase(const char* databaseName)

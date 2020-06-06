@@ -139,7 +139,7 @@ void State::Render(sf::RenderTarget& target)
 
 void State::ProcessEvents(const sf::Event &sfEvent)
 {
-	if (SFML_Manager::GetInstance()->WindowWasResized)
+	if (SFML_Manager::GetInstance().WindowWasResized)
 	{
 		mRebuild = true;
 	}
@@ -159,9 +159,9 @@ void State::AddText(std::string text, int fontSize, float locx, float locy)
 
 	sf::Text t;
 
-	auto localizedText = LocalizationManager::GetInstance()->GetLocByKey(text);
-	t.setString(*localizedText);
-	t.setFont(*GameManager::GetInstance()->GetGlobalFont());
+	auto localizedText = LocalizationManager::GetInstance().GetLocByKey(text);
+	t.setString(*localizedText);	
+	t.setFont(*GameManager::GetInstance().GetGlobalFont());
 	t.setFillColor(sf::Color::Red);
 	t.setCharacterSize(fontSize);
 	t.setPosition(locx, locy);
@@ -176,7 +176,7 @@ void State::AddButton(std::string text, sf::FloatRect rect, std::string callback
 		return;
 	}
 
-	auto localizedText = LocalizationManager::GetInstance()->GetLocByKey(text);
+	auto localizedText = LocalizationManager::GetInstance().GetLocByKey(text);
 
 	sf_ext::SFML_Button b(*localizedText, rect,
 		[=]() {
