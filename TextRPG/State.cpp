@@ -59,7 +59,7 @@ void State::HashFile()
 	file.close();
 }
 
-const StateType& State::GetStateType()
+const StateType& State::GetStateType() const
 {
 	return mStateType;
 }

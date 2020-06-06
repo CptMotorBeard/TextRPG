@@ -15,9 +15,9 @@ bool StateManager::StateExists(const StateType &stateType)
 	return false;
 }
 
-StateManager::StateManager(State initialState)
+StateManager::StateManager(State* initialState)
 {
-	mStates.push_back(std::make_shared<State>(initialState));
+	mStates.emplace_back(initialState);
 }
 
 std::shared_ptr<State> StateManager::GetCurrentState()
@@ -25,19 +25,19 @@ std::shared_ptr<State> StateManager::GetCurrentState()
 	return mStates.back();
 }
 
-void StateManager::PushState(State newState)
+void StateManager::PushState(State* newState)
 {
-	std::shared_ptr<State> stateExists = PopToState(newState.GetStateType());
+	std::shared_ptr<State> stateExists = PopToState(newState->GetStateType());
 	if (stateExists != nullptr)
 	{
 		PopState();
 	}
 
-	if (newState.GetStateType() != GetCurrentState()->GetStateType())
+	if (newState->GetStateType() != GetCurrentState()->GetStateType())
 	{
-		mStates.push_back(std::make_unique<State>(newState));
+		mStates.emplace_back(newState);
 		GetCurrentState()->ForceRebuild();
-	}	
+	}
 }
 
 std::shared_ptr<State> StateManager::PopState(bool rebuild)
@@ -72,7 +72,7 @@ std::shared_ptr<State> StateManager::PopToState(StateType stateType)
 	return nullptr;
 }
 
-std::shared_ptr<State> StateManager::PopToState(State state)
+std::shared_ptr<State> StateManager::PopToState(const State &state)
 {
 	return PopToState(state.GetStateType());
 }
@@ -105,7 +105,7 @@ std::vector<std::string> StateManager::AllStatesAsStrings()
 	return ret;
 }
 
-StateManager& StateManager::Init(State initialState)
+StateManager& StateManager::Init(State* initialState)
 {
 	assert(mInstance == nullptr && "Cannot initialize the state manager :: It is already initilized");
 	mInstance = new StateManager(initialState);

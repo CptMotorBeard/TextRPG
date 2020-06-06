@@ -2,13 +2,13 @@
 
 #include "GameStates.h"
 
-std::unique_ptr<GameStateFactoryManager> GameStateFactoryManager::mInstance = nullptr;
-
-GameStateFactoryManager* GameStateFactoryManager::GetInstance()
+GameStateFactoryManager& GameStateFactoryManager::GetInstance()
 {
+	static GameStateFactoryManager* mInstance = nullptr;
+
 	if (mInstance == nullptr)
 	{
-		mInstance = std::make_unique<GameStateFactoryManager>();
+		mInstance = new GameStateFactoryManager();
 
 		// Initialize all of the factories
 		REGISTER_FACTORY(BuildingUpgrades);
@@ -27,12 +27,12 @@ GameStateFactoryManager* GameStateFactoryManager::GetInstance()
 		REGISTER_FACTORY(WorldOverview);
 	}
 
-	return mInstance.get();
+	return *mInstance;
 }
 
 void GameStateFactoryManager::RegisterFactory(const std::string &stateType, StateFactory* stateFactory)
 {
-	mFactories.insert(std::pair<std::string, std::unique_ptr<StateFactory>>(stateType, stateFactory->make_unique()));
+	mFactories.insert(std::pair<std::string, StateFactory*>(stateType, stateFactory));
 }
 
 State* GameStateFactoryManager::Create(const std::string &stateType)
@@ -44,4 +44,15 @@ State* GameStateFactoryManager::Create(const std::string &stateType)
 	}
 
 	return nullptr;
+}
+
+void GameStateFactoryManager::Shutdown()
+{
+	for (const auto& pair : mFactories)
+	{
+		delete pair.second;
+	}
+
+	mFactories.clear();
+	delete this;
 }

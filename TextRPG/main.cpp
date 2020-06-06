@@ -95,8 +95,8 @@ void CreateStateManagerDebugWindow(StateManager& stateManager)
 	{
 		if (ImGui::Selectable(statePair.second.c_str()))
 		{
-			std::string luafile = "Resources/LUA/" + statePair.second + ".lua";
-			stateManager.PushState(State(statePair.first, luafile.c_str()));
+			std::string luafile = "Resources/LUA/" + statePair.second + ".lua";			
+			stateManager.PushState(new State(statePair.first, luafile.c_str()));
 
 			DebugLogger::GetInstance().LogMessage("Push state %s", statePair.second.c_str());
 		}
@@ -112,7 +112,8 @@ int main()
 	DebugLogger& debugLogger = DebugLogger::GetInstance();
 	GameManager& gameManager = GameManager::GetInstance();
 	LocalizationManager& locManager = LocalizationManager::GetInstance();
-	StateManager& stateManager = StateManager::Init(StateMainMenu());
+
+	StateManager& stateManager = StateManager::Init(new StateMainMenu());
 	
 	auto p = locManager.GetLocByKey("ENTRY_TITLE");
 	const char* windowTitle = p->c_str();
@@ -165,11 +166,11 @@ int main()
 				}
 				if (ImGui::MenuItem("Save Game"))
 				{
-					stateManager.PushState(StateSaveGame());
+					stateManager.PushState(new StateSaveGame());
 				}
 				if (ImGui::MenuItem("Load Game"))
 				{
-					stateManager.PushState(StateLoadGame());
+					stateManager.PushState(new StateLoadGame());
 				}
 				if (ImGui::MenuItem("Quit"))
 				{
@@ -199,8 +200,7 @@ int main()
 		stateManager.GetCurrentState()->RecalculateHash();
 	}
 
-	ImGui::SFML::Shutdown();
-	
+	ImGui::SFML::Shutdown();	
 
 	debugLogger.Shutdown();
 	gameManager.Shutdown();

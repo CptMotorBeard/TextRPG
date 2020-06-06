@@ -60,8 +60,8 @@ public:
 	static const std::map<StateType, std::string> StateStringMap;
 
 	State(StateType stateType, const std::string &lua_source);
-	State() : State(StateType::DEFAULT, "") {};	
-	const StateType& GetStateType();	
+	State() : State(StateType::DEFAULT, "") {};
+	const StateType& GetStateType() const;
 
 	virtual ~State() {};
 
@@ -89,7 +89,6 @@ class StateFactory
 {
 public:
 	virtual State* Create() = 0;
-	virtual std::unique_ptr<StateFactory> make_unique() = 0;
 	virtual ~StateFactory() = 0;
 };
 
@@ -107,11 +106,6 @@ public:	\
 	{	\
 		return new stateName();	\
 	};	\
-\
-	virtual std::unique_ptr<StateFactory> make_unique() override	\
-	{	\
-		return std::make_unique<stateName##Factory>(*this);	\
-	}	\
 \
 	virtual ~stateName##Factory() override	\
 	{	\

@@ -145,8 +145,7 @@ int lua_PushGameState(lua_State* L)
 			state = lua_tostring(L, 1);
 		}
 
-		State* newState = GameStateFactoryManager::GetInstance()->Create(state);
-		StateManager::GetInstance().PushState(*newState);
+		StateManager::GetInstance().PushState(GameStateFactoryManager::GetInstance().Create(state));
 	}
 
 	return 0;
@@ -287,5 +286,6 @@ void LuaManager::InitializeNativeFunctions()
 
 void LuaManager::Shutdown()
 {
+	GameStateFactoryManager::GetInstance().Shutdown();
 	lua_close(L);
 }

@@ -8,10 +8,10 @@
 class GameStateFactoryManager
 {
 private:
-	static std::unique_ptr<GameStateFactoryManager> mInstance;
-	std::unordered_map<std::string, std::unique_ptr<StateFactory>> mFactories;
+	std::unordered_map<std::string, StateFactory*> mFactories;
 public:
-	static GameStateFactoryManager* GetInstance();
+	static GameStateFactoryManager& GetInstance();
+	void Shutdown();
 
 	void RegisterFactory(const std::string &stateType, StateFactory* stateFactory);
 	State* Create(const std::string &stateType);
