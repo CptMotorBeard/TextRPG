@@ -19,11 +19,11 @@ namespace sf_ext
 
 		std::function<void(void)> mCallback;
 
-		void SetupButton(const sf::Text &text, const sf::FloatRect &rect, std::function<void(void)>& callback, const sf::Color &backColour = sf::Color::White);
+		void SetupButton(const sf::Text &text, const sf::FloatRect &rect, std::function<void(void)> callback, const sf::Color &backColour = sf::Color::White);
 
 	public:
-		SFML_Button(const std::string &string, const sf::FloatRect &rect, std::function<void(void)>& callback, const sf::Color &backColour = sf::Color::White);
-		SFML_Button(const sf::Text &text, const sf::FloatRect &rect, std::function<void(void)>& callback, const sf::Color &backColour = sf::Color::White);
+		SFML_Button(const std::string &string, const sf::FloatRect &rect, std::function<void(void)> callback, const sf::Color &backColour = sf::Color::White);
+		SFML_Button(const sf::Text &text, const sf::FloatRect &rect, std::function<void(void)> callback, const sf::Color &backColour = sf::Color::White);
 
 		void Draw(sf::RenderTarget& target) const;
 

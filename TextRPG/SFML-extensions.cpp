@@ -4,7 +4,7 @@
 
 namespace sf_ext
 {
-	void SFML_Button::SetupButton(const sf::Text &text, const sf::FloatRect &rect, std::function<void(void)>& callback, const sf::Color &backColour)
+	void SFML_Button::SetupButton(const sf::Text &text, const sf::FloatRect &rect, std::function<void(void)> callback, const sf::Color &backColour)
 	{
 		mButtonHitbox = rect;
 		mButtonColour = backColour;
@@ -24,7 +24,7 @@ namespace sf_ext
 		mCallback = callback;
 	}
 
-	SFML_Button::SFML_Button(const std::string &string, const sf::FloatRect &rect, std::function<void(void)>& callback, const sf::Color &backColour)
+	SFML_Button::SFML_Button(const std::string &string, const sf::FloatRect &rect, std::function<void(void)> callback, const sf::Color &backColour)
 	{
 		unsigned int fontSize = 12;
 		sf::Color fontColor = sf::Color::Black;
@@ -36,7 +36,7 @@ namespace sf_ext
 		SetupButton(t, rect, callback, backColour);
 	};
 
-	SFML_Button::SFML_Button(const sf::Text &text, const sf::FloatRect &rect, std::function<void(void)>& callback, const sf::Color &backColour)
+	SFML_Button::SFML_Button(const sf::Text &text, const sf::FloatRect &rect, std::function<void(void)> callback, const sf::Color &backColour)
 	{
 		SetupButton(text, rect, callback, backColour);
 	};
