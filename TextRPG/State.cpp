@@ -157,16 +157,16 @@ void State::AddText(std::string text, int fontSize, float locx, float locy)
 		return;
 	}
 
-	sf::Text t;
+	sf::Text* t = new sf::Text();
 
 	auto localizedText = LocalizationManager::GetInstance().GetLocByKey(text);
-	t.setString(*localizedText);	
-	t.setFont(*GameManager::GetInstance().GetGlobalFont());
-	t.setFillColor(sf::Color::Red);
-	t.setCharacterSize(fontSize);
-	t.setPosition(locx, locy);
+	t->setString(*localizedText);	
+	t->setFont(*GameManager::GetInstance().GetGlobalFont());
+	t->setFillColor(sf::Color::Red);
+	t->setCharacterSize(fontSize);
+	t->setPosition(locx, locy);
 
-	mAllDrawables.push_back(std::make_shared<sf::Text>(t));
+	mAllDrawables.emplace_back(t);
 }
 
 void State::AddButton(std::string text, sf::FloatRect rect, std::string callbackName)
@@ -178,13 +178,13 @@ void State::AddButton(std::string text, sf::FloatRect rect, std::string callback
 
 	auto localizedText = LocalizationManager::GetInstance().GetLocByKey(text);
 
-	sf_ext::SFML_Button b(*localizedText, rect,
+	sf_ext::SFML_Button *b = new sf_ext::SFML_Button(*localizedText, rect,
 		[=]() {
 		LuaManager::CallbackFunction(callbackName, LUA_SOURCE.c_str());
 		}
 	);
 
-	mAllButtons.push_back(std::make_shared<sf_ext::SFML_Button>(b));
+	mAllButtons.emplace_back(b);
 }
 
 void State::imguiBegin(const char * text)
