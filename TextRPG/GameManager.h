@@ -8,7 +8,7 @@ class GameManager
 private:	
 	sf::Font* mGlobalFont;
 
-	GameManager() {};
+	GameManager();
 	GameManager(const GameManager& other) = delete;
 
 public:

@@ -1,6 +1,6 @@
 #include "UnitStatus.h"
 
-UnitStatus::UnitStatus(uint16 startingAge)
+UnitStatus::UnitStatus(const uint16& startingAge)
 {
 	UnitStatus::UnitHealth = HealthStats(startingAge);
 

@@ -20,6 +20,11 @@ void GameManager::Shutdown()
 	delete this;
 }
 
+GameManager::GameManager()
+{
+	mGlobalFont = nullptr;
+}
+
 sf::Font* GameManager::GetGlobalFont()
 {
 	return mGlobalFont;

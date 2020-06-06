@@ -14,13 +14,13 @@ private:
 
 public:
 	Stat() {};
-	Stat(const E &statType, uint16 startingValue)
+	Stat(const E& statType, const uint16& startingValue)
 	{
 		mStatType = statType;
 		mBaseValue = startingValue;
 	};
 
-	int16 GetTotalModifier()
+	int16 GetTotalModifier() const
 	{
 		int16 total = 0;
 		for (auto const &attributeModifier : Stat::mModifiers)
@@ -31,24 +31,24 @@ public:
 		return total;
 	};
 
-	const uint16& GetBaseValue()
+	const uint16& GetBaseValue() const
 	{
 		return mBaseValue;
 	};
 
-	uint16 GetValue()
+	uint16 GetValue() const
 	{
 		int16 modifier = GetTotalModifier();
 		return mBaseValue + modifier;
 	};
 
-	uint16 AddModifier(int8 modifier)
+	uint16 AddModifier(const int8& modifier)
 	{
 		mModifiers.push_back(modifier);
 		return GetValue();
 	};
 
-	uint16 RemoveModifier(int8 modifier)
+	uint16 RemoveModifier(const int8& modifier)
 	{
 		auto position = std::find(mModifiers.begin(), mModifiers.end(), modifier);
 		if (position != mModifiers.end())

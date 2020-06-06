@@ -59,7 +59,7 @@ private:
 public:	
 	static const std::map<StateType, std::string> StateStringMap;
 
-	State(StateType stateType, const std::string &lua_source);
+	State(const StateType& stateType, const std::string &lua_source);
 	State() : State(StateType::DEFAULT, "") {};
 	const StateType& GetStateType() const;
 
@@ -76,8 +76,8 @@ public:
 	virtual void Render(sf::RenderTarget &target);
 
 #pragma region LUA Blocks
-	void AddText(std::string text, int fontSize, float locX, float locY);
-	void AddButton(std::string text, sf::FloatRect rect, std::string callbackName);
+	void AddText(const std::string& text, const int& fontSize, const float& locX, const float& locY);
+	void AddButton(const std::string& text, const sf::FloatRect& rect, const std::string& callbackName);
 	void imguiBegin(const char * text);
 	bool PushCharacterCreationWindow(Unit* character);
 	void imguiEnd();

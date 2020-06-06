@@ -178,7 +178,7 @@ void DebugLogger::Draw()
 	ImGui::End();
 }
 
-void DebugLogger::LogMessage(LogLevel level, const char* msg, va_list args)
+void DebugLogger::LogMessage(const LogLevel& level, const char* msg, va_list args)
 {
 	int old_size = Buffer.size();
 

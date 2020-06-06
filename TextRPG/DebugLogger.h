@@ -17,7 +17,7 @@ private:
 	ImVector<int>       LineOffsets;
 	bool                AutoScroll;
 
-	void LogMessage(LogLevel level, const char* msg, va_list args);
+	void LogMessage(const LogLevel& level, const char* msg, va_list args);
 
 	DebugLogger();
 	DebugLogger(const DebugLogger& other) = delete;

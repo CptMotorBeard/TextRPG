@@ -2,7 +2,7 @@
 
 StateManager* StateManager::mInstance = nullptr;
 
-bool StateManager::StateExists(const StateType &stateType)
+bool StateManager::StateExists(const StateType &stateType) const
 {
 	for (auto const& state : mStates)
 	{
@@ -20,7 +20,7 @@ StateManager::StateManager(State* initialState)
 	mStates.emplace_back(initialState);
 }
 
-std::shared_ptr<State> StateManager::GetCurrentState()
+std::shared_ptr<State> StateManager::GetCurrentState() const
 {	
 	return mStates.back();
 }
@@ -56,7 +56,7 @@ std::shared_ptr<State> StateManager::PopState(bool rebuild)
 	return topState;
 }
 
-std::shared_ptr<State> StateManager::PopToState(StateType stateType)
+std::shared_ptr<State> StateManager::PopToState(const StateType& stateType)
 {
 	if (StateExists(stateType))
 	{
@@ -87,7 +87,7 @@ std::shared_ptr<State> StateManager::PopToBottom()
 	return GetCurrentState();
 }
 
-std::vector<std::string> StateManager::AllStatesAsStrings()
+std::vector<std::string> StateManager::AllStatesAsStrings() const
 {
 	std::vector<std::string> ret;
 	ret.resize(mStates.size());

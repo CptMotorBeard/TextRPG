@@ -17,12 +17,12 @@ public:
 	Inventory UnitInventory;
 
 	Unit() : Unit(0, 0, 0) {};
-	Unit(uint16 startingAge, uint8 startingHeight, uint8 startingWeight);
+	Unit(const uint16& startingAge, const uint8& startingHeight, const uint8& startingWeight);
 };
 
 class Leader : public Unit
 {
 public:
 	Leader() : Leader(0, 0, 0) {};
-	Leader(uint16 startingAge, uint8 startingHeight, uint8 startingWeight) : Unit(startingAge, startingHeight, startingWeight) {};
+	Leader(const uint16& startingAge, const uint8& startingHeight, const uint8& startingWeight) : Unit(startingAge, startingHeight, startingWeight) {};
 };

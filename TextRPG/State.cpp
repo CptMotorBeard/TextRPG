@@ -26,7 +26,7 @@ const std::map<StateType, std::string> State::StateStringMap
 	STATE_STRING_MAP_ITEM(StateUnitUpgrades)
 };
 
-State::State(StateType stateType, const std::string &lua_source)
+State::State(const StateType& stateType, const std::string &lua_source)
 {
 	State::mStateType = stateType;
 	State::mCurrentRenderMode = State::RenderMode::NONE;
@@ -150,7 +150,7 @@ void State::ProcessEvents(const sf::Event &sfEvent)
 	}
 }
 
-void State::AddText(std::string text, int fontSize, float locx, float locy)
+void State::AddText(const std::string& text, const int& fontSize, const float& locx, const float& locy)
 {
 	if (mCurrentRenderMode != RenderMode::Render)
 	{
@@ -169,7 +169,7 @@ void State::AddText(std::string text, int fontSize, float locx, float locy)
 	mAllDrawables.emplace_back(t);
 }
 
-void State::AddButton(std::string text, sf::FloatRect rect, std::string callbackName)
+void State::AddButton(const std::string& text, const sf::FloatRect& rect, const std::string& callbackName)
 {
 	if (mCurrentRenderMode != RenderMode::Render)
 	{

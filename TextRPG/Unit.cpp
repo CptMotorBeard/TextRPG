@@ -1,6 +1,6 @@
 #include "Unit.h"
 
-Unit::Unit(uint16 startingAge, uint8 startingHeight, uint8 startingWeight)
+Unit::Unit(const uint16& startingAge, const uint8& startingHeight, const uint8& startingWeight)
 {
 	Unit::Name = "";
 
