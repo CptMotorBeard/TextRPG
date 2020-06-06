@@ -1,4 +1,5 @@
 #include "GameManager.h"
+
 std::unique_ptr<GameManager> GameManager::mInstance = nullptr;
 
 GameManager* GameManager::GetInstance()

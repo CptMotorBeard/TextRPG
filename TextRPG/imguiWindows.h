@@ -1,5 +1,6 @@
 #pragma once
-#include "Unit.h"
+
+class Unit;
 
 namespace imguiWindow
 {

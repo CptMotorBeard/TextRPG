@@ -1,15 +1,10 @@
 #pragma once
 
-#include <functional>
-
 #include "BaseIncludes.h"
 
-#include "imgui.h"
-#include "imgui-SFML.h"
-#include "LUA.h"
-#include "SFML/Graphics.hpp"
 #include "SFML-extensions.h"
-#include "Unit.h"
+
+class Unit;
 
 /*
 	All states must be declared as a StateType. All states must be declared as friend classes. We want the states to be able to initialize what state type they are

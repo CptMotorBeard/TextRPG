@@ -1,7 +1,7 @@
 #pragma once
+#include "Inventory.h"
 #include "UnitStatus.h"
 #include "UnitTraits.h"
-#include "Inventory.h"
 
 class Unit
 {

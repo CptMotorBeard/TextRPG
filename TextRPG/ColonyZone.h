@@ -1,5 +1,6 @@
 #pragma once
 #include "BaseIncludes.h"
+
 #include "ColonyBuildings.h"
 
 class ColonyZone

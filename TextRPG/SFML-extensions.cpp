@@ -1,4 +1,5 @@
 #include "SFML-extensions.h"
+
 #include "GameManager.h"
 
 namespace sf_ext

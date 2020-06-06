@@ -1,5 +1,6 @@
 #include "imguiWindows.h"
 #include "imgui.h"
+#include "Unit.h"
 
 bool imguiWindow::PushNewCharacterCreationWindow(Unit* character)
 {

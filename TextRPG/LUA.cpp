@@ -2,6 +2,7 @@
 #include "GameStates.h"
 #include "GameStateFactoryManager.h"
 #include "SFML-manager.h"
+#include "Unit.h"
 
 lua_State *LuaManager::L = nullptr;
 

@@ -1,7 +1,6 @@
 #pragma once
 #include "BaseIncludes.h"
 #include "SFML/Graphics.hpp"
-#include "SFML/System/Clock.hpp"
 
 class SFML_Manager
 {

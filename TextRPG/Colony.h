@@ -1,8 +1,9 @@
 #pragma once
 
 #include "BaseIncludes.h"
-#include "ColonyZone.h"
+
 #include "ColonyUpgrades.h"
+#include "ColonyZone.h"
 #include "Resources.h"
 
 class Colony

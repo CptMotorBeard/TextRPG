@@ -1,7 +1,8 @@
 #pragma once
 #include "BaseIncludes.h"
-#include "Stats.h"
+
 #include "HealthStats.h"
+#include "Stats.h"
 
 class UnitStatus
 {

@@ -1,5 +1,6 @@
 #pragma once
 #include "BaseIncludes.h"
+
 #include "State.h"
 
 #define REGISTER_FACTORY(FactoryString) mInstance->RegisterFactory(#FactoryString, new State##FactoryString##Factory())

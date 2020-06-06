@@ -1,8 +1,8 @@
 #pragma once
-#include <functional>
-
 #include "BaseIncludes.h"
+
 #include "SFML/Graphics.hpp"
+#include <functional>
 
 namespace sf_ext
 {

@@ -1,4 +1,5 @@
 #include "GameStateFactoryManager.h"
+
 #include "GameStates.h"
 
 std::unique_ptr<GameStateFactoryManager> GameStateFactoryManager::mInstance = nullptr;
