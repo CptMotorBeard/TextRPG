@@ -26,6 +26,10 @@
 		void PopGameState()
 		void PopGameStateHome()
 		
+	-- Game Management --
+		void SaveGame(int saveFile)
+		void LoadGame(int saveFile)
+		
 	-- ImGui --
 		void ImGuiBegin(string title)
 		void ImGuiEnd()

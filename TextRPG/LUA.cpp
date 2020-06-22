@@ -1,4 +1,5 @@
 #include "LUA.h"
+#include "GameManager.h"
 #include "GameStates.h"
 #include "GameStateFactoryManager.h"
 #include "SFML-manager.h"
@@ -213,6 +214,36 @@ int lua_imguiEnd(lua_State* L)
 }
 #pragma endregion
 
+#pragma region Game Calls
+int lua_SaveGame(lua_State* L)
+{
+	if (lua_gettop(L) >= 1)
+	{
+		if (lua_isinteger(L, 1))
+		{
+			int saveFile = lua_tointeger(L, 1);
+			GameManager::GetInstance().SaveGame(saveFile);
+		}
+	}
+
+	return 0;
+}
+
+int lua_LoadGame(lua_State* L)
+{
+	if (lua_gettop(L) >= 1)
+	{
+		if (lua_isinteger(L, 1))
+		{
+			int saveFile = lua_tointeger(L, 1);
+			GameManager::GetInstance().LoadGame(saveFile);
+		}
+	}
+
+	return 0;
+}
+#pragma endregion
+
 #pragma region Engine
 /// <summary> Unit CreateNewLeader() </summary>
 int lua_CreateNewUnit(lua_State* L)
@@ -276,6 +307,10 @@ void LuaManager::InitializeNativeFunctions()
 	lua_register(L, "ImGuiBegin", lua_imguiBegin);
 	lua_register(L, "PushCharacterCreationWindow", lua_PushCharacterCreationWindow);
 	lua_register(L, "ImGuiEnd", lua_imguiEnd);
+
+	// Game calls
+	lua_register(L, "SaveGame", lua_SaveGame);
+	lua_register(L, "LoadGame", lua_LoadGame);
 
 	// Engine calls
 	lua_register(L, "CreateNewUnit", lua_CreateNewUnit);
