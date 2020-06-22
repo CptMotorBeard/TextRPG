@@ -3,17 +3,23 @@
 
 class Injury
 {
-
+public:
+	json SerializeData() const;
+	void DeserializeData(json data);
 };
 
 class Illness
 {
-
+public:
+	json SerializeData() const;
+	void DeserializeData(json data);
 };
 
 class Disease
 {
-
+public:
+	json SerializeData() const;
+	void DeserializeData(json data);
 };
 
 class HealthStats
@@ -35,4 +41,7 @@ private:
 public:
 	HealthStats() : HealthStats(0) {};
 	HealthStats(uint16 startingAge);
+
+	json SerializeData() const;
+	void DeserializeData(json data);
 };

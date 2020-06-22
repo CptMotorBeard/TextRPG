@@ -8,6 +8,10 @@ class Stat
 {
 	static_assert(std::is_enum<E>::value, "Type E must be an enum");
 private:
+	const char* kStatType = "stats_sty";
+	const char* kBaseValue = "stats_bsv";
+	const char* kMod = "stats_mod";
+
 	E mStatType;
 	uint16 mBaseValue;
 	std::vector<int8> mModifiers;
@@ -18,6 +22,57 @@ public:
 	{
 		mStatType = statType;
 		mBaseValue = startingValue;
+	};
+
+	json SerializeData() const
+	{
+		json data;
+
+		data[kStatType] = (int)mStatType;
+		data[kBaseValue] = mBaseValue;
+
+		data[kMod] = json::array();
+		for (const auto& mod : mModifiers)
+		{
+			data[kMod].emplace_back(mod);
+		}
+
+		return data;
+	};
+
+	void DeserializeData(json data)
+	{
+		if (!data.is_object())
+		{
+			return;
+		}
+
+		if (data.contains(kStatType) && data[kStatType].is_number_integer())
+		{
+			try
+			{
+				int index = std::stoi(data[kStatType].get<std::string>());
+				mStatType = (E)index;
+			}
+			catch (const std::exception& e)
+			{
+
+			}
+		}
+
+		if (data.contains(kBaseValue) && data[kBaseValue].is_number_integer())
+		{
+			mBaseValue = data[kBaseValue];
+		}
+
+		if (data.contains(kMod) && data[kMod].is_array())
+		{
+			mModifiers.clear();
+			for (const auto& mod : data[kMod])
+			{
+				mModifiers.push_back(mod);
+			}
+		}
 	};
 
 	int16 GetTotalModifier() const

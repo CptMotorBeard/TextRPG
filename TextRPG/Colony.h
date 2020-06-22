@@ -15,4 +15,7 @@ private:
 
 public:
 	Colony();
+
+	json SerializeData() const;
+	void DeserializeData(json data);
 };

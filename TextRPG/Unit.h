@@ -1,4 +1,6 @@
 #pragma once
+#include "BaseIncludes.h"
+
 #include "Inventory.h"
 #include "UnitStatus.h"
 #include "UnitTraits.h"
@@ -18,6 +20,9 @@ public:
 
 	Unit() : Unit(0, 0, 0) {};
 	Unit(const uint16& startingAge, const uint8& startingHeight, const uint8& startingWeight);
+
+	json SerializeData() const;
+	void DeserializeData(json data);
 };
 
 class Leader : public Unit

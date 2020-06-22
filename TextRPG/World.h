@@ -7,4 +7,7 @@ class World
 public:
 	Faction PlayerFaction;
 	std::vector<Faction> WorldFactions;
+
+	json SerializeData() const;
+	void DeserializeData(json data);
 };

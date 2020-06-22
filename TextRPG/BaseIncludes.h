@@ -9,6 +9,8 @@
 #include <unordered_map>
 #include <vector>
 
+using json = nlohmann::json;
+
 #define int8  std::int8_t
 #define int16 std::int16_t
 #define int32 std::int32_t

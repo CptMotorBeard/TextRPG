@@ -1,5 +1,7 @@
 #include "LocalizationManager.h"
 
+const char* LocalizationKey::ENTRY::TITLE = "ENTRY_TITLE";
+
 namespace SQLOperations
 {
 	namespace Query

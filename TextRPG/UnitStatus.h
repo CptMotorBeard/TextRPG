@@ -14,4 +14,7 @@ public:
 
 	UnitStatus() : UnitStatus(0) {};
 	UnitStatus(const uint16& startingAge);
+
+	json SerializeData() const;
+	void DeserializeData(json data);
 };

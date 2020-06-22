@@ -12,9 +12,12 @@ enum class FactionAllegiance
 class Faction
 {
 public:
-	std::map<Faction, FactionAllegiance> mFactionRelationships;
+	std::map<Faction *, FactionAllegiance> mFactionRelationships;
 	Leader mLeader;
 	Colony mColony;
 
 	Faction();
+
+	json SerializeData() const;
+	void DeserializeData(json data);
 };
