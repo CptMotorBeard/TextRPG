@@ -3,7 +3,8 @@
 
 	-- Visuals --
 		void AddText(string text, int fontSize, float locX, float locY)
-		void AddButton(string text, table [height, width, x, y] rect, string callbackName, table [r, g, b, a] backColour=Color::White)
+		void AddButton(string text, table [height, width, x, y] rect, string callbackName)
+		void AddButton(string text, table [height, width, x, y] rect, string callbackName, string callbackSource) -- The callbackSource is passed as an argument to callbacks
 
 	-- State Management --
 		[STATES]:
@@ -35,8 +36,11 @@
 		void ImGuiEnd()
 		
 	-- Engine Functions --
+		Unit CreateNewUnit()
+		Leader CreateNewLeader()
 		table[width=, height=] GetScreenDimensions()
 		void Shutdown()
+		void RefreshState()
 ]]--
 
 function Build()
@@ -60,6 +64,9 @@ end
 
 function QuitGame()
 	print "[LUA] button callback"
+	file = io.open("test9001.tmp", "w")
+	file:write("ttt")
+	file:close()
 	Shutdown()
 end
 

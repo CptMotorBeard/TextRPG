@@ -32,14 +32,15 @@ lua_State* LuaManager::GetLuaState()
 	return L;
 }
 
-bool LuaManager::CallbackFunction(const std::string &functionName, const char* sourceFile)
+bool LuaManager::CallbackFunction(const std::string &functionName, const char* sourceFile, const std::string& callbackSource)
 {
 	if (LuaManager::LuaOkay(L, luaL_dofile(L, sourceFile)))
 	{
 		lua_getglobal(L, functionName.c_str());
-		if (lua_isfunction(L, -1))
+		lua_pushstring(L, callbackSource.c_str());
+		if (lua_isfunction(L, -2))
 		{
-			return LuaManager::LuaOkay(L, lua_pcall(L, 0, 0, 0));
+			return LuaManager::LuaOkay(L, lua_pcall(L, 1, 0, 0));
 		}
 	}
 
@@ -128,7 +129,13 @@ int lua_AddButton(lua_State* L)
 		callbackName = lua_tostring(L, 3);
 	}
 
-	StateManager::GetInstance().GetCurrentState()->AddButton(text, sf::FloatRect(locx, locy, width, height), callbackName);
+	std::string callbackSource;
+	if (lua_isstring(L, 4))
+	{
+		callbackSource = lua_tostring(L, 4);
+	}
+
+	StateManager::GetInstance().GetCurrentState()->AddButton(text, sf::FloatRect(locx, locy, width, height), callbackName, callbackSource);
 
 	return 0;
 }
@@ -164,6 +171,13 @@ int lua_PopGameState(lua_State* L)
 int lua_PopGameStateHome(lua_State* L)
 {
 	StateManager::GetInstance().PopToBottom();
+
+	return 0;
+}
+
+int lua_RefreshState(lua_State* L)
+{
+	StateManager::GetInstance().GetCurrentState()->ForceRebuild();
 
 	return 0;
 }
@@ -317,6 +331,7 @@ void LuaManager::InitializeNativeFunctions()
 	lua_register(L, "CreateNewLeader", lua_CreateNewLeader);
 	lua_register(L, "Shutdown", lua_Shutdown);
 	lua_register(L, "GetScreenDimensions", lua_GetScreenDimensions);
+	lua_register(L, "RefreshState", lua_RefreshState);
 }
 
 void LuaManager::Shutdown()

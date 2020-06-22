@@ -77,7 +77,7 @@ public:
 
 #pragma region LUA Blocks
 	void AddText(const std::string& text, const int& fontSize, const float& locX, const float& locY);
-	void AddButton(const std::string& text, const sf::FloatRect& rect, const std::string& callbackName);
+	void AddButton(const std::string& text, const sf::FloatRect& rect, const std::string& callbackName, const std::string callbackSource);
 	void imguiBegin(const char * text);
 	bool PushCharacterCreationWindow(Unit* character);
 	void imguiEnd();

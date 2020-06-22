@@ -169,7 +169,7 @@ void State::AddText(const std::string& text, const int& fontSize, const float& l
 	mAllDrawables.emplace_back(t);
 }
 
-void State::AddButton(const std::string& text, const sf::FloatRect& rect, const std::string& callbackName)
+void State::AddButton(const std::string& text, const sf::FloatRect& rect, const std::string& callbackName, const std::string callbackSource)
 {
 	if (mCurrentRenderMode != RenderMode::Render)
 	{
@@ -180,7 +180,7 @@ void State::AddButton(const std::string& text, const sf::FloatRect& rect, const 
 
 	sf_ext::SFML_Button *b = new sf_ext::SFML_Button(*localizedText, rect,
 		[=]() {
-		LuaManager::CallbackFunction(callbackName, LUA_SOURCE.c_str());
+		LuaManager::CallbackFunction(callbackName, LUA_SOURCE.c_str(), callbackSource);
 		}
 	);
 
