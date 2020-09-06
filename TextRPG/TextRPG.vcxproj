@@ -189,12 +189,12 @@
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
-      <AdditionalIncludeDirectories>C:\SQLite\Project\sqlite3;D:\User Data\Documents\C++ Libraries\imgui-sfml-master;D:\User Data\Documents\C++ Libraries\imgui-master;D:\User Data\Documents\SFML\sfml\include</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>D:\User Data\Documents\C++ Libraries\ultralight\include;C:\SQLite\Project\sqlite3;D:\User Data\Documents\C++ Libraries\imgui-sfml-master;D:\User Data\Documents\C++ Libraries\imgui-master;D:\User Data\Documents\SFML\sfml\include</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
-      <AdditionalLibraryDirectories>C:\Users\Antonio\source\repos\TextRPG\x64\Debug;C:\Users\Antonio\source\repos\TextRPG\TextRPG\Lua535;D:\User Data\Documents\SFML\sfml-build\lib\Debug</AdditionalLibraryDirectories>
+      <AdditionalLibraryDirectories>D:\User Data\Documents\C++ Libraries\ultralight\lib;C:\Users\Antonio\source\repos\TextRPG\x64\Debug;C:\Users\Antonio\source\repos\TextRPG\TextRPG\Lua535;D:\User Data\Documents\SFML\sfml-build\lib\Debug</AdditionalLibraryDirectories>
       <AdditionalDependencies>sfml-audio-d.lib;sfml-graphics-d.lib;sfml-main-d.lib;sfml-network-d.lib;sfml-system-d.lib;sfml-window-d.lib;opengl32.lib;lua53.lib;sqlite3.lib;%(AdditionalDependencies)</AdditionalDependencies>
       <ShowProgress>LinkVerbose</ShowProgress>
     </Link>
