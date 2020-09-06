@@ -5,6 +5,7 @@
 namespace sf
 {
 	class RenderWindow;
+	class Event;
 }
 
 class UiManager
@@ -21,7 +22,7 @@ private:
 
 public:
 	void Draw(sf::RenderWindow& window);
-
+	void ProcessEvents(sf::Event sfEvent);
 	void Update();
 
 

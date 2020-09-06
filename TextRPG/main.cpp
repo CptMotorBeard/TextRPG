@@ -146,7 +146,8 @@ int main()
 		while (sfmlManager.ProcessEvents(sfEvent))
 		{
 			ImGui::SFML::ProcessEvent(sfEvent);
-			stateManager.GetCurrentState()->ProcessEvents(sfEvent);			
+			stateManager.GetCurrentState()->ProcessEvents(sfEvent);
+			uiManager.ProcessEvents(sfEvent);
 			if (sfEvent.type == sf::Event::KeyReleased)
 			{
 				if (sfEvent.key.code == sf::Keyboard::Tilde)
