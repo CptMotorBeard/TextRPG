@@ -41,6 +41,7 @@
     <ClCompile Include="State.cpp" />
     <ClCompile Include="StateManager.cpp" />
     <ClCompile Include="Stats.cpp" />
+    <ClCompile Include="UiManager.cpp" />
     <ClCompile Include="Unit.cpp" />
     <ClCompile Include="UnitStatus.cpp" />
     <ClCompile Include="World.cpp" />
@@ -81,6 +82,7 @@
     <ClInclude Include="StateWorldOverview.h" />
     <ClInclude Include="Stats.h" />
     <ClInclude Include="HealthStats.h" />
+    <ClInclude Include="UiManager.h" />
     <ClInclude Include="Unit.h" />
     <ClInclude Include="UnitStatus.h" />
     <ClInclude Include="UnitTraits.h" />
@@ -195,7 +197,7 @@
       <SubSystem>Console</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <AdditionalLibraryDirectories>D:\User Data\Documents\C++ Libraries\ultralight\lib;C:\Users\Antonio\source\repos\TextRPG\x64\Debug;C:\Users\Antonio\source\repos\TextRPG\TextRPG\Lua535;D:\User Data\Documents\SFML\sfml-build\lib\Debug</AdditionalLibraryDirectories>
-      <AdditionalDependencies>sfml-audio-d.lib;sfml-graphics-d.lib;sfml-main-d.lib;sfml-network-d.lib;sfml-system-d.lib;sfml-window-d.lib;opengl32.lib;lua53.lib;sqlite3.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>sfml-audio-d.lib;sfml-graphics-d.lib;sfml-main-d.lib;sfml-network-d.lib;sfml-system-d.lib;sfml-window-d.lib;opengl32.lib;lua53.lib;sqlite3.lib;AppCore.lib;Ultralight.lib;UltralightCore.lib;WebCore.lib;%(AdditionalDependencies)</AdditionalDependencies>
       <ShowProgress>LinkVerbose</ShowProgress>
     </Link>
   </ItemDefinitionGroup>

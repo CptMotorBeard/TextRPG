@@ -16,6 +16,8 @@
 #include "SFML-extensions.h"
 #include "SFML-manager.h"
 
+#include "UiManager.h"
+
 void CreateFrameDebugWindow(int32 dt)
 {
 	const float DISTANCE = 10.0f;
@@ -112,6 +114,7 @@ int main()
 	DebugLogger& debugLogger = DebugLogger::GetInstance();
 	GameManager& gameManager = GameManager::GetInstance();
 	LocalizationManager& locManager = LocalizationManager::GetInstance();
+	UiManager& uiManager = UiManager::GetInstance();
 
 	StateManager& stateManager = StateManager::Init(new StateMainMenu());
 	
@@ -191,10 +194,13 @@ int main()
 			debugLogger.Draw();
 		}
 
+		uiManager.Update();
+
 		sfmlManager.Window.clear(bgColor);
 		ImGui::ShowDemoWindow();
 		stateManager.GetCurrentState()->Render(sfmlManager.Window);
 		ImGui::SFML::Render(sfmlManager.Window);
+		uiManager.Draw(sfmlManager.Window);
 		sfmlManager.Window.display();
 
 		stateManager.GetCurrentState()->RecalculateHash();
